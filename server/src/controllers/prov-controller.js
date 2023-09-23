@@ -1,5 +1,6 @@
 const prov = require("../models/coordinate/Province");
 const provDetail = require("../models/detail/ProvDetail");
+const { detailValidate } = require("../utils/validate");
 
 let pageNumber = 1;
 const limit = 3;
@@ -7,8 +8,8 @@ const limit = 3;
 module.exports = {
   provPage: async (req, res) => {
     try {
-      const length = await prov.count();
-      const total = Math.ceil(length / Number.parseInt(limit));
+      const count = await prov.count();
+      const total = Math.ceil(count / Number.parseInt(limit));
 
       res.status(202).send({ page: total });
     } catch (error) {
@@ -41,8 +42,8 @@ module.exports = {
   getProvOnIsland: async (req, res) => {
     const { island } = req.query;
     try {
-      const length = await prov.find({ island: island }).count();
-      const total = Math.ceil(length / Number.parseInt(limit));
+      const count = await prov.find({ island: island }).count();
+      const total = Math.ceil(count / Number.parseInt(limit));
 
       res.status(202).send({ page: total });
     } catch (error) {
@@ -73,12 +74,45 @@ module.exports = {
     }
   },
 
-  provDetail: async (req, res) => {
+  addProvDetail: async (req, res) => {
+    try {
+      const { error } = detailValidate(req.body);
+      if (error)
+        return res.status(400).send({ message: error.details[0].message });
+
+      const prov = await provDetail.findOne({ capital: req.body.capital });
+
+      if (prov)
+        return res.status(409).send({ message: "Detail Provinsi Sudah Ada" });
+
+      await new provDetail(req.body).save();
+      res.status(202).send({ message: "Detail Provinsi Berhasil Ditambahkan" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+    }
+  },
+
+  updateProvDetail: async (req, res) => {
     try {
       const { id } = req.params;
       if (!id) res.status(404).send({ message: "Id Provinsi Tidak Ditemukan" });
 
-      const detail = await provDetail.find({ _id: id });
+      await provDetail.findByIdAndUpdate(id, req.body);
+      res.status(202).send({ message: "Detail Provinsi Berhasil Diperbarui" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+    }
+  },
+
+  getProvDetail: async (req, res) => {
+    try {
+      const { prov_id } = req.params;
+      if (!prov_id)
+        res.status(404).send({ message: "Id Provinsi Tidak Ditemukan" });
+
+      const detail = await provDetail.find({ prov_id: prov_id });
       res.status(202).send(detail);
     } catch (error) {
       console.log(error);
