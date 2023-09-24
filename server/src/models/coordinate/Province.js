@@ -10,6 +10,10 @@ const ProvSchema = new Schema({
     },
   },
   island: String,
+  detail: {
+    type: Schema.Types.ObjectId,
+    ref: "provdetail",
+  },
 });
 
 const provgeo = mongoose.model("provlatlong", ProvSchema, "ProvLatLong");
