@@ -1,7 +1,10 @@
 const express = require("express"),
   cors = require("cors"),
   bodyParser = require("body-parser");
-(app = express()), ((db = require("./db")), (route = require("./route")));
+const app = express(),
+  db = require("./db"),
+  route = require("./route"),
+  client = require("./utils/redis");
 
 require("dotenv").config();
 
@@ -19,6 +22,13 @@ app.use(cors({ origin: "*", methods: ["GET"] }));
 
 //Route
 app.use("/v1", route);
+
+//Redis logging
+client.on("error", (err) => {
+  console.log(err);
+});
+
+await client.connect();
 
 //DB Connection
 db();

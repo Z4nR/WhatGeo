@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    container_name: geojson-api
+    ports:
+      - 5500:5000
+  # redis:
+  #   image: "redis:alpine"
+  #   volumes:
+  #     - ${REDIS_LOCAL_STORAGE}:/data
