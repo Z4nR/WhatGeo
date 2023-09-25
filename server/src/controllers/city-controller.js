@@ -151,4 +151,25 @@ module.exports = {
       res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
     }
   },
+
+  getCityDestiny: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const destiny = await city.findById(id).populate({
+        path: "destinations",
+        options: { sort: { place_name: 1 } },
+      });
+      if (!destiny)
+        return res
+          .status(404)
+          .send({ message: "Data lokasi liburan tidak ditemukan" });
+
+      const data = destiny.destinations;
+
+      res.status(202).send(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+    }
+  },
 };

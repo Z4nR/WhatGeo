@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const ProvDetailSchema = new Schema({
+  prov_id: Number,
   date_created: String,
   capital: String,
-  latitude: Number,
-  longitude: Number,
+  lat_capital: Number,
+  long_capital: Number,
   description: String,
 });
 

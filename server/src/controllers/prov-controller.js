@@ -76,11 +76,6 @@ module.exports = {
 
   addProvDetail: async (req, res) => {
     try {
-      const { id } = req.params;
-      const province = await prov.findById(id);
-      if (!province)
-        return res.status(404).send({ message: "Provinsi Tidak Ditemukan" });
-
       const { error } = detailValidate(req.body);
       if (error)
         return res.status(400).send({ message: error.details[0].message });
@@ -89,11 +84,7 @@ module.exports = {
       if (capital)
         return res.status(409).send({ message: "Detail Provinsi Sudah Ada" });
 
-      const detail = new provDetail(req.body);
-      await detail.save();
-
-      province.detail = detail;
-      await province.save();
+      await new provDetail(req.body).save();
 
       res.status(202).send({ message: "Detail Provinsi Berhasil Ditambahkan" });
     } catch (error) {
@@ -110,6 +101,22 @@ module.exports = {
 
       await provDetail.findByIdAndUpdate(id, req.body);
       res.status(202).send({ message: "Detail Provinsi Berhasil Diperbarui" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+    }
+  },
+
+  getProvDetail: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const detail = await provDetail.findOne({ prov_id: id });
+      if (!detail)
+        return res
+          .status(404)
+          .send({ message: "Detail Provinsi Tidak Ditemukan" });
+
+      res.status(202).send(detail);
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
