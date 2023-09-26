@@ -1,5 +1,6 @@
 const prov = require("../models/coordinate/Province");
 const provDetail = require("../models/detail/ProvDetail");
+const client = require("../utils/redis");
 const { detailValidate } = require("../utils/validate");
 
 let pageNumber = 1;
@@ -31,6 +32,8 @@ module.exports = {
 
       if (page <= 0)
         res.status(404).send({ message: "Data Provinsi Tidak Ditemukan" });
+
+      await client.setEx(`prov-${page}`, 3600, JSON.stringify(data));
 
       res.status(202).send(data);
     } catch (error) {
@@ -66,6 +69,8 @@ module.exports = {
 
       if (page <= 0)
         res.status(404).send({ message: "Data Provinsi Tidak Ditemukan" });
+
+      client.setEx(`prov-${island}${page}`, 3600, data);
 
       res.status(202).send(data);
     } catch (error) {

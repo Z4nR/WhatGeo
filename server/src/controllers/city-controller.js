@@ -32,6 +32,8 @@ module.exports = {
       if (page <= 0)
         res.status(404).send({ message: "Data Kota Tidak Ditemukan" });
 
+      client.setEx(`city-${page}`, 3600, data);
+
       res.status(202).send(data);
     } catch (error) {
       console.log(error);
@@ -67,6 +69,8 @@ module.exports = {
       if (page <= 0)
         res.status(404).send({ message: "Data Kota Tidak Ditemukan" });
 
+      client.setEx(`city-${prov_id}${page}`, 3600, data);
+
       res.status(202).send(data);
     } catch (error) {
       console.log(error);
@@ -101,6 +105,8 @@ module.exports = {
 
       if (page <= 0)
         res.status(404).send({ message: "Data Kota Tidak Ditemukan" });
+
+      client.setEx(`city-${island}${page}`, 3600, data);
 
       res.status(202).send(data);
     } catch (error) {

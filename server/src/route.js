@@ -1,10 +1,13 @@
+const cachingController = require("./controllers/caching-controller");
 const cityController = require("./controllers/city-controller");
 const provController = require("./controllers/prov-controller");
 
 const router = require("express-promise-router")();
 
 router.route("/province/page").get(provController.provPage); //Get Total Page of Province
-router.route("/province").get(provController.getProvByPage); //Get Province Data using query page number
+router
+  .route("/province")
+  .get(cachingController.cacheProvByPage, provController.getProvByPage); //Get Province Data using query page number
 router.route("/province/island/page").get(provController.getProvOnIsland); //Get Total Page of Province on Island using query island name
 router.route("/province/island").get(provController.getProvByIsland); //Get Province Data using query Island name and page number
 router.route("/province/:id/detail").get(provController.getProvDetail);
