@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(cors({ origin: "*", methods: ["GET"] }));
 
 //Route
-app.use("/v1", route);
+app.use("v1", route);
 
 //Redis logging
 client.on("error", (err) => {
