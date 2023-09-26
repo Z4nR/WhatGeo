@@ -24,4 +24,4 @@ jobs:
             git pull origin main
             cd server
             docker compose down --remove-orphans
-            docker compose up --build -d
+            docker compose --project-name geojson up --build -d

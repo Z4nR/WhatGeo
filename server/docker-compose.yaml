@@ -1,7 +1,6 @@
 services:
-  geojson:
+  api:
     build: .
-    container_name: geojson-api
     ports:
       - 5500:5000
   # redis:
