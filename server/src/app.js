@@ -28,6 +28,12 @@ client.on("error", (err) => {
   console.log(err);
 });
 
+const redisConnect = async () => {
+  return await client.connect();
+};
+
+redisConnect();
+
 //DB Connection
 db();
 
