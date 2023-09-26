@@ -1,5 +1,5 @@
 services:
-  app:
+  geojson:
     build: .
     container_name: geojson-api
     ports:
