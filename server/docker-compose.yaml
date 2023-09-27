@@ -7,3 +7,5 @@ services:
     image: "redis:alpine"
     volumes:
       - /redis/data:/data/persistence
+    ports:
+      - 6379
