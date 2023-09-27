@@ -25,4 +25,3 @@ jobs:
             cd server
             docker compose down --remove-orphans
             docker compose --project-name geojson up --build -d
-            docker image prune -a

@@ -2,8 +2,8 @@ services:
   api:
     build: .
     ports:
-      - 5500:5000
-  # redis:
-  #   image: "redis:alpine"
-  #   volumes:
-  #     - ${REDIS_LOCAL_STORAGE}:/data
+      - 5000:5500
+  redis:
+    image: "redis:alpine"
+    volumes:
+      - /redis/data:/data/persistence
