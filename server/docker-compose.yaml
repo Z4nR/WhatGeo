@@ -2,7 +2,7 @@ services:
   api:
     build: .
     ports:
-      - 5000:5500
+      - 5500:5000
   redis:
     image: "redis:alpine"
     volumes:
