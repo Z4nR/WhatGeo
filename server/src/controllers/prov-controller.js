@@ -70,7 +70,7 @@ module.exports = {
       if (page <= 0)
         res.status(404).send({ message: "Data Provinsi Tidak Ditemukan" });
 
-      client.setEx(`prov-${island}${page}`, 3600, data);
+      client.setEx(`prov-${island}${page}`, 3600, JSON.stringify(data));
 
       res.status(202).send(data);
     } catch (error) {

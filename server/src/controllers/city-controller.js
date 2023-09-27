@@ -1,5 +1,6 @@
 const city = require("../models/coordinate/City");
 const cityDestiny = require("../models/detail/CityDestiny");
+const client = require("../utils/redis.js");
 const { destinyValidate } = require("../utils/validate");
 
 let pageNumber = 1;
@@ -32,7 +33,7 @@ module.exports = {
       if (page <= 0)
         res.status(404).send({ message: "Data Kota Tidak Ditemukan" });
 
-      client.setEx(`city-${page}`, 3600, data);
+      client.setEx(`city-${page}`, 3600, JSON.stringify(data));
 
       res.status(202).send(data);
     } catch (error) {
@@ -69,7 +70,7 @@ module.exports = {
       if (page <= 0)
         res.status(404).send({ message: "Data Kota Tidak Ditemukan" });
 
-      client.setEx(`city-${prov_id}${page}`, 3600, data);
+      client.setEx(`city-${prov_id}${page}`, 3600, JSON.stringify(data));
 
       res.status(202).send(data);
     } catch (error) {
@@ -106,7 +107,7 @@ module.exports = {
       if (page <= 0)
         res.status(404).send({ message: "Data Kota Tidak Ditemukan" });
 
-      client.setEx(`city-${island}${page}`, 3600, data);
+      client.setEx(`city-${island}${page}`, 3600, JSON.stringify(data));
 
       res.status(202).send(data);
     } catch (error) {
