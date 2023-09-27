@@ -13,7 +13,7 @@ module.exports = {
 
       const parseData = JSON.parse(data);
 
-      res.status(202).send({ data: parseData, info: "Data dari cache" });
+      res.status(202).send(parseData);
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
@@ -31,7 +31,7 @@ module.exports = {
 
       const parseData = JSON.parse(data);
 
-      res.status(202).send({ data: parseData, info: "Data dari cache" });
+      res.status(202).send(parseData);
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
@@ -48,7 +48,7 @@ module.exports = {
 
       const parseData = JSON.parse(data);
 
-      res.status(202).send({ data: parseData, info: "Data dari cache" });
+      res.status(202).send(parseData);
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
@@ -66,7 +66,7 @@ module.exports = {
 
       const parseData = JSON.parse(data);
 
-      res.status(202).send({ data: parseData, info: "Data dari cache" });
+      res.status(202).send(parseData);
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
@@ -84,7 +84,7 @@ module.exports = {
 
       const parseData = JSON.parse(data);
 
-      res.status(202).send({ data: parseData, info: "Data dari cache" });
+      res.status(202).send(parseData);
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
