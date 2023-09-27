@@ -6,6 +6,6 @@ services:
   redis:
     image: "redis:alpine"
     volumes:
-      - /redis/data:/data/persistence
+      - /redis/data:/data
     ports:
       - 6379:6379
