@@ -8,4 +8,4 @@ services:
     volumes:
       - /redis/data:/data/persistence
     ports:
-      - 6379
+      - 6379:6379
