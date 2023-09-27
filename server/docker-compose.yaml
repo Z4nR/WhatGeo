@@ -6,6 +6,6 @@ services:
   redis:
     image: "redis:alpine"
     volumes:
-      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - /redis/data:/data
     ports:
       - 6379:6379
