@@ -1,7 +1,6 @@
 const prov = require("../models/coordinate/Province");
 const provDetail = require("../models/detail/ProvDetail");
 const client = require("../utils/redis");
-const { detailValidate } = require("../utils/validate");
 
 let pageNumber = 1;
 const limit = 3;
@@ -73,39 +72,6 @@ module.exports = {
       client.setEx(`prov-${island}${page}`, 3600, JSON.stringify(data));
 
       res.status(202).send(data);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
-    }
-  },
-
-  addProvDetail: async (req, res) => {
-    try {
-      const { error } = detailValidate(req.body);
-      if (error)
-        return res.status(400).send({ message: error.details[0].message });
-
-      const capital = await provDetail.findOne({ capital: req.body.capital });
-      if (capital)
-        return res.status(409).send({ message: "Detail Provinsi Sudah Ada" });
-
-      await new provDetail(req.body).save();
-
-      res.status(202).send({ message: "Detail Provinsi Berhasil Ditambahkan" });
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
-    }
-  },
-
-  updateProvDetail: async (req, res) => {
-    try {
-      const { id } = req.params;
-      if (!id)
-        res.status(404).send({ message: "Id Detail Provinsi Tidak Ditemukan" });
-
-      await provDetail.findByIdAndUpdate(id, req.body);
-      res.status(202).send({ message: "Detail Provinsi Berhasil Diperbarui" });
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });

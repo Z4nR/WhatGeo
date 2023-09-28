@@ -1,7 +1,5 @@
 const city = require("../models/coordinate/City");
-const cityDestiny = require("../models/detail/CityDestiny");
 const client = require("../utils/redis.js");
-const { destinyValidate } = require("../utils/validate");
 
 let pageNumber = 1;
 const limit = 5;
@@ -110,49 +108,6 @@ module.exports = {
       client.setEx(`city-${island}${page}`, 3600, JSON.stringify(data));
 
       res.status(202).send(data);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
-    }
-  },
-
-  addCityDestiny: async (req, res) => {
-    try {
-      const { id } = req.params;
-      const town = await city.findById(id);
-      if (!town)
-        return res.status(404).send({ message: "Kab/Kota Tidak Ditemukan" });
-
-      const { error } = destinyValidate(req.body);
-      if (error)
-        return res.status(400).send({ message: error.details[0].message });
-
-      const name = await cityDestiny.findOne({
-        place_name: req.body.place_name,
-      });
-      if (name)
-        return res.status(409).send({ message: "Lokasi Liburan Sudah Ada" });
-
-      const destiny = new cityDestiny(req.body);
-      await destiny.save();
-
-      town.destinations.push(destiny);
-      await town.save();
-
-      res.status(202).send({ message: "Lokasi Liburan Berhasil Ditambahkan" });
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
-    }
-  },
-
-  updateCityDestiny: async (req, res) => {
-    try {
-      const { id } = req.params;
-      if (!id) res.status(404).send({ message: "Data Tidak Ditemukan" });
-
-      await cityDestiny.findByIdAndUpdate(id, req.body);
-      res.status(202).send({ message: "Lokasi Liburan Berhasil Diperbarui" });
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
