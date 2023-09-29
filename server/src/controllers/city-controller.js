@@ -115,6 +115,24 @@ module.exports = {
     }
   },
 
+  getCityMap: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const map = await city.findById(id);
+      if (!map)
+        return res
+          .status(404)
+          .send({ message: "Denah Kab/Kota Tidak Ditemukan" });
+
+      client.setEx(`city-${id}`, 3600, JSON.stringify(data));
+
+      res.status(202).send(map);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+    }
+  },
+
   getCityDestiny: async (req, res) => {
     try {
       const { id } = req.params;

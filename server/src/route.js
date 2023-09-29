@@ -13,7 +13,8 @@ router.route("/prov/isle/page").get(provController.getProvOnIsland); //Get Total
 router
   .route("/prov/isle")
   .get(cachingController.cacheProvByIsland, provController.getProvByIsland); //Get Province Data using query Island name and page number
-router.route("/prov/:id/detail").get(provController.getProvDetail); //Get Province Data using Id Province params
+router.route("/prov/:id/map").get(provController.getProvMap); //Get Province Map using Id Province params
+router.route("/prov/:id/detail").get(provController.getProvDetail); //Get Province Detail using Id Province params
 
 //City Route
 router.route("/city/page").get(cityController.cityPage); //Get Total Page of City
@@ -28,6 +29,7 @@ router.route("/city/isle/page").get(cityController.getCityOnIsland); //Get Total
 router
   .route("/city/isle")
   .get(cachingController.cacheCityByIsland, cityController.getCityByIsland); //Get City Data using query Island name and page number
+router.route("/city/:id/map").get(cityController.getCityMap); //Get City Map using Id City params
 router.route("/city/:id/destiny").get(cityController.getCityDestiny); //Get City Destiny using Id City params
 
 module.exports = router;

@@ -78,6 +78,24 @@ module.exports = {
     }
   },
 
+  getProvMap: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const map = await prov.findById(id);
+      if (!map)
+        return res
+          .status(404)
+          .send({ message: "Denah Provinsi Tidak Ditemukan" });
+
+      client.setEx(`prov-${id}`, 3600, JSON.stringify(data));
+
+      res.status(202).send(map);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+    }
+  },
+
   getProvDetail: async (req, res) => {
     try {
       const { id } = req.params;

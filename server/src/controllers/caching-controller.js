@@ -38,6 +38,23 @@ module.exports = {
     }
   },
 
+  cacheProvMap: async (req, res, next) => {
+    const { id } = req.params;
+    if (!Number.isNaN(page) && page > 0) pageNumber = page;
+
+    try {
+      const data = await client.get(`prov-${id}`);
+      if (!data) return next();
+
+      const parseData = JSON.parse(data);
+
+      res.status(202).send(parseData);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+    }
+  },
+
   cacheCityByPage: async (req, res, next) => {
     const { page } = req.query;
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
@@ -80,6 +97,23 @@ module.exports = {
 
     try {
       const data = await client.get(`city-${island}${page}`);
+      if (!data) return next();
+
+      const parseData = JSON.parse(data);
+
+      res.status(202).send(parseData);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+    }
+  },
+
+  cacheCityMap: async (req, res, next) => {
+    const { id } = req.params;
+    if (!Number.isNaN(page) && page > 0) pageNumber = page;
+
+    try {
+      const data = await client.get(`city-${id}`);
       if (!data) return next();
 
       const parseData = JSON.parse(data);

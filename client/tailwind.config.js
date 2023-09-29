@@ -2,6 +2,17 @@
 import daisyui from "daisyui";
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    screens: {
+      base: "0em",
+      xs: "25em",
+      sm: "37em",
+      md: "48em",
+      lg: "62em",
+      xl: "80em",
+      "2xl": "96em",
+    },
+  },
   daisyui: {
     themes: [
       {
