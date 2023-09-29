@@ -1,5 +1,4 @@
 const city = require("../models/coordinate/City");
-require("../models/detail/CityDestiny");
 const client = require("../utils/redis.js");
 
 let pageNumber = 1;
