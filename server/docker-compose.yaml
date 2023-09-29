@@ -3,11 +3,11 @@ services:
     build: .
     ports:
       - 5500:5000
-    restart: unless-stopped
+    restart: always
   redis:
     image: "redis:alpine"
     volumes:
       - /redis/data:/data
     ports:
       - 6379:6379
-    restart: unless-stopped
+    restart: always
