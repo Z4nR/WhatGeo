@@ -87,7 +87,7 @@ module.exports = {
           .status(404)
           .send({ message: "Denah Provinsi Tidak Ditemukan" });
 
-      client.setEx(`prov-${id}`, 3600, JSON.stringify(data));
+      client.setEx(`prov-${id}`, 3600, JSON.stringify(map));
 
       res.status(202).send(map);
     } catch (error) {

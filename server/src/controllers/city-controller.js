@@ -124,7 +124,7 @@ module.exports = {
           .status(404)
           .send({ message: "Denah Kab/Kota Tidak Ditemukan" });
 
-      client.setEx(`city-${id}`, 3600, JSON.stringify(data));
+      client.setEx(`city-${id}`, 3600, JSON.stringify(map));
 
       res.status(202).send(map);
     } catch (error) {
