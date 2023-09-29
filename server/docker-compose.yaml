@@ -1,11 +1,9 @@
 services:
   api:
-    restart: always
     build: .
     ports:
       - 5500:5000
   redis:
-    restart: always
     image: "redis:alpine"
     volumes:
       - /redis/data:/data
