@@ -4,13 +4,13 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     screens: {
-      base: "0em",
-      xs: "25em",
-      sm: "37em",
-      md: "48em",
-      lg: "62em",
-      xl: "80em",
-      "2xl": "96em",
+      base: "0px",
+      xs: "400px",
+      sm: "592px",
+      md: "768px",
+      lg: "992px",
+      xl: "1280px",
+      "2xl": "1536px",
     },
   },
   daisyui: {

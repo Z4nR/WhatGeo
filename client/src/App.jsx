@@ -1,9 +1,11 @@
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+
 export default function App() {
   return (
     <>
-      <header className="navbar bg-primary">
-        <img />
-      </header>
+      <Header />
+      <Footer />
     </>
   );
 }
