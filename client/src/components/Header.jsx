@@ -4,9 +4,11 @@ import desktopLogo from "../assets/logo/desktop-logo.svg";
 export default function Header() {
   return (
     <header className="w-full flex justify-center sticky z-20 shadow-sm">
-      <div className="navbar max-w-7xl bg-base-100 px-6">
+      <div className="navbar px-0 py-2 max-w-7xl bg-base-100">
         <div className="flex-1">
-          <img src={desktopLogo} alt="website-logo" />
+          <Link to={"/"}>
+            <img src={desktopLogo} alt="website-logo" />
+          </Link>
         </div>
         <div className="hidden font-medium sm:flex-none sm:inline-block">
           <ul className="hidden sm:menu sm:menu-horizontal">
@@ -14,7 +16,7 @@ export default function Header() {
               <Link to={"/guide"}>Petunjuk</Link>
             </li>
             <li>
-              <Link to={"/docs"}>Dok</Link>
+              <Link to={"/doc"}>Dok</Link>
             </li>
             <li>
               <Link to={"/example"}>Contoh</Link>
@@ -46,7 +48,7 @@ export default function Header() {
               <Link to={"/guide"}>Petunjuk</Link>
             </li>
             <li>
-              <Link to={"/docs"}>Dok</Link>
+              <Link to={"/doc"}>Dok</Link>
             </li>
             <li>
               <Link to={"/example"}>Contoh</Link>

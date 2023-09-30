@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+main {
+  margin: 0 auto;
+}
+
 .footer {
   justify-items: center;
   align-items: center;
