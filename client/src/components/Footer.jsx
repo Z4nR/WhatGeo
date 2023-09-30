@@ -3,18 +3,20 @@ import desktopLogo from "../assets/logo/desktop-logo.svg";
 
 export default function Footer() {
   return (
-    <footer className="w-full flex justify-center">
-      <div className="footer max-w-7xl py-10 px-6 bg-base-100 text-neutral-content">
+    <footer className="w-full flex justify-center bg-stone-200">
+      <div className="footer xs:justify-between xs:grid-flow-col max-w-7xl py-10 px-6 text-neutral-content">
         <aside>
-          <img className="w-80" src={desktopLogo} alt="website-logo" />
+          <img className="w-50 md:w-80" src={desktopLogo} alt="website-logo" />
         </aside>
         <nav>
-          <header className="footer-title text-black">Reach me on</header>
+          <header className="footer-title text-xs text-black">
+            Reach me on
+          </header>
           <div className="grid grid-flow-col gap-4">
             <Link>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-black"
+                className="h-4 w-4 md:h-5 md:w-5 text-black"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -24,7 +26,7 @@ export default function Footer() {
             <Link>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-black"
+                className="h-4 w-4 md:h-5 md:w-5 text-black"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -34,7 +36,7 @@ export default function Footer() {
             <Link>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-black"
+                className="h-4 w-4 md:h-5 md:w-5 text-black"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
