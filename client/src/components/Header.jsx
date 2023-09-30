@@ -4,7 +4,7 @@ import desktopLogo from "../assets/logo/desktop-logo.svg";
 export default function Header() {
   return (
     <header className="w-full flex justify-center sticky z-20 shadow-sm">
-      <div className="navbar px-0 py-2 max-w-7xl bg-base-100">
+      <div className="navbar px-4 md:px-0 py-2 max-w-7xl bg-base-100">
         <div className="flex-1">
           <Link to={"/"}>
             <img src={desktopLogo} alt="website-logo" />

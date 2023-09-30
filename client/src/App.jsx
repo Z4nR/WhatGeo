@@ -10,7 +10,7 @@ export default function App() {
   return (
     <>
       <a
-        className="transition left-0 bg-primary text-primary-content absolute p-3 m-3 -translate-y-16 focus:translate-y-0"
+        className="sr-only focus:not-sr-only text-white bg-blue-500 p-2 rounded-sm"
         href="#main"
       >
         Skip Navigation
@@ -18,7 +18,7 @@ export default function App() {
       <Header />
       <main
         id="main"
-        className="w-full my-4 max-w-7xl min-h-screen md:min-h-[75vh] 2xl:min-h-[80vh]"
+        className="w-full px-4 md:px-0 my-4 max-w-7xl min-h-screen md:min-h-[75vh] 2xl:min-h-[80vh]"
       >
         <Routes>
           <Route path="/" element={<HomePage />} />

@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-main {
+main,
+.mockup-code {
   margin: 0 auto;
 }
 

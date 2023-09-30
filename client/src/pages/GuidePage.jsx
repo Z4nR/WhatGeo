@@ -1,3 +1,9 @@
+import LoadAll from "../components/guide/LoadAll";
+
 export default function GuidePage() {
-  return <p className="text-md">Petunjuk</p>;
+  return (
+    <div>
+      <LoadAll />
+    </div>
+  );
 }
