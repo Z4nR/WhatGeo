@@ -31,7 +31,7 @@ export default function LoadAll() {
   }, []);
 
   return (
-    <div className="py-4 px-6">
+    <div className="pt-4">
       <h1 className="text-xl font-bold">Memuat data peta</h1>
       <p className="pt-2 pb-4 text-justify">
         Hasil dari API yang dipanggil tidak berisikan seluruh data berdasarkan
@@ -41,17 +41,15 @@ export default function LoadAll() {
         dibutuhkan, terdapat beberapa tahapan yang harus dilakukan.
       </p>
       {loadAll.map((data, index) => (
-        <div key={index}>
+        <div key={index} className="pb-8">
           <h2 className="text-lg font-medium">
             {index + 1}. {data.title}
           </h2>
           <p className="py-2 text-justify">{data.description}</p>
-          <div className="pb-8">
-            <div className="mockup-code lg:w-fit pl-5">
-              <pre>
-                <code className="language-javascript hjls">{data.step}</code>
-              </pre>
-            </div>
+          <div className="mockup-code w-fit max-w-screen-sm pl-5">
+            <pre>
+              <code className="language-javascript hjls">{data.step}</code>
+            </pre>
           </div>
         </div>
       ))}

@@ -13,13 +13,22 @@ export default function Header() {
         <div className="hidden font-medium sm:flex-none sm:inline-block">
           <ul className="hidden sm:menu sm:menu-horizontal">
             <li>
-              <Link to={"/guide"}>Petunjuk</Link>
+              <Link className="hover:bg-accent hover:text-white" to={"/guide"}>
+                Petunjuk
+              </Link>
             </li>
             <li>
-              <Link to={"/doc"}>Dok</Link>
+              <Link className="hover:bg-accent hover:text-white" to={"/doc"}>
+                Dok
+              </Link>
             </li>
             <li>
-              <Link to={"/example"}>Contoh</Link>
+              <Link
+                className="hover:bg-accent hover:text-white"
+                to={"/example"}
+              >
+                Contoh
+              </Link>
             </li>
           </ul>
         </div>
@@ -45,13 +54,22 @@ export default function Header() {
             className="dropdown-content z-[1] p-2 menu shadow bg-base-100 rounded-box w-52 px-1"
           >
             <li>
-              <Link to={"/guide"}>Petunjuk</Link>
+              <Link className="hover:bg-accent hover:text-white" to={"/guide"}>
+                Petunjuk
+              </Link>
             </li>
             <li>
-              <Link to={"/doc"}>Dok</Link>
+              <Link className="hover:bg-accent hover:text-white" to={"/doc"}>
+                Dok
+              </Link>
             </li>
             <li>
-              <Link to={"/example"}>Contoh</Link>
+              <Link
+                className="hover:bg-accent hover:text-white"
+                to={"/example"}
+              >
+                Contoh
+              </Link>
             </li>
           </ul>
         </div>
