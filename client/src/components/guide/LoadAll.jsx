@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import loadPage from "../../utils/code/loadMap/loadPage.js?raw";
+import loopPage from "../../utils/code/loadMap/loopPage.js?raw";
+import displayMap from "../../utils/code/loadMap/displayMap.js?raw";
 import hljs from "highlight.js";
 
 export default function LoadAll() {
@@ -14,13 +16,13 @@ export default function LoadAll() {
       title: "Lakukan perulangan menggunakan variable page",
       description:
         "Setelah data didapatkan dan tersimpan pada variable page, lakukan perulangan menggunakan metode apapun dengan menggunakan variable page sebagai jumlah maksimal perulangan. Variable page juga digunakan untuk mengisi query data map berdasarkan kategori. Lalu lakukan perintah array.push kedalam variable data dengan value array.",
-      step: "buat looping dengan i <= page, const result = axios.get(`zulham.ahlitani.com/geo/v1/prov?page={page}`)",
+      step: loopPage,
     },
     {
       title: "Menyatukan data dan menggunakannya",
       description:
         "Data dari variable data akan memiliki bentuk seperti nested array. Untuk dapat menggunakan data tersebut langkah pertama yang perlu dilakukan ialah merubah nested array menjadi 1 array menggunakan Array.flat(). Setelah data dipastikan dalam 1 array tunggal kita tinggal melakukan mapping pada data tersebut untuk ditampilkan ke dalam peta yang sudah kita siapkan",
-      step: "const feature = data.flat()",
+      step: displayMap,
     },
   ];
 
@@ -44,7 +46,7 @@ export default function LoadAll() {
             {index + 1}. {data.title}
           </h2>
           <p className="py-2 text-justify">{data.description}</p>
-          <div className="pb-4">
+          <div className="pb-8">
             <div className="mockup-code lg:w-fit pl-5">
               <pre>
                 <code className="language-javascript hjls">{data.step}</code>
