@@ -32,7 +32,7 @@ export default function LoadAll() {
 
   return (
     <div className="pt-4">
-      <h1 className="text-xl font-bold">Memuat data peta</h1>
+      <h1 className="text-lg font-bold">Memuat data map berdasarkan page</h1>
       <p className="pt-2 pb-4 text-justify">
         Hasil dari API yang dipanggil tidak berisikan seluruh data berdasarkan
         kategori yang dibutuhkan. Kita dapat menampilkan semua data peta

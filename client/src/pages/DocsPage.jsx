@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import hljs from "highlight.js";
-import { cityRoute, provRoute } from "../utils/docs-data";
+import { cityRoute, codeData, provRoute } from "../utils/docs-data";
 import TableRoute from "../components/docs/TableRoute";
+import TableCode from "../components/docs/TableCode";
 
 export default function DocsPage() {
   useEffect(() => {
@@ -19,6 +20,7 @@ export default function DocsPage() {
       </div>
       <TableRoute route={provRoute} />
       <TableRoute route={cityRoute} />
+      <TableCode data={codeData} />
     </div>
   );
 }

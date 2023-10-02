@@ -88,4 +88,14 @@ const cityRoute = [
   },
 ];
 
-export { provRoute, cityRoute };
+const codeData = [
+  {
+    prov_id: 11,
+    regency_id: "1101 - ",
+    city_id: "1171 - ",
+    prov_name: "Nangroe Aceh Darussalam",
+    island: "Sumatera",
+  },
+];
+
+export { provRoute, cityRoute, codeData };
