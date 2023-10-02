@@ -14,7 +14,7 @@ export default function DocsPage() {
       <div className="mockup-code xs:w-fit xs:max-w-screen-sm pl-5">
         <pre>
           <code className="language-javascript hjls">
-            base_url = zulham.ahlitani.com/geo/v1
+            const base_url = `zulham.ahlitani.com/geo/v1`
           </code>
         </pre>
       </div>
