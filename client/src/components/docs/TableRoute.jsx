@@ -17,7 +17,7 @@ export default function TableRoute({ route }) {
             {route.map((data, index) => (
               <tr key={index}>
                 <td>
-                  <div className="badge badge-accent w-fit font-medium">
+                  <div className="badge badge-accent w-fit font-medium font-mono">
                     {data.router}
                   </div>
                 </td>
