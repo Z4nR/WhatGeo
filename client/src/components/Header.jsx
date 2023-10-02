@@ -3,8 +3,8 @@ import desktopLogo from "../assets/logo/desktop-logo.svg";
 
 export default function Header() {
   return (
-    <header className="w-full flex justify-center sticky z-20 shadow-sm">
-      <div className="navbar px-6 py-2 max-w-7xl bg-base-100">
+    <header className="w-full flex justify-center sticky z-20 shadow-sm bg-primary">
+      <div className="navbar px-6 py-2 max-w-7xl">
         <div className="flex-1">
           <Link to={"/"}>
             <img src={desktopLogo} alt="website-logo" />
@@ -13,18 +13,21 @@ export default function Header() {
         <div className="hidden font-medium sm:flex-none sm:inline-block">
           <ul className="hidden sm:menu sm:menu-horizontal">
             <li>
-              <Link className="hover:bg-accent hover:text-white" to={"/guide"}>
-                Petunjuk
-              </Link>
-            </li>
-            <li>
-              <Link className="hover:bg-accent hover:text-white" to={"/doc"}>
+              <Link className="hover:bg-secondary hover:text-white" to={"/doc"}>
                 Dok
               </Link>
             </li>
             <li>
               <Link
-                className="hover:bg-accent hover:text-white"
+                className="hover:bg-secondary hover:text-white"
+                to={"/guide"}
+              >
+                Petunjuk
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="hover:bg-secondary hover:text-white"
                 to={"/example"}
               >
                 Contoh
@@ -54,18 +57,21 @@ export default function Header() {
             className="dropdown-content z-[1] p-2 menu shadow bg-base-100 rounded-box w-52 px-1"
           >
             <li>
-              <Link className="hover:bg-accent hover:text-white" to={"/guide"}>
-                Petunjuk
-              </Link>
-            </li>
-            <li>
-              <Link className="hover:bg-accent hover:text-white" to={"/doc"}>
+              <Link className="hover:bg-secondary hover:text-white" to={"/doc"}>
                 Dok
               </Link>
             </li>
             <li>
               <Link
-                className="hover:bg-accent hover:text-white"
+                className="hover:bg-secondary hover:text-white"
+                to={"/guide"}
+              >
+                Petunjuk
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="hover:bg-secondary hover:text-white"
                 to={"/example"}
               >
                 Contoh

@@ -46,7 +46,7 @@ export default function LoadAll() {
             {index + 1}. {data.title}
           </h2>
           <p className="py-2 text-justify">{data.description}</p>
-          <div className="mockup-code w-fit max-w-screen-sm pl-5">
+          <div className="mockup-code md:w-fit xs:max-w-screen-sm pl-5">
             <pre>
               <code className="language-javascript hjls">{data.step}</code>
             </pre>
