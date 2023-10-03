@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.35.7",
     "axios": "^1.5.1",
     "highlight.js": "^11.8.0",
     "leaflet": "^1.9.4",
@@ -19,6 +20,7 @@
     "react-router-dom": "^6.16.0"
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^4.36.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",

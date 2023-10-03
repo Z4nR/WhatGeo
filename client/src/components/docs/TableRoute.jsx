@@ -1,8 +1,6 @@
 export default function TableRoute({ route }) {
   return (
     <>
-      <div className="divider" />
-      <h1 className="text-lg font-bold">Data Provinsi</h1>
       <div className="overflow-x-auto py-2">
         <table className="table table-md">
           <thead>

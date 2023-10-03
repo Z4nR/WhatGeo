@@ -18,7 +18,11 @@ export default function DocsPage() {
           </code>
         </pre>
       </div>
+      <div className="divider" />
+      <h1 className="text-lg font-bold">Router Provinsi</h1>
       <TableRoute route={provRoute} />
+      <div className="divider" />
+      <h1 className="text-lg font-bold">Router Kota</h1>
       <TableRoute route={cityRoute} />
       <TableCode data={codeData} />
     </div>
