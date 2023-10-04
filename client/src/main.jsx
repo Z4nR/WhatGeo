@@ -4,7 +4,7 @@ import App from "./App";
 import "./styles/main.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/WhatGeo">
     <App />
   </BrowserRouter>
 );
