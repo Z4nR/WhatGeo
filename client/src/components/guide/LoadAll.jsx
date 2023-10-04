@@ -28,10 +28,8 @@ export default function LoadAll() {
         </pre>
       </div>
       <p className="py-2 text-justify">
-        Dari proses looping tersebut kemudian lakukan push data kedalam variable
-        dengan nilai <b>[array]</b> . Kemudian lakukan array.flat() untuk
-        menjadikan sub array yang ada didalamnya menjadi sebuah array. Langkah
-        terakhir ialah memanggil data yang diperlukan untuk ditampilkan di map.
+        Dari proses looping tersebut kemudian lakukan push data ke dalam
+        variable dengan nilai <b>[array]</b> .
       </p>
       <div className="mockup-code md:w-fit xs:max-w-screen-sm pl-5">
         <pre>
