@@ -52,6 +52,7 @@ export default function LoadAll() {
           <code className="language-javascript hjls">{flattingData}</code>
         </pre>
       </div>
+      <div className="divider" />
     </div>
   );
 }
