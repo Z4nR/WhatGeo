@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
-import { getProvByIsle, provPageByIsle } from "../../../utils/network";
 import { useQuery } from "@tanstack/react-query";
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
-import { provCoordinate } from "../../../utils/map-helper";
+import { getProvByIsle, provPageByIsle } from "@/utils/network";
+import { provCoordinate } from "@/utils/map-helper";
 
 export default function ProvMapByIsle() {
   const [island, setIsland] = useState("");

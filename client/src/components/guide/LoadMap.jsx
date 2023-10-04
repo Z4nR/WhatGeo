@@ -1,4 +1,4 @@
-import { loadMap } from "../../utils/code-example";
+import { loadMap } from "@/utils/code-example";
 import hljs from "highlight.js";
 import { useEffect } from "react";
 

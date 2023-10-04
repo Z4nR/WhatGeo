@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import desktopLogo from "../assets/logo/desktop-logo.svg";
-import mobileLogo from "../assets/logo/mobile-logo.svg";
+import desktopLogo from "@/assets/logo/desktop-logo.svg";
+import mobileLogo from "@/assets/logo/mobile-logo.svg";
 
 export default function Header() {
   return (

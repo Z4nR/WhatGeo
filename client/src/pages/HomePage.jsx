@@ -1,5 +1,5 @@
-import ProvMapByIsle from "../components/home/province/ProvMapByIsle";
-import AllProvMap from "../components/home/province/AllProvMap";
+import AllProvMap from "@/components/home/province/AllProvMap";
+import ProvMapByIsle from "@/components/home/province/ProvMapByIsle";
 
 export default function HomePage() {
   return (

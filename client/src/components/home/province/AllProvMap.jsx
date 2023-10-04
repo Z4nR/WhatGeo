@@ -1,5 +1,5 @@
-import { provCoordinate } from "../../../utils/map-helper";
-import { getProvByPage, provPage } from "../../../utils/network";
+import { provCoordinate } from "@/utils/map-helper";
+import { getProvByPage, provPage } from "@/utils/network";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";

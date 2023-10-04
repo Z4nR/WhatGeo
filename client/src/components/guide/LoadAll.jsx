@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import hljs from "highlight.js";
-import { flattingData, loopingCode, saveData } from "../../utils/code-example";
+import { flattingData, loopingCode, saveData } from "@/utils/code-example";
 
 export default function LoadAll() {
   useEffect(() => {

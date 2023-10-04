@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import hljs from "highlight.js";
 import { cityRoute, codeData, provRoute } from "../utils/docs-data";
-import TableRoute from "../components/docs/TableRoute";
-import TableCode from "../components/docs/TableCode";
+import TableRoute from "@/components/docs/TableRoute";
+import TableCode from "@/components/docs/TableCode";
 
 export default function DocsPage() {
   useEffect(() => {
