@@ -60,6 +60,18 @@ export default function ProvMapByIsle() {
 
   return (
     <div className="py-4">
+      <h2 className="text-xl text-center text-black font-bold pb-2">
+        Peta Provinsi berdasarkan Pulau dan Kepulauannya
+      </h2>
+      <MapContainer center={[-1.2480891, 122]} zoom={5} scrollWheelZoom={true}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {prov?.map((item, index) => (
+          <GeoJSON key={index} data={item} />
+        ))}
+      </MapContainer>
       <div className="grid grid-flow-col gap-2 my-4">
         <div className="grid grid-flow-row content-start gap-2 justify-center">
           {btnData.left.map((item, index) => (
@@ -88,15 +100,6 @@ export default function ProvMapByIsle() {
           ))}
         </div>
       </div>
-      <MapContainer center={[-1.2480891, 122]} zoom={5} scrollWheelZoom={true}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {prov?.map((item, index) => (
-          <GeoJSON key={index} data={item} />
-        ))}
-      </MapContainer>
     </div>
   );
 }
