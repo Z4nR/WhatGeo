@@ -16,4 +16,22 @@ const getProvByPage = async (page) => {
   });
 };
 
-export { provPage, getProvByPage };
+const provPageByIsle = async (island) => {
+  return axios
+    .get(`${base_url}/prov/isle/page?island=${island}`)
+    .then((response) => {
+      const data = response.data;
+      return data.page;
+    });
+};
+
+const getProvByIsle = async (island, page) => {
+  return axios
+    .get(`${base_url}/prov/isle?island=${island}&page=${page}`)
+    .then((response) => {
+      const data = response.data;
+      return data;
+    });
+};
+
+export { provPage, getProvByPage, provPageByIsle, getProvByIsle };

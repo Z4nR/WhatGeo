@@ -76,7 +76,7 @@ export default function Header() {
           </label>
           <ul
             tabIndex={0}
-            className="dropdown-content z-[1] p-2 menu shadow bg-base-100 rounded-box w-52 px-1"
+            className="dropdown-content z-[1] p-2 menu shadow bg-base-100 rounded-box px-1"
           >
             <li>
               <Link className="hover:bg-secondary hover:text-white" to={"/doc"}>
