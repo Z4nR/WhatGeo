@@ -43,5 +43,5 @@ jobs:
         run: |
           git config --global user.email "${{ secrets.USER_EMAIL }}"
           git config --global user.name "${{ secrets.USER_NAME }}"
-          git remote set-url origin https://${{ secrets.API_KEY }}@github.com/${{ secrets.USER_NAME }}/WhatColors.git
+          git remote set-url origin https://${{ secrets.API_KEY }}@github.com/${{ secrets.USER_NAME }}/GeoAPI-Doc.git
           npm run deploy
