@@ -1,7 +1,7 @@
 {
   "name": "client",
   "private": true,
-  "homepage": "https://z4nr.github.io/WhatGeo/",
+  "homepage": "https://z4nr.github.io/GeoAPI-Doc/",
   "version": "0.35.0",
   "type": "module",
   "scripts": {
