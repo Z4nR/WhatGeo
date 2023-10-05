@@ -20,10 +20,10 @@ router.route("/city/page").get(cityController.cityPage); //Get Total Page of Cit
 router
   .route("/city")
   .get(cachingController.cacheCityByPage, cityController.getCityByPage); //Get City Data using query page number
-router.route("/city/prov/page").get(cityController.getCityOnProv); //Get Total Page of City on Province using query island name
+router.route("/city/prov/page").get(cityController.getCityOnProv); //Get Total Page of City on Province using query Province Id
 router
   .route("/city/prov")
-  .get(cachingController.cacheCityByProv, cityController.getCityByProv); //Get City Data using query Province name and page number
+  .get(cachingController.cacheCityByProv, cityController.getCityByProv); //Get City Data using query Province Id and page number
 router.route("/city/isle/page").get(cityController.getCityOnIsland); //Get Total Page of City on Island using query island name
 router
   .route("/city/isle")
