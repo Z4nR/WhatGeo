@@ -35,7 +35,7 @@ export default function ProvMapByIsle() {
       },
       {
         btnTitle: "Provinsi di Wilayah Kep. BalNusRa",
-        island: "BalNusRa",
+        island: "BalNusra",
       },
       {
         btnTitle: "Provinsi di Wilayah Kep. Maluku",
