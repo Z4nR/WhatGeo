@@ -1,5 +1,4 @@
 const prov = require("../models/coordinate/Province");
-const provDetail = require("../models/detail/ProvDetail");
 const client = require("../utils/redis");
 
 let pageNumber = 1;
@@ -90,22 +89,6 @@ module.exports = {
       client.setEx(`prov-${id}`, 3600, JSON.stringify(map));
 
       res.status(202).send(map);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
-    }
-  },
-
-  getProvDetail: async (req, res) => {
-    try {
-      const { id } = req.params;
-      const detail = await provDetail.findOne({ prov_id: id });
-      if (!detail)
-        return res
-          .status(404)
-          .send({ message: "Detail Provinsi Tidak Ditemukan" });
-
-      res.status(202).send(detail);
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });

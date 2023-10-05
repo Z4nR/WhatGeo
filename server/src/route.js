@@ -14,7 +14,6 @@ router
   .route("/prov/isle")
   .get(cachingController.cacheProvByIsland, provController.getProvByIsland); //Get Province Data using query Island name and page number
 router.route("/prov/:id/map").get(provController.getProvMap); //Get Province Map using Id Province params
-router.route("/prov/:id/detail").get(provController.getProvDetail); //Get Province Detail using Id Province params
 
 //City Route
 router.route("/city/page").get(cityController.cityPage); //Get Total Page of City
