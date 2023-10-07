@@ -17,7 +17,7 @@ export default function ProvMapByIsle() {
       }
       return page.flat();
     },
-    staleTime: 3600,
+    staleTime: 3600000,
     refetchOnWindowFocus: false,
   });
 
