@@ -4,7 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/GeoAPI-Doc",
+  base: "/WhatGeo",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
