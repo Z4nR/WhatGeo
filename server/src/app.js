@@ -3,7 +3,7 @@ const express = require("express"),
   bodyParser = require("body-parser");
 const app = express(),
   db = require("./db"),
-  route = require("./route"),
+  route = require("./routes"),
   client = require("./utils/redis");
 
 require("dotenv").config();
