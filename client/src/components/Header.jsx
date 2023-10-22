@@ -7,14 +7,14 @@ export default function Header() {
   return (
     <header className="w-full flex justify-center top-0 right-0 sticky z-20 shadow-sm bg-primary">
       <div className="navbar px-6 py-2 max-w-7xl">
-        <div className="flex-1 font-medium">
+        <div className="flex-1">
           <Link
             className="hover:text-white aria-[current=page]:text-secondary"
             aria-label="Home Button"
             aria-current={urlPath === '/' ? 'page' : undefined}
             to={'/'}
           >
-            WhatGeo: Indonesian Map
+            <h3 className="text-lg font-medium">WhatGeo: Indonesian Map</h3>
           </Link>
         </div>
         <div className="hidden font-medium items-center sm:flex">
@@ -89,16 +89,23 @@ export default function Header() {
           </label>
           <ul
             tabIndex={0}
-            className="dropdown-content z-[1] p-2 menu shadow bg-base-100 rounded-box px-1"
+            className="dropdown-content z-[1] p-2 menu bg-white shadow rounded-box px-1"
           >
             <li>
-              <Link className="hover:bg-secondary hover:text-white" to={'/doc'}>
+              <Link
+                className="hover:bg-accent hover:text-white aria-[current=page]:text-secondary aria-[current=page]:hover:bg-secondary aria-[current=page]:hover:text-white"
+                aria-label="Document Button"
+                aria-current={urlPath === '/doc' ? 'page' : undefined}
+                to={'/doc'}
+              >
                 Dokumentasi
               </Link>
             </li>
             <li>
               <Link
-                className="hover:bg-secondary hover:text-white"
+                className="hover:bg-accent hover:text-white aria-[current=page]:text-secondary aria-[current=page]:hover:bg-secondary aria-[current=page]:hover:text-white"
+                aria-label="Guide Button"
+                aria-current={urlPath === '/guide' ? 'page' : undefined}
                 to={'/guide'}
               >
                 Petunjuk
@@ -106,7 +113,9 @@ export default function Header() {
             </li>
             <li>
               <Link
-                className="hover:bg-secondary hover:text-white"
+                className="hover:bg-accent hover:text-white aria-[current=page]:text-secondary aria-[current=page]:hover:bg-secondary aria-[current=page]:hover:text-white"
+                aria-label="Example Button"
+                aria-current={urlPath === '/example' ? 'page' : undefined}
                 to={'/example'}
               >
                 Contoh
@@ -117,7 +126,7 @@ export default function Header() {
                 to="https://github.com/Z4nR/GeoAPI-Doc"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:bg-secondary hover:text-white"
+                className="hover:bg-accent hover:text-white"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
