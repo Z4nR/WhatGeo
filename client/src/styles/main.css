@@ -27,7 +27,7 @@ main,
 }
 
 .mockup-code pre::before {
-  content: "";
+  content: '';
   margin-right: 0px;
 }
 
