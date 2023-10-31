@@ -1,12 +1,12 @@
-import { provCoordinate } from "@/utils/map-helper";
-import { getProvByPage, provPage } from "@/utils/network";
-import { useQuery } from "@tanstack/react-query";
-import { useMemo } from "react";
-import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
+import { provCoordinate } from '@/utils/map-helper';
+import { getProvByPage, provPage } from '@/utils/network';
+import { useQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
+import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 
 export default function AllProvMap() {
   const { data } = useQuery({
-    queryKey: ["prov-data"],
+    queryKey: ['prov-data'],
     queryFn: async () => {
       const totalPage = await provPage();
       let page = [];
@@ -23,7 +23,7 @@ export default function AllProvMap() {
   const prov = useMemo(() => provCoordinate(data), [data]);
 
   return (
-    <div className="py-4">
+    <div className="pt-4">
       <h2 className="text-xl text-center text-black font-bold pb-2">
         Peta Provinsi
       </h2>
@@ -36,6 +36,7 @@ export default function AllProvMap() {
           <GeoJSON key={index} data={item} />
         ))}
       </MapContainer>
+      <div className="divider" />
     </div>
   );
 }

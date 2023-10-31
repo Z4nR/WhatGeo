@@ -1,5 +1,6 @@
-import AllProvMap from "@/components/home/province/AllProvMap";
-import ProvMapByIsle from "@/components/home/province/ProvMapByIsle";
+import AllProvMap from '@/components/home/province/AllProvMap';
+import ProvmMapById from '@/components/home/province/ProvMapById';
+import ProvMapByIsle from '@/components/home/province/ProvMapByIsle';
 
 export default function HomePage() {
   return (
@@ -17,6 +18,7 @@ export default function HomePage() {
       </p>
       <AllProvMap />
       <ProvMapByIsle />
+      <ProvmMapById />
     </div>
   );
 }

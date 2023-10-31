@@ -1,13 +1,13 @@
-import { useMemo, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
-import { getProvByIsle, provPageByIsle } from "@/utils/network";
-import { provCoordinate } from "@/utils/map-helper";
+import { useMemo, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+import { getProvByIsle, provPageByIsle } from '@/utils/network';
+import { provCoordinate } from '@/utils/map-helper';
 
 export default function ProvMapByIsle() {
-  const [island, setIsland] = useState("");
+  const [island, setIsland] = useState('');
   const { data, refetch } = useQuery({
-    queryKey: ["prov-data", island],
+    queryKey: ['prov-data', island],
     queryFn: async () => {
       const totalPage = await provPageByIsle(island);
       let page = [];
@@ -23,43 +23,39 @@ export default function ProvMapByIsle() {
 
   const prov = useMemo(() => provCoordinate(data), [data]);
 
-  const btnData = {
-    right: [
-      {
-        btnTitle: "Provinsi di Wilayah Sulawesi",
-        island: "Sulawesi",
-      },
-      {
-        btnTitle: "Provinsi di Wilayah Papua",
-        island: "Papua",
-      },
-      {
-        btnTitle: "Provinsi di Wilayah Kep. BalNusRa",
-        island: "BalNusra",
-      },
-      {
-        btnTitle: "Provinsi di Wilayah Kep. Maluku",
-        island: "Maluku",
-      },
-    ],
-    left: [
-      {
-        btnTitle: "Provinsi di Wilayah Jawa",
-        island: "Jawa",
-      },
-      {
-        btnTitle: "Provinsi di Wilayah Sumatera",
-        island: "Sumatera",
-      },
-      {
-        btnTitle: "Provinsi di Wilayah Kalimantan",
-        island: "Kalimantan",
-      },
-    ],
-  };
+  const btnData = [
+    {
+      btnTitle: 'Prov. di Wilayah Sulawesi',
+      island: 'Sulawesi',
+    },
+    {
+      btnTitle: 'Prov. di Wilayah Papua',
+      island: 'Papua',
+    },
+    {
+      btnTitle: 'Prov. di Wilayah Kep. BalNusRa',
+      island: 'BalNusra',
+    },
+    {
+      btnTitle: 'Prov. di Wilayah Kep. Maluku',
+      island: 'Maluku',
+    },
+    {
+      btnTitle: 'Prov. di Wilayah Jawa',
+      island: 'Jawa',
+    },
+    {
+      btnTitle: 'Prov. di Wilayah Sumatera',
+      island: 'Sumatera',
+    },
+    {
+      btnTitle: 'Prov. di Wilayah Kalimantan',
+      island: 'Kalimantan',
+    },
+  ];
 
   return (
-    <div className="py-4">
+    <div className="pt-4">
       <h2 className="text-xl text-center text-black font-bold pb-2">
         Peta Provinsi berdasarkan Pulau dan Kepulauannya
       </h2>
@@ -72,34 +68,20 @@ export default function ProvMapByIsle() {
           <GeoJSON key={index} data={item} />
         ))}
       </MapContainer>
-      <div className="grid grid-flow-col gap-2 my-4">
-        <div className="grid grid-flow-row content-start gap-2 justify-center">
-          {btnData.left.map((item, index) => (
-            <button
-              onClick={() => {
-                setIsland(item.island), refetch();
-              }}
-              key={index}
-              className="btn btn-sm w-full md:max-w-xs btn-secondary text-xs text-white"
-            >
-              {item.btnTitle}
-            </button>
-          ))}
-        </div>
-        <div className="grid grid-flow-row content-start gap-2 justify-center">
-          {btnData.right.map((item, index) => (
-            <button
-              onClick={() => {
-                setIsland(item.island), refetch();
-              }}
-              key={index}
-              className="btn btn-sm w-full md:max-w-xs btn-secondary text-xs text-white"
-            >
-              {item.btnTitle}
-            </button>
-          ))}
-        </div>
+      <div className="pt-4 px-4 flex flex-wrap justify-center gap-2">
+        {btnData.map((item, index) => (
+          <button
+            onClick={() => {
+              setIsland(item.island), refetch();
+            }}
+            key={index}
+            className="btn btn-sm px-0.5 w-full xs:max-w-xs btn-secondary text-xs text-white"
+          >
+            {item.btnTitle}
+          </button>
+        ))}
       </div>
+      <div className="divider" />
     </div>
   );
 }
