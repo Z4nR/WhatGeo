@@ -1,0 +1,1 @@
+import{f as o}from"./format-7101f815.js";var f=o,r=e(Error),p=r;r.eval=e(EvalError);r.range=e(RangeError);r.reference=e(ReferenceError);r.syntax=e(SyntaxError);r.type=e(TypeError);r.uri=e(URIError);r.create=e;function e(a){return t.displayName=a.displayName||a.name,t;function t(n){return n&&(n=f.apply(null,arguments)),new a(n)}}export{p as f};
