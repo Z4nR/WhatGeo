@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const ProvSchema = new Schema({
@@ -18,5 +18,5 @@ const ProvSchema = new Schema({
   description: String,
 });
 
-const provgeo = mongoose.model("provlatlong", ProvSchema, "ProvLatLong");
+const provgeo = mongoose.model('provlatlong', ProvSchema, 'ProvLatLong');
 module.exports = provgeo;

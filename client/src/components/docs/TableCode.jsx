@@ -1,9 +1,13 @@
 export default function TableCode({ data }) {
   return (
     <>
-      <div className="divider" />
-      <h1 className="text-lg font-bold">Kode Data Provinsi dan Kab/Kota</h1>
-      <div className="overflow-x-auto py-2">
+      <h1 className="text-xl font-bold">Kode Data Provinsi dan Kab/Kota</h1>
+      <h2 className="text-sm">
+        *Untuk Kode Prov Id di Pulau Papua dibuat secara pribadi dan Kode City
+        Id Kota di Pulau Papua terlihat acak dikarenakan belum adanya
+        pemutakhiran kode terbaru
+      </h2>
+      <div className="overflow-x-auto pt-4 pb-2">
         <table className="table table-md text-center">
           <thead>
             <tr>
@@ -19,11 +23,11 @@ export default function TableCode({ data }) {
                 <td className="text-center">{data.prov_id}</td>
                 <td>
                   <div className="pb-2">
-                    <span className=" font-medium">Kode Kab :</span> <br />{" "}
+                    <span className=" font-medium">Kode Kab :</span> <br />{' '}
                     {data.regency_id}
                   </div>
                   <div>
-                    <span className=" font-medium">Kode Kota :</span> <br />{" "}
+                    <span className=" font-medium">Kode Kota :</span> <br />{' '}
                     {data.city_id}
                   </div>
                 </td>

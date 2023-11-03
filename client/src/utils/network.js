@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const base_url = import.meta.env.VITE_API;
 
@@ -34,4 +34,11 @@ const getProvByIsle = async (island, page) => {
     });
 };
 
-export { provPage, getProvByPage, provPageByIsle, getProvByIsle };
+const getProvById = async (id) => {
+  return axios.get(`${base_url}/prov/${id}`).then((response) => {
+    const data = response.data;
+    return data;
+  });
+};
+
+export { provPage, getProvByPage, provPageByIsle, getProvByIsle, getProvById };
