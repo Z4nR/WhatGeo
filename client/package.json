@@ -21,7 +21,8 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
     "react-leaflet": "^4.2.1",
-    "react-router-dom": "^6.16.0"
+    "react-router-dom": "^6.16.0",
+    "swagger-ui-react": "^5.9.1"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^4.36.0",

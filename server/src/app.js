@@ -1,14 +1,11 @@
 const express = require('express'),
   cors = require('cors'),
-  bodyParser = require('body-parser'),
-  swaggerJsdoc = require('swagger-jsdoc'),
-  swaggerUi = require('swagger-ui-express');
+  bodyParser = require('body-parser');
 
 const app = express(),
   db = require('./db'),
   route = require('./routes'),
-  client = require('./utils/redis'),
-  swaggerOptions = require('./utils/swagger');
+  client = require('./utils/redis');
 
 require('dotenv').config();
 
@@ -40,17 +37,6 @@ redisConnect();
 
 //DB Connection
 db();
-
-//Swagger
-const specs = swaggerJsdoc(swaggerOptions);
-app.use(
-  '/api-docs',
-  swaggerUi.serve,
-  swaggerUi.setup(specs, {
-    customCss: '.swagger-ui>.topbar { display: none }',
-    customSiteTitle: 'WhatGeo Documentation',
-  })
-);
 
 //Listen Port
 app.listen(port, () => {
