@@ -10,10 +10,6 @@ const options = {
         name: 'MIT',
         url: 'https://spdx.org/licenses/MIT.html',
       },
-      contact: {
-        name: 'WhatGeo',
-        url: 'https://z4nr.github.io/WhatGeo/',
-      },
     },
     servers: [
       {
