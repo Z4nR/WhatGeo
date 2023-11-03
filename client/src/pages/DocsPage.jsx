@@ -1,13 +1,7 @@
-import { useEffect } from 'react';
-import hljs from 'highlight.js';
 import { codeData } from '../utils/docs-data';
 import TableCode from '@/components/docs/TableCode';
 
 export default function DocsPage() {
-  useEffect(() => {
-    hljs.highlightAll();
-  }, []);
-
   return (
     <div className="py-4 px-6">
       <TableCode data={codeData} />
