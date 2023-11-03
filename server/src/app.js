@@ -46,7 +46,7 @@ const specs = swaggerJsdoc(swaggerOptions);
 app.use(
   '/api-docs',
   swaggerUi.serve,
-  swaggerUi.setup(specs, { customCss: '.swagger-ui .topbar { display: none }' })
+  swaggerUi.setup(specs, { customCss: '.swagger-ui>.topbar { display: none }' })
 );
 
 //Listen Port
