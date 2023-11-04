@@ -5,7 +5,7 @@ export default function Header() {
   const urlPath = urlLocation.pathname;
 
   return (
-    <header className="w-full flex justify-center top-0 right-0 sticky z-20 shadow-sm bg-accent">
+    <header className="w-full flex justify-center top-0 right-0 sticky z-20 shadow-sm bg-primary">
       <div className="navbar px-6 py-2 max-w-7xl">
         <div className="flex-1">
           <Link
