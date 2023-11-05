@@ -253,4 +253,11 @@ const codeData = [
   },
 ];
 
-export { codeData };
+const guideData = [
+  {
+    title: 'Menyatukan data peta yang terpisah berdasarkan angka halaman',
+    desc: 'Untuk dapat memuat seluruh data geojson dari beberapa halaman berbeda menjadi satu array utama',
+  },
+];
+
+export { codeData, guideData };

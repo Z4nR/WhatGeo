@@ -1,24 +1,39 @@
 import { provCoordinate } from '@/utils/map-helper';
 import { getProvByPage, provPage } from '@/utils/network';
-import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useQueries, useQuery } from '@tanstack/react-query';
+import { useEffect, useMemo } from 'react';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 
 export default function AllProvMap() {
-  const { data } = useQuery({
-    queryKey: ['prov-data'],
-    queryFn: async () => {
-      const totalPage = await provPage();
-      let page = [];
-      for (let i = 1; i <= totalPage; i++) {
-        const data = await getProvByPage(i);
-        page.push(data);
-      }
-      return page.flat();
-    },
+  const totalPage = useQuery({
+    queryKey: ['prov-page'],
+    queryFn: async () => await provPage(),
     staleTime: 3600,
     refetchOnWindowFocus: false,
   });
+  const pageProv = totalPage.data;
+
+  const { data } = useQueries({
+    queries: Array(pageProv)
+      .fill(null)
+      .map((_, index) => {
+        return {
+          queryKey: ['page-prov', index],
+          queryFn: () => getProvByPage(1 + index),
+          staleTime: 3600,
+          refetchOnWindowFocus: false,
+        };
+      }),
+    combine: (results) => {
+      return {
+        data: results.map((result) => result.data),
+      };
+    },
+  });
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   const prov = useMemo(() => provCoordinate(data), [data]);
 
