@@ -1,41 +1,55 @@
 import { provCoordinate } from '@/utils/map-helper';
 import { getProvByPage, provPage } from '@/utils/network';
 import { useQueries, useQuery } from '@tanstack/react-query';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 
 export default function AllProvMap() {
-  const totalPage = useQuery({
+  const { data } = useQuery({
     queryKey: ['prov-page'],
     queryFn: async () => await provPage(),
-    staleTime: 3600,
+    staleTime: 60 * 60 * 1000,
     refetchOnWindowFocus: false,
   });
-  const pageProv = totalPage.data;
 
-  const { data } = useQueries({
-    queries: Array(pageProv)
+  // const { data } = useQuery({
+  //   queryKey: ['prov-data'],
+  //   queryFn: async () => {
+  //     const totalPage = await provPage();
+  //     let page = [];
+  //     for (let i = 1; i <= totalPage; i++) {
+  //       const data = await getProvByPage(i);
+  //       page.push(data);
+  //     }
+  //     return page.flat();
+  //   },
+  //   staleTime: 3600,
+  //   refetchOnWindowFocus: false,
+  // });
+
+  const provData = useQueries({
+    queries: Array(data)
       .fill(null)
       .map((_, index) => {
         return {
-          queryKey: ['page-prov', index],
+          queryKey: ['page-prov', 1 + index],
           queryFn: () => getProvByPage(1 + index),
-          staleTime: 3600,
+          enabled: data > 0,
+          staleTime: 60 * 60 * 1000,
           refetchOnWindowFocus: false,
         };
       }),
     combine: (results) => {
       return {
         data: results.map((result) => result.data),
+        pending: results.some((result) => result.isPending),
       };
     },
   });
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const geodata = provData.data.flat();
 
-  const prov = useMemo(() => provCoordinate(data), [data]);
+  const prov = useMemo(() => provCoordinate(geodata), [geodata]);
 
   return (
     <div className="pt-4">
