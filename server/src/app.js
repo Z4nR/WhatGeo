@@ -19,7 +19,7 @@ if (env === 'development') {
 
 //Middleware
 app.use(bodyParser.json());
-app.use(cors({ origin: true, methods: ['GET'] }));
+app.use(cors());
 
 //Route
 app.use('/v1', route);
