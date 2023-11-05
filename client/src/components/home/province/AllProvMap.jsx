@@ -12,21 +12,6 @@ export default function AllProvMap() {
     refetchOnWindowFocus: false,
   });
 
-  // const { data } = useQuery({
-  //   queryKey: ['prov-data'],
-  //   queryFn: async () => {
-  //     const totalPage = await provPage();
-  //     let page = [];
-  //     for (let i = 1; i <= totalPage; i++) {
-  //       const data = await getProvByPage(i);
-  //       page.push(data);
-  //     }
-  //     return page.flat();
-  //   },
-  //   staleTime: 3600,
-  //   refetchOnWindowFocus: false,
-  // });
-
   const provData = useQueries({
     queries: Array(data)
       .fill(null)

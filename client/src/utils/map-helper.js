@@ -1,4 +1,4 @@
-const provCoordinate = (map) => {
+export const provCoordinate = (map) => {
   let coordinate = [];
   if (map) {
     map.find((d) => {
@@ -8,5 +8,3 @@ const provCoordinate = (map) => {
   }
   return coordinate;
 };
-
-export { provCoordinate };
