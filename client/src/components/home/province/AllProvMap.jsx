@@ -32,9 +32,10 @@ export default function AllProvMap() {
     },
   });
 
-  let geodata;
-  if (!provData.pending) geodata = provData.data.flat();
-  const prov = useMemo(() => provCoordinate(geodata), [geodata]);
+  const prov = useMemo(() => {
+    if (provData.pending) return null;
+    return provCoordinate(provData.data.flat());
+  }, [provData]);
 
   return (
     <div className="pt-4">
