@@ -8,3 +8,14 @@ export const provCoordinate = (map) => {
   }
   return coordinate;
 };
+
+export const cityCoordinate = (map) => {
+  let coordinate = [];
+  if (map) {
+    map.find((d) => {
+      const feature = d?.cityFeature;
+      coordinate.push(feature);
+    });
+  }
+  return coordinate;
+};

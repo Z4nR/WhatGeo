@@ -32,8 +32,8 @@ export default function AllProvMap() {
     },
   });
 
-  const geodata = provData.data.flat();
-
+  let geodata;
+  if (!provData.pending) geodata = provData.data.flat();
   const prov = useMemo(() => provCoordinate(geodata), [geodata]);
 
   return (
