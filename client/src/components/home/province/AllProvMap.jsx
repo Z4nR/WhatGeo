@@ -17,8 +17,8 @@ export default function AllProvMap() {
       .fill(null)
       .map((_, index) => {
         return {
-          queryKey: ['page-prov', 1 + index],
-          queryFn: () => getProvByPage(1 + index),
+          queryKey: ['page-prov', index + 1],
+          queryFn: () => getProvByPage(index + 1),
           enabled: data > 0,
           staleTime: 60 * 60 * 1000,
           refetchOnWindowFocus: false,

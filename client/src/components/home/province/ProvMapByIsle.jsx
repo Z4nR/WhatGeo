@@ -1,27 +1,41 @@
 import { useMemo, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import { getProvByIsle, provPageByIsle } from '@/utils/network';
 import { provCoordinate } from '@/utils/map-helper';
 
 export default function ProvMapByIsle() {
   const [island, setIsland] = useState('');
-  const { data, refetch } = useQuery({
-    queryKey: ['prov-data', island],
-    queryFn: async () => {
-      const totalPage = await provPageByIsle(island);
-      let page = [];
-      for (let i = 1; i <= totalPage; i++) {
-        const data = await getProvByIsle(island, i);
-        page.push(data);
-      }
-      return page.flat();
-    },
-    staleTime: 3600000,
+  const { data } = useQuery({
+    queryKey: ['prov-isle-page', island],
+    queryFn: async () => await provPageByIsle(island),
+    staleTime: 60 * 15 * 1000,
     refetchOnWindowFocus: false,
   });
 
-  const prov = useMemo(() => provCoordinate(data), [data]);
+  const provData = useQueries({
+    queries: Array(data)
+      .fill(null)
+      .map((_, index) => {
+        return {
+          queryKey: ['prov-isle', island, index + 1],
+          queryFn: () => getProvByIsle(island, index + 1),
+          staleTime: 60 * 15 * 1000,
+          refetchOnWindowFocus: false,
+        };
+      }),
+    combine: (results) => {
+      return {
+        data: results.map((result) => result.data),
+        pending: results.some((result) => result.isPending),
+      };
+    },
+  });
+
+  const prov = useMemo(() => {
+    if (provData.pending) return null;
+    return provCoordinate(provData.data.flat());
+  }, [provData]);
 
   const btnData = [
     {
@@ -72,7 +86,7 @@ export default function ProvMapByIsle() {
         {btnData.map((item, index) => (
           <button
             onClick={() => {
-              setIsland(item.island), refetch();
+              setIsland(item.island);
             }}
             key={index}
             className="btn btn-sm px-0.5 w-full xs:max-w-xs btn-secondary text-xs text-white"

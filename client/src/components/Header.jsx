@@ -77,8 +77,8 @@ export default function Header() {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              stroke="white"
-              className="hover:text-primary w-6 h-6"
+              stroke="#11648e"
+              className="w-6 h-6"
             >
               <path
                 strokeLinecap="round"
