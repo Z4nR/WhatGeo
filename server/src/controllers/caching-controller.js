@@ -11,9 +11,6 @@ module.exports = {
       const data = await client.get(`prov-${page}`);
       if (!data) return next();
 
-      const testing = await client.get(`prov-1`);
-      console.log(testing);
-
       const parseData = JSON.parse(data);
 
       res.status(202).send(parseData);
