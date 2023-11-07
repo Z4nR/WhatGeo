@@ -1,5 +1,5 @@
-const prov = require("../models/coordinate/Province");
-const client = require("../utils/redis");
+const prov = require('../models/coordinate/Province');
+const client = require('../utils/redis');
 
 let pageNumber = 1;
 const limit = 3;
@@ -13,7 +13,7 @@ module.exports = {
       res.status(202).send({ page: total });
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -29,14 +29,15 @@ module.exports = {
         .sort({ _id: 1 });
 
       if (page <= 0)
-        res.status(404).send({ message: "Data Provinsi Tidak Ditemukan" });
+        res.status(404).send({ message: 'Data Provinsi Tidak Ditemukan' });
 
+      console.log(data);
       await client.setEx(`prov-${page}`, 3600, JSON.stringify(data));
 
       res.status(202).send(data);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -49,7 +50,7 @@ module.exports = {
       res.status(202).send({ page: total });
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -66,14 +67,14 @@ module.exports = {
         .sort({ _id: 1 });
 
       if (page <= 0)
-        res.status(404).send({ message: "Data Provinsi Tidak Ditemukan" });
+        res.status(404).send({ message: 'Data Provinsi Tidak Ditemukan' });
 
       client.setEx(`prov-${island}${page}`, 3600, JSON.stringify(data));
 
       res.status(202).send(data);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -84,14 +85,14 @@ module.exports = {
       if (!map)
         return res
           .status(404)
-          .send({ message: "Denah Provinsi Tidak Ditemukan" });
+          .send({ message: 'Denah Provinsi Tidak Ditemukan' });
 
       client.setEx(`prov-${id}`, 3600, JSON.stringify(map));
 
       res.status(202).send(map);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 };
