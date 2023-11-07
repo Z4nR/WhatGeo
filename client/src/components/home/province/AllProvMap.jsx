@@ -39,6 +39,8 @@ export default function AllProvMap() {
     return provCoordinate(provData.data.flat());
   }, [provData]);
 
+  console.log(provData.data);
+
   return (
     <div className="pt-4">
       <h2 className="text-xl text-center text-black font-bold pb-2">

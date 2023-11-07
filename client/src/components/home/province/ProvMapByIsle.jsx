@@ -6,6 +6,7 @@ import { provCoordinate } from '@/utils/map-helper';
 
 export default function ProvMapByIsle() {
   const [island, setIsland] = useState('');
+  console.log(island);
   const { data } = useQuery({
     queryKey: ['prov-isle-page', island],
     queryFn: async () => await provPageByIsle(island),
@@ -38,6 +39,8 @@ export default function ProvMapByIsle() {
     if (provData.pending) return null;
     return provCoordinate(provData.data.flat());
   }, [provData]);
+
+  console.log(prov);
 
   const btnData = [
     {
