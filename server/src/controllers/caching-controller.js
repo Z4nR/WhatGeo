@@ -9,7 +9,13 @@ module.exports = {
 
     try {
       const data = await client.get(`prov-${page}`);
-      if (!data || data.length === 0) return next();
+      if (!data || data.length === 0) {
+        console.log('Data tidak ditemukan');
+        return next();
+      }
+
+      const testing = await client.get(`prov-1`);
+      console.log(testing);
 
       const parseData = JSON.parse(data);
 
