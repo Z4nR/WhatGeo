@@ -10,6 +10,7 @@ module.exports = {
     try {
       const data = await client.get(`prov-${page}`);
       if (!data) return next();
+      if (data.length === 0) return next();
 
       const parseData = JSON.parse(data);
 
