@@ -9,7 +9,8 @@ export default function ProvMapByIsle() {
   const { data } = useQuery({
     queryKey: ['prov-isle-page', island],
     queryFn: async () => await provPageByIsle(island),
-    staleTime: 60 * 15 * 1000,
+    staleTime: Infinity,
+    gcTime: Infinity,
     refetchOnWindowFocus: false,
   });
 
@@ -20,7 +21,8 @@ export default function ProvMapByIsle() {
         return {
           queryKey: ['prov-isle', island, index + 1],
           queryFn: () => getProvByIsle(island, index + 1),
-          staleTime: 60 * 15 * 1000,
+          staleTime: Infinity,
+          gcTime: Infinity,
           refetchOnWindowFocus: false,
         };
       }),

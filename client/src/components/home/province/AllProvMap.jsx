@@ -8,7 +8,8 @@ export default function AllProvMap() {
   const { data } = useQuery({
     queryKey: ['prov-page'],
     queryFn: async () => await provPage(),
-    staleTime: 60 * 60 * 1000,
+    staleTime: Infinity,
+    gcTime: Infinity,
     refetchOnWindowFocus: false,
   });
 
@@ -20,7 +21,8 @@ export default function AllProvMap() {
           queryKey: ['page-prov', index + 1],
           queryFn: () => getProvByPage(index + 1),
           enabled: data > 0,
-          staleTime: 60 * 60 * 1000,
+          staleTime: Infinity,
+          gcTime: Infinity,
           refetchOnWindowFocus: false,
         };
       }),

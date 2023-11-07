@@ -1,4 +1,4 @@
-const client = require("../utils/redis");
+const client = require('../utils/redis');
 
 let pageNumber = 1;
 
@@ -11,12 +11,14 @@ module.exports = {
       const data = await client.get(`prov-${page}`);
       if (!data) return next();
 
+      console.log(data);
+
       const parseData = JSON.parse(data);
 
       res.status(202).send(parseData);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -34,7 +36,7 @@ module.exports = {
       res.status(202).send(parseData);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -51,7 +53,7 @@ module.exports = {
       res.status(202).send(parseData);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -68,7 +70,7 @@ module.exports = {
       res.status(202).send(parseData);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -86,7 +88,7 @@ module.exports = {
       res.status(202).send(parseData);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -104,7 +106,7 @@ module.exports = {
       res.status(202).send(parseData);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -121,7 +123,7 @@ module.exports = {
       res.status(202).send(parseData);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 };
