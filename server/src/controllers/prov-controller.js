@@ -33,7 +33,7 @@ module.exports = {
 
       await client.set(`prov-${page}`, JSON.stringify(data), {
         EX: 600,
-        NX: true,
+        XX: true,
       });
 
       res.status(202).send(data);
