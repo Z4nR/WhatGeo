@@ -1,6 +1,6 @@
-const city = require("../models/coordinate/City");
-require("../models/detail/CityDestiny");
-const client = require("../utils/redis.js");
+const city = require('../models/coordinate/City');
+require('../models/detail/CityDestiny');
+const client = require('../utils/redis.js');
 
 let pageNumber = 1;
 const limit = 5;
@@ -14,7 +14,7 @@ module.exports = {
       res.status(202).send({ page: total });
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -30,14 +30,17 @@ module.exports = {
         .sort({ _id: 1 });
 
       if (page <= 0)
-        res.status(404).send({ message: "Data Kota Tidak Ditemukan" });
+        res.status(404).send({ message: 'Data Kota Tidak Ditemukan' });
 
-      client.setEx(`city-${page}`, 3600, JSON.stringify(data));
+      client.set(`city-${page}`, JSON.stringify(data), {
+        EX: 600,
+        NX: true,
+      });
 
       res.status(202).send(data);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -50,7 +53,7 @@ module.exports = {
       res.status(202).send({ page: total });
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -67,14 +70,17 @@ module.exports = {
         .sort({ _id: 1 });
 
       if (page <= 0)
-        res.status(404).send({ message: "Data Kota Tidak Ditemukan" });
+        res.status(404).send({ message: 'Data Kota Tidak Ditemukan' });
 
-      client.setEx(`city-${prov_id}${page}`, 3600, JSON.stringify(data));
+      client.set(`city-${prov_id}${page}`, 3600, JSON.stringify(data), {
+        EX: 600,
+        NX: true,
+      });
 
       res.status(202).send(data);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -87,7 +93,7 @@ module.exports = {
       res.status(202).send({ page: total });
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -104,14 +110,17 @@ module.exports = {
         .sort({ _id: 1 });
 
       if (page <= 0)
-        res.status(404).send({ message: "Data Kota Tidak Ditemukan" });
+        res.status(404).send({ message: 'Data Kota Tidak Ditemukan' });
 
-      client.setEx(`city-${island}${page}`, 3600, JSON.stringify(data));
+      client.set(`city-${island}${page}`, 3600, JSON.stringify(data), {
+        EX: 600,
+        NX: true,
+      });
 
       res.status(202).send(data);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -122,14 +131,17 @@ module.exports = {
       if (!map)
         return res
           .status(404)
-          .send({ message: "Denah Kab/Kota Tidak Ditemukan" });
+          .send({ message: 'Denah Kab/Kota Tidak Ditemukan' });
 
-      client.setEx(`city-${id}`, 3600, JSON.stringify(map));
+      client.set(`city-${id}`, 3600, JSON.stringify(map), {
+        EX: 600,
+        NX: true,
+      });
 
       res.status(202).send(map);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 
@@ -137,20 +149,20 @@ module.exports = {
     try {
       const { id } = req.params;
       const destiny = await city.findById(id).populate({
-        path: "destinations",
+        path: 'destinations',
         options: { sort: { place_name: 1 } },
       });
       if (!destiny)
         return res
           .status(404)
-          .send({ message: "Data lokasi liburan tidak ditemukan" });
+          .send({ message: 'Data lokasi liburan tidak ditemukan' });
 
       const data = destiny.destinations;
 
       res.status(202).send(data);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Terjadi Kesalahan Pada Server" });
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
     }
   },
 };

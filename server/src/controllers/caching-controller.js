@@ -8,7 +8,7 @@ module.exports = {
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
     try {
-      const data = await client.get(`prov-${page}`);
+      const data = await client.getEx(`prov-${page}`, { EX: 600 });
       if (!data || data.length === 0) {
         console.log(`Data prov-${page} tidak ditemukan`);
         return next();
@@ -33,7 +33,7 @@ module.exports = {
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
     try {
-      const data = await client.get(`prov-${island}${page}`);
+      const data = await client.getEx(`prov-${island}${page}`);
       if (!data) return next();
 
       const parseData = JSON.parse(data);
@@ -50,7 +50,7 @@ module.exports = {
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
     try {
-      const data = await client.get(`prov-${id}`);
+      const data = await client.getEx(`prov-${id}`);
       if (!data) return next();
 
       const parseData = JSON.parse(data);
@@ -67,7 +67,7 @@ module.exports = {
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
     try {
-      const data = await client.get(`city-${page}`);
+      const data = await client.getEx(`city-${page}`);
       if (!data) return next();
 
       const parseData = JSON.parse(data);
@@ -85,7 +85,7 @@ module.exports = {
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
     try {
-      const data = await client.get(`city-${prov_id}${page}`);
+      const data = await client.getEx(`city-${prov_id}${page}`);
       if (!data) return next();
 
       const parseData = JSON.parse(data);
@@ -103,7 +103,7 @@ module.exports = {
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
     try {
-      const data = await client.get(`city-${island}${page}`);
+      const data = await client.getEx(`city-${island}${page}`, { EX: 600 });
       if (!data) return next();
 
       const parseData = JSON.parse(data);
@@ -120,7 +120,7 @@ module.exports = {
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
     try {
-      const data = await client.get(`city-${id}`);
+      const data = await client.getEx(`city-${id}`);
       if (!data) return next();
 
       const parseData = JSON.parse(data);
