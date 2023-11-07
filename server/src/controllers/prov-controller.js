@@ -31,6 +31,10 @@ module.exports = {
       if (page <= 0)
         res.status(404).send({ message: 'Data Provinsi Tidak Ditemukan' });
 
+      if ((page = 1)) {
+        console.log(data._id);
+      }
+
       await client.setEx(`prov-${page}`, 3600, JSON.stringify(data));
 
       res.status(202).send(data);

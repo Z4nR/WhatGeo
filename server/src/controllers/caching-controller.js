@@ -15,7 +15,8 @@ module.exports = {
       }
 
       const testing = await client.get(`prov-1`);
-      console.log(testing);
+      const dataOne = JSON.parse(testing);
+      console.log(dataOne._id);
 
       const parseData = JSON.parse(data);
 
