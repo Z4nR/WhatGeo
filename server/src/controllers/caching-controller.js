@@ -10,7 +10,6 @@ module.exports = {
     try {
       const data = await client.get(`prov-${page}`);
       if (!data || data.length === 0) {
-        console.log('Data tidak ditemukan');
         return next();
       }
 
