@@ -6,7 +6,9 @@ const router = require('express-promise-router')();
 
 //Prov Route
 router.route('/prov/page').get(provController.provPage); //Get Total Page of Province
-router.route('/prov').get(provController.getProvByPage); //Get Province Data using query page number
+router
+  .route('/prov')
+  .get(/**cachingController.cacheProvByPage, */ provController.getProvByPage); //Get Province Data using query page number
 router.route('/prov/isle/page').get(provController.getProvOnIsland); //Get Total Page of Province on Island using query island name
 router
   .route('/prov/isle')
