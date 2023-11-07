@@ -71,6 +71,10 @@ export default function ProvMapByIsle() {
       btnTitle: 'Prov. di Wilayah Kalimantan',
       island: 'Kalimantan',
     },
+    {
+      btnTitle: 'Kosongkan Data',
+      island: '',
+    },
   ];
 
   return (
