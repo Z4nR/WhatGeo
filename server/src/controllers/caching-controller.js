@@ -8,7 +8,7 @@ module.exports = {
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
     try {
-      const data = await client.getEx(`prov-${page}`, { EX: 600 });
+      const data = await client.get(`prov-${page}`);
       if (!data || data.length === 0) {
         console.log(`Data prov-${page} tidak ditemukan`);
         return next();
