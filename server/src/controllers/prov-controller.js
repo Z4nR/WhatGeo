@@ -2,7 +2,7 @@ const prov = require('../models/coordinate/Province');
 const client = require('../utils/redis');
 
 let pageNumber = 1;
-const limit = 3;
+const limit = 5;
 
 module.exports = {
   provPage: async (req, res) => {

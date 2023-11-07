@@ -14,7 +14,7 @@ module.exports = {
         return next();
       }
 
-      const testing = await client.get(`prov-2`);
+      const testing = await client.get(`prov-1`);
       const dataOne = JSON.parse(testing);
       console.log(dataOne);
 
