@@ -25,7 +25,8 @@ module.exports = {
       const data = await prov
         .find()
         .skip((pageNumber - 1) * limit)
-        .limit(limit);
+        .limit(limit)
+        .sort({ _id: 1 });
 
       if (page <= 0)
         res.status(404).send({ message: 'Data Provinsi Tidak Ditemukan' });
