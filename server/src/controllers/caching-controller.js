@@ -9,16 +9,13 @@ module.exports = {
 
     try {
       const data = await client.getEx(`prov-${page}`, { EX: 3600 });
-      if (!data || data.length === 0) {
+
+      const parseData = JSON.parse(data);
+
+      if (!parseData || parseData.length === 0) {
         console.log(`Data prov-${page} tidak ditemukan`);
         return next();
       }
-
-      const testing = await client.get(`prov-1`);
-      const dataOne = JSON.parse(testing);
-      console.log(dataOne);
-
-      const parseData = JSON.parse(data);
 
       res.status(202).send(parseData);
     } catch (error) {
@@ -34,9 +31,13 @@ module.exports = {
 
     try {
       const data = await client.getEx(`prov-${island}${page}`, { EX: 3600 });
-      if (!data) return next();
 
       const parseData = JSON.parse(data);
+
+      if (!parseData || parseData.length === 0) {
+        console.log(`Data prov-${island}${page} tidak ditemukan`);
+        return next();
+      }
 
       res.status(202).send(parseData);
     } catch (error) {
@@ -51,9 +52,13 @@ module.exports = {
 
     try {
       const data = await client.getEx(`prov-${id}`, { EX: 3600 });
-      if (!data) return next();
 
       const parseData = JSON.parse(data);
+
+      if (!parseData || parseData.length === 0) {
+        console.log(`Data prov-${id} tidak ditemukan`);
+        return next();
+      }
 
       res.status(202).send(parseData);
     } catch (error) {
@@ -68,9 +73,13 @@ module.exports = {
 
     try {
       const data = await client.getEx(`city-${page}`, { EX: 3600 });
-      if (!data) return next();
 
       const parseData = JSON.parse(data);
+
+      if (!parseData || parseData.length === 0) {
+        console.log(`Data city-${page} tidak ditemukan`);
+        return next();
+      }
 
       res.status(202).send(parseData);
     } catch (error) {
@@ -86,9 +95,13 @@ module.exports = {
 
     try {
       const data = await client.getEx(`city-${prov_id}${page}`, { EX: 3600 });
-      if (!data) return next();
 
       const parseData = JSON.parse(data);
+
+      if (!parseData || parseData.length === 0) {
+        console.log(`Data city-${prov_id}${page} tidak ditemukan`);
+        return next();
+      }
 
       res.status(202).send(parseData);
     } catch (error) {
@@ -104,9 +117,13 @@ module.exports = {
 
     try {
       const data = await client.getEx(`city-${island}${page}`, { EX: 3600 });
-      if (!data) return next();
 
       const parseData = JSON.parse(data);
+
+      if (!parseData || parseData.length === 0) {
+        console.log(`Data city-${island}${page} tidak ditemukan`);
+        return next();
+      }
 
       res.status(202).send(parseData);
     } catch (error) {
@@ -121,9 +138,13 @@ module.exports = {
 
     try {
       const data = await client.getEx(`city-${id}`, { EX: 3600 });
-      if (!data) return next();
 
       const parseData = JSON.parse(data);
+
+      if (!parseData || parseData.length === 0) {
+        console.log(`Data city-${id} tidak ditemukan`);
+        return next();
+      }
 
       res.status(202).send(parseData);
     } catch (error) {
