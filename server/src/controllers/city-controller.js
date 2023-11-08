@@ -72,8 +72,8 @@ module.exports = {
       if (page <= 0)
         res.status(404).send({ message: 'Data Kota Tidak Ditemukan' });
 
-      client.set(`city-${prov_id}${page}`, 3600, JSON.stringify(data), {
-        EX: 600,
+      client.set(`city-${prov_id}${page}`, JSON.stringify(data), {
+        EX: 3600,
         NX: true,
       });
 
@@ -112,8 +112,8 @@ module.exports = {
       if (page <= 0)
         res.status(404).send({ message: 'Data Kota Tidak Ditemukan' });
 
-      client.set(`city-${island}${page}`, 3600, JSON.stringify(data), {
-        EX: 600,
+      client.set(`city-${island}${page}`, JSON.stringify(data), {
+        EX: 3600,
         NX: true,
       });
 
@@ -133,8 +133,8 @@ module.exports = {
           .status(404)
           .send({ message: 'Denah Kab/Kota Tidak Ditemukan' });
 
-      client.set(`city-${id}`, 3600, JSON.stringify(map), {
-        EX: 600,
+      client.set(`city-${id}`, JSON.stringify(map), {
+        EX: 3600,
         NX: true,
       });
 

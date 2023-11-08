@@ -31,7 +31,10 @@ module.exports = {
       if (page <= 0)
         res.status(404).send({ message: 'Data Provinsi Tidak Ditemukan' });
 
-      await client.set(`prov-${page}`, JSON.stringify(data));
+      await client.set(`prov-${page}`, JSON.stringify(data), {
+        EX: 3600,
+        NX: true,
+      });
 
       res.status(202).send(data);
     } catch (error) {
@@ -69,7 +72,7 @@ module.exports = {
         res.status(404).send({ message: 'Data Provinsi Tidak Ditemukan' });
 
       client.set(`prov-${island}${page}`, JSON.stringify(data), {
-        EX: 600,
+        EX: 3600,
         NX: true,
       });
 
@@ -90,7 +93,7 @@ module.exports = {
           .send({ message: 'Denah Provinsi Tidak Ditemukan' });
 
       client.set(`prov-${id}`, JSON.stringify(map), {
-        EX: 600,
+        EX: 3600,
         NX: true,
       });
 

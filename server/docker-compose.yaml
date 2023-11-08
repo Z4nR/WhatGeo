@@ -5,7 +5,7 @@ services:
       - 5500:5000
     restart: always
   redis:
-    image: "redis:alpine"
+    image: 'redis:6.0-alpine'
     volumes:
       - /redis/data:/data
     ports:
