@@ -5,9 +5,13 @@ services:
       - 5500:5000
     restart: always
   redis:
-    image: 'redis:6.0-alpine'
+    image: 'redis:alpine'
+    restart: always
+    command: redis-server --loglevel warning
     volumes:
-      - /redis/data:/data
+      - cache:/data
     ports:
       - 6379:6379
-    restart: always
+volumes:
+  cache:
+    driver: local
