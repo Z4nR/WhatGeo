@@ -72,7 +72,7 @@ export default function ProvMapByIsle() {
       island: 'Kalimantan',
     },
     {
-      btnTitle: 'Bersihkan Peta',
+      btnTitle: 'Bersihkan Data Peta',
       island: '',
     },
   ];
