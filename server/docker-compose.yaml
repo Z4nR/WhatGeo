@@ -7,7 +7,6 @@ services:
   redis:
     image: 'redis:alpine'
     restart: always
-    command: sh -c "redis-server && redis-cli monitor"
     volumes:
       - cache:/data
     ports:
