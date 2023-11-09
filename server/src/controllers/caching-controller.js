@@ -8,7 +8,7 @@ module.exports = {
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
     try {
-      const data = await client.getEx(`prov-${page}`, { EX: 3600 });
+      const data = await client.get(`prov-${page}`);
 
       const parseData = JSON.parse(data);
 
@@ -30,7 +30,7 @@ module.exports = {
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
     try {
-      const data = await client.getEx(`prov-${island}${page}`, { EX: 3600 });
+      const data = await client.get(`prov-${island}${page}`);
 
       const parseData = JSON.parse(data);
 
@@ -51,7 +51,7 @@ module.exports = {
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
     try {
-      const data = await client.getEx(`prov-${id}`, { EX: 3600 });
+      const data = await client.get(`prov-${id}`);
 
       const parseData = JSON.parse(data);
 
@@ -72,7 +72,7 @@ module.exports = {
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
     try {
-      const data = await client.getEx(`city-${page}`, { EX: 3600 });
+      const data = await client.get(`city-${page}`);
 
       const parseData = JSON.parse(data);
 
@@ -94,7 +94,7 @@ module.exports = {
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
     try {
-      const data = await client.getEx(`city-${prov_id}${page}`, { EX: 3600 });
+      const data = await client.get(`city-${prov_id}${page}`);
 
       const parseData = JSON.parse(data);
 
@@ -116,7 +116,7 @@ module.exports = {
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
     try {
-      const data = await client.getEx(`city-${island}${page}`, { EX: 3600 });
+      const data = await client.get(`city-${island}${page}`);
 
       const parseData = JSON.parse(data);
 
@@ -137,7 +137,7 @@ module.exports = {
     if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
     try {
-      const data = await client.getEx(`city-${id}`, { EX: 3600 });
+      const data = await client.get(`city-${id}`);
 
       const parseData = JSON.parse(data);
 
