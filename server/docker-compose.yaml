@@ -7,8 +7,6 @@ services:
   redis:
     image: 'redis:alpine'
     restart: always
-    links:
-      - redis
     command: redis-cli monitor
     volumes:
       - cache:/data
