@@ -34,7 +34,7 @@ module.exports = {
       const stringifyJson = JSON.stringify(data);
       console.log(stringifyJson);
 
-      await client.set(`prov-${page}`, stringifyJson);
+      await client.set(`prov-${page}`, stringifyJson, { NX: true });
 
       res.status(202).send(data);
     } catch (error) {
@@ -71,7 +71,7 @@ module.exports = {
       if (page <= 0)
         res.status(404).send({ message: 'Data Provinsi Tidak Ditemukan' });
 
-      client.set(`prov-${island}${page}`, JSON.stringify(data));
+      client.set(`prov-${island}${page}`, JSON.stringify(data), { NX: true });
 
       res.status(202).send(data);
     } catch (error) {
@@ -89,7 +89,7 @@ module.exports = {
           .status(404)
           .send({ message: 'Denah Provinsi Tidak Ditemukan' });
 
-      client.set(`prov-${id}`, JSON.stringify(map));
+      client.set(`prov-${id}`, JSON.stringify(map), { NX: true });
 
       res.status(202).send(map);
     } catch (error) {
