@@ -8,8 +8,6 @@ services:
     image: 'redis:alpine'
     restart: always
     command: redis-server --requirepass 1n!Pe7AinD0
-    env_file:
-      - .env
     volumes:
       - cache:/data
     ports:
