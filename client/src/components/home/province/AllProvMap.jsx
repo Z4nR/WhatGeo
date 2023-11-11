@@ -39,14 +39,12 @@ export default function AllProvMap() {
     return provCoordinate(provData.data.flat());
   }, [provData]);
 
-  console.log(provData.data);
-
   return (
     <div className="pt-4">
       <h2 className="text-xl text-center text-black font-bold pb-2">
         Peta Provinsi
       </h2>
-      <MapContainer center={[-1.2480891, 122]} zoom={5} scrollWheelZoom={true}>
+      <MapContainer center={[-1.2480891, 118]} zoom={5} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

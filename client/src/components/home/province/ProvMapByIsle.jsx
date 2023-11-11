@@ -6,7 +6,6 @@ import { provCoordinate } from '@/utils/map-helper';
 
 export default function ProvMapByIsle() {
   const [island, setIsland] = useState('');
-  console.log(island);
   const { data } = useQuery({
     queryKey: ['prov-isle-page', island],
     queryFn: async () => await provPageByIsle(island),
@@ -40,8 +39,6 @@ export default function ProvMapByIsle() {
     return provCoordinate(provData.data.flat());
   }, [provData]);
 
-  console.log(prov);
-
   const btnData = [
     {
       btnTitle: 'Prov. di Wilayah Sulawesi',
@@ -71,10 +68,6 @@ export default function ProvMapByIsle() {
       btnTitle: 'Prov. di Wilayah Kalimantan',
       island: 'Kalimantan',
     },
-    {
-      btnTitle: 'Bersihkan Data Peta',
-      island: '',
-    },
   ];
 
   return (
@@ -82,13 +75,13 @@ export default function ProvMapByIsle() {
       <h2 className="text-xl text-center text-black font-bold pb-2">
         Peta Provinsi berdasarkan Pulau dan Kepulauannya
       </h2>
-      <MapContainer center={[-1.2480891, 122]} zoom={5} scrollWheelZoom={true}>
+      <MapContainer center={[-1.2480891, 118]} zoom={5} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {prov?.map((item, index) => (
-          <GeoJSON key={index} data={item} />
+          <GeoJSON key={`${island}-${index}`} data={item} />
         ))}
       </MapContainer>
       <div className="pt-4 px-4 flex flex-wrap justify-center gap-2">
@@ -97,12 +90,20 @@ export default function ProvMapByIsle() {
             onClick={() => {
               setIsland(item.island);
             }}
-            key={index}
-            className="btn btn-sm px-0.5 w-full xs:max-w-xs btn-secondary text-xs text-white"
+            key={`btn-${index}`}
+            className="btn btn-sm btn-secondary text-xs text-white px-0.5 w-full xs:max-w-xs "
           >
             {item.btnTitle}
           </button>
         ))}
+        <button
+          onClick={() => {
+            setIsland('');
+          }}
+          className="btn btn-sm btn-outline btn-error text-xs text-white px-0.5 w-full xs:max-w-xs "
+        >
+          Bersihkan Data Peta
+        </button>
       </div>
       <div className="divider" />
     </div>

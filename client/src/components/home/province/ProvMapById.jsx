@@ -1,13 +1,42 @@
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { getProvById } from '@/utils/network';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 
-export default function ProvmMapById() {
+export default function ProvMapById() {
+  const [provId, setProvId] = useState('');
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+
+  const { data } = useQuery({
+    queryKey: ['prov', provId],
+    queryFn: async () => await getProvById(provId),
+    staleTime: Infinity,
+    gcTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
+
+  console.log(data?.provFeature);
+
+  const onSubmit = (data) => {
+    setProvId(data.id);
+  };
+
   return (
     <div className="py-4">
       <h2 className="text-xl text-center text-black font-bold pb-2">
         Peta Provinsi berdasarkan Id Provinsi
       </h2>
       <div className="flex justify-center">
-        <form className="form-control w-full max-w-sm my-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="form-control w-full max-w-sm my-4"
+        >
           <label className="label">
             <span className="label-text">Masukkan ID Provinsi</span>
           </label>
@@ -16,19 +45,25 @@ export default function ProvmMapById() {
               type="number"
               placeholder="Ketik ID disini"
               className="input input-bordered w-full max-w-xs"
+              {...register('id', { required: true })}
             />
             <button className="btn btn-primary w-fit max-w-xs">Cari</button>
           </div>
-          <label className="label">
-            <span className="label-text-alt">Bottom Left label</span>
-          </label>
+          {errors.id && errors.id.type === 'required' && (
+            <label className="label">
+              <span className="label-text-alt text-error">
+                Harap masukkan ID yang sesuai
+              </span>
+            </label>
+          )}
         </form>
       </div>
-      <MapContainer center={[-1.2480891, 122]} zoom={5} scrollWheelZoom={true}>
+      <MapContainer center={[-1.2480891, 118]} zoom={5} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        <GeoJSON key={provId} data={data?.provFeature} />
       </MapContainer>
       <div className="divider" />
     </div>

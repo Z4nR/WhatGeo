@@ -35,7 +35,7 @@ const getProvByIsle = async (island, page) => {
 };
 
 const getProvById = async (id) => {
-  return axios.get(`${base_url}/prov/${id}`).then((response) => {
+  return axios.get(`${base_url}/prov/${id}/map`).then((response) => {
     const data = response.data;
     return data;
   });
