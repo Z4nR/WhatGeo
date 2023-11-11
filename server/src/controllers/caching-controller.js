@@ -11,7 +11,6 @@ module.exports = {
       const data = await client.get(`prov-${page}`);
 
       const parseData = JSON.parse(data);
-      console.log(parseData);
 
       if (!parseData || parseData.length === 0) {
         console.log(`Data prov-${page} tidak ditemukan`);
