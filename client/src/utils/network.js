@@ -41,4 +41,46 @@ const getProvById = async (id) => {
   });
 };
 
-export { provPage, getProvByPage, provPageByIsle, getProvByIsle, getProvById };
+const cityPage = async () => {
+  return axios.get(`${base_url}/city/page`).then((response) => {
+    const data = response.data;
+    return data.page;
+  });
+};
+
+const getCityByPage = async (page) => {
+  return axios.get(`${base_url}/city?page=${page}`).then((response) => {
+    const data = response.data;
+    return data;
+  });
+};
+
+const cityPageByIsle = async (island) => {
+  return axios
+    .get(`${base_url}/city/isle/page?island=${island}`)
+    .then((response) => {
+      const data = response.data;
+      return data.page;
+    });
+};
+
+const getCityByIsle = async (island, page) => {
+  return axios
+    .get(`${base_url}/city/isle?island=${island}&page=${page}`)
+    .then((response) => {
+      const data = response.data;
+      return data;
+    });
+};
+
+export {
+  provPage,
+  getProvByPage,
+  provPageByIsle,
+  getProvByIsle,
+  getProvById,
+  cityPage,
+  getCityByPage,
+  cityPageByIsle,
+  getCityByIsle,
+};

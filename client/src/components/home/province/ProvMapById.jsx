@@ -1,12 +1,11 @@
 import { getProvById } from '@/utils/network';
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 
 export default function ProvMapById() {
-  const [provId, setProvId] = useState('');
-
+  const [provId, setProvId] = useState(null);
   const {
     handleSubmit,
     register,
@@ -16,12 +15,13 @@ export default function ProvMapById() {
   const { data } = useQuery({
     queryKey: ['prov', provId],
     queryFn: async () => await getProvById(provId),
+    enabled: provId !== null,
     staleTime: Infinity,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
   });
 
-  console.log(data?.provFeature);
+  const prov = useMemo(() => data?.provFeature, [data]);
 
   const onSubmit = (data) => {
     setProvId(data.id);
@@ -47,7 +47,9 @@ export default function ProvMapById() {
               className="input input-bordered w-full max-w-xs"
               {...register('id', { required: true })}
             />
-            <button className="btn btn-primary w-fit max-w-xs">Cari</button>
+            <button type="submit" className="btn btn-primary w-fit max-w-xs">
+              Cari
+            </button>
           </div>
           {errors.id && errors.id.type === 'required' && (
             <label className="label">
@@ -63,7 +65,7 @@ export default function ProvMapById() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <GeoJSON key={provId} data={data?.provFeature} />
+        <GeoJSON key={`prov-${provId}`} data={prov} />
       </MapContainer>
       <div className="divider" />
     </div>

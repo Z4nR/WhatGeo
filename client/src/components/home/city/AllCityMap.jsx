@@ -1,25 +1,25 @@
-import { provCoordinate } from '@/utils/map-helper';
-import { getProvByPage, provPage } from '@/utils/network';
+import { cityCoordinate } from '@/utils/map-helper';
+import { cityPage, getCityByPage } from '@/utils/network';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 
-export default function AllProvMap() {
+export default function AllCityMap() {
   const { data } = useQuery({
-    queryKey: ['prov-page'],
-    queryFn: async () => await provPage(),
+    queryKey: ['city-page'],
+    queryFn: async () => await cityPage(),
     staleTime: Infinity,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
   });
 
-  const provData = useQueries({
+  const cityData = useQueries({
     queries: Array(data)
       .fill(null)
       .map((_, index) => {
         return {
-          queryKey: ['page-prov', index + 1],
-          queryFn: () => getProvByPage(index + 1),
+          queryKey: ['page-city', index + 1],
+          queryFn: () => getCityByPage(index + 1),
           enabled: data > 0,
           staleTime: Infinity,
           gcTime: Infinity,
@@ -34,22 +34,22 @@ export default function AllProvMap() {
     },
   });
 
-  const prov = useMemo(() => {
-    if (provData.pending) return null;
-    return provCoordinate(provData.data.flat());
-  }, [provData]);
+  const city = useMemo(() => {
+    if (cityData.pending) return null;
+    return cityCoordinate(cityData.data.flat());
+  }, [cityData]);
 
   return (
     <div className="pt-4">
       <h2 className="text-xl text-center text-black font-bold pb-2">
-        Peta Provinsi Seluruh Indonesia
+        Peta Kota Seluruh Indonesia
       </h2>
       <MapContainer center={[-1.2480891, 118]} zoom={5} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {prov?.map((item, index) => (
+        {city?.map((item, index) => (
           <GeoJSON key={index} data={item} />
         ))}
       </MapContainer>
