@@ -5,23 +5,31 @@ import { useForm } from 'react-hook-form';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 
 export default function ProvMapById() {
-  const [provId, setProvId] = useState(null);
+  const [provId, setProvId] = useState('');
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      id: '',
+    },
+  });
 
-  const { data } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ['prov', provId],
     queryFn: async () => await getProvById(provId),
-    enabled: provId !== null,
     staleTime: Infinity,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
   });
 
-  const prov = useMemo(() => data?.provFeature, [data]);
+  const prov = useMemo(() => {
+    if (isPending) return null;
+    return data?.provFeature;
+  }, [data, isPending]);
+
+  console.log(prov);
 
   const onSubmit = (data) => {
     setProvId(data.id);
