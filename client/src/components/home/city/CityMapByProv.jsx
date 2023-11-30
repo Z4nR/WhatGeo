@@ -1,4 +1,4 @@
-import { getProvById } from '@/utils/network';
+import { cityPageByProv } from '@/utils/network';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -16,20 +16,13 @@ export default function CityMapByProv() {
     },
   });
 
-  const { data, isPending } = useQuery({
-    queryKey: ['prov', provId],
-    queryFn: async () => await getProvById(provId),
+  const { data } = useQuery({
+    queryKey: ['city-prov-page', provId],
+    queryFn: async () => await cityPageByProv(provId),
     staleTime: Infinity,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
   });
-
-  const prov = useMemo(() => {
-    if (isPending) return null;
-    return data?.provFeature;
-  }, [data, isPending]);
-
-  console.log(prov);
 
   const onSubmit = (data) => {
     setProvId(data.id);
@@ -73,7 +66,6 @@ export default function CityMapByProv() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <GeoJSON key={`prov-${provId}`} data={prov} />
       </MapContainer>
       <div className="divider" />
     </div>

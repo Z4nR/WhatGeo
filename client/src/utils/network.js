@@ -73,6 +73,24 @@ const getCityByIsle = async (island, page) => {
     });
 };
 
+const cityPageByProv = async (prov) => {
+  return axios
+    .get(`${base_url}/city/prov/page?prov_id=${prov}`)
+    .then((response) => {
+      const data = response.data;
+      return data.page;
+    });
+};
+
+const getCityByProv = async (prov, page) => {
+  return axios
+    .get(`${base_url}/city/prov?prov_id=${prov}&page=${page}`)
+    .then((response) => {
+      const data = response.data;
+      return data;
+    });
+};
+
 export {
   provPage,
   getProvByPage,
@@ -83,4 +101,6 @@ export {
   getCityByPage,
   cityPageByIsle,
   getCityByIsle,
+  cityPageByProv,
+  getCityByProv,
 };

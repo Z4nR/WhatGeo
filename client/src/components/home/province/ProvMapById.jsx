@@ -19,6 +19,7 @@ export default function ProvMapById() {
   const { data, isPending } = useQuery({
     queryKey: ['prov', provId],
     queryFn: async () => await getProvById(provId),
+    enabled: provId !== '',
     staleTime: Infinity,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
