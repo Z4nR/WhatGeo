@@ -1,27 +1,54 @@
-import { cityPageByProv } from '@/utils/network';
-import { useQuery } from '@tanstack/react-query';
+import { cityCoordinate } from '@/utils/map-helper';
+import { cityPageByProv, getCityByProv } from '@/utils/network';
+import { useQueries, useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 
 export default function CityMapByProv() {
   const [provId, setProvId] = useState('');
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      id: '',
-    },
-  });
-
   const { data } = useQuery({
     queryKey: ['city-prov-page', provId],
     queryFn: async () => await cityPageByProv(provId),
     staleTime: Infinity,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
+  });
+
+  const cityData = useQueries({
+    queries: Array(data)
+      .fill(null)
+      .map((_, index) => {
+        return {
+          queryKey: ['city-isle', provId, index + 1],
+          queryFn: () => getCityByProv(provId, index + 1),
+          staleTime: Infinity,
+          gcTime: Infinity,
+          refetchOnWindowFocus: false,
+        };
+      }),
+    combine: (results) => {
+      return {
+        data: results.map((result) => result.data),
+        pending: results.some((result) => result.isPending),
+      };
+    },
+  });
+
+  const city = useMemo(() => {
+    if (cityData.pending) return null;
+    return cityCoordinate(cityData.data.flat());
+  }, [cityData]);
+
+  const {
+    handleSubmit,
+    reset,
+    register,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      id: '',
+    },
   });
 
   const onSubmit = (data) => {
@@ -46,16 +73,24 @@ export default function CityMapByProv() {
               type="number"
               placeholder="Ketik ID disini"
               className="input input-bordered w-full max-w-xs"
-              {...register('id', { required: true })}
+              {...register('id', { pattern: /[0-9]{2}/ })}
             />
             <button type="submit" className="btn btn-primary w-fit max-w-xs">
               Cari
             </button>
+            <button
+              onClick={() => {
+                reset();
+              }}
+              className="btn btn-outline btn-error w-fit max-w-xs"
+            >
+              Reset
+            </button>
           </div>
-          {errors.id && errors.id.type === 'required' && (
+          {errors.id && errors.id.type === 'pattern' && (
             <label className="label">
               <span className="label-text-alt text-error">
-                Harap masukkan ID yang sesuai
+                Harap Masukkan ID Sesuai Dokumentasi
               </span>
             </label>
           )}
@@ -66,6 +101,9 @@ export default function CityMapByProv() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        {city?.map((item, index) => (
+          <GeoJSON key={`${provId}-${index}`} data={item} />
+        ))}
       </MapContainer>
       <div className="divider" />
     </div>

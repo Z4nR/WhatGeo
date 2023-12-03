@@ -19,7 +19,7 @@ export default function CityMapByIsle() {
       .fill(null)
       .map((_, index) => {
         return {
-          queryKey: ['prov-isle', island, index + 1],
+          queryKey: ['city-isle', island, index + 1],
           queryFn: () => getCityByIsle(island, index + 1),
           staleTime: Infinity,
           gcTime: Infinity,
@@ -73,7 +73,7 @@ export default function CityMapByIsle() {
   return (
     <div className="pt-4">
       <h2 className="text-xl text-center text-black font-bold pb-2">
-        Peta Provinsi berdasarkan Pulau dan Kepulauannya
+        Peta Kota berdasarkan Pulau dan Kepulauannya
       </h2>
       <MapContainer center={[-1.2480891, 118]} zoom={5} scrollWheelZoom={true}>
         <TileLayer

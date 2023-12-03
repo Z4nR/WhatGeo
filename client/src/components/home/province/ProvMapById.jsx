@@ -6,20 +6,9 @@ import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 
 export default function ProvMapById() {
   const [provId, setProvId] = useState('');
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      id: '',
-    },
-  });
-
   const { data, isPending } = useQuery({
     queryKey: ['prov', provId],
     queryFn: async () => await getProvById(provId),
-    enabled: provId !== '',
     staleTime: Infinity,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
@@ -31,6 +20,17 @@ export default function ProvMapById() {
   }, [data, isPending]);
 
   console.log(prov);
+
+  const {
+    handleSubmit,
+    reset,
+    register,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      id: '',
+    },
+  });
 
   const onSubmit = (data) => {
     setProvId(data.id);
@@ -54,16 +54,24 @@ export default function ProvMapById() {
               type="number"
               placeholder="Ketik ID disini"
               className="input input-bordered w-full max-w-xs"
-              {...register('id', { required: true })}
+              {...register('id', { pattern: /[0-9]{2}/ })}
             />
             <button type="submit" className="btn btn-primary w-fit max-w-xs">
               Cari
             </button>
+            <button
+              onClick={() => {
+                reset();
+              }}
+              className="btn btn-outline btn-error w-fit max-w-xs"
+            >
+              Reset
+            </button>
           </div>
-          {errors.id && errors.id.type === 'required' && (
+          {errors.id && errors.id.type === 'pattern' && (
             <label className="label">
               <span className="label-text-alt text-error">
-                Harap masukkan ID yang sesuai
+                Harap Masukkan ID Sesuai Dokumentasi
               </span>
             </label>
           )}
