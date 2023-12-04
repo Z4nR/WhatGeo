@@ -42,7 +42,7 @@ This project is OpenAPI for Indonesian GeoJSON Data include Province and City.
 Clone the project
 
 ```bash
-  git clone https://github.com/Z4nR/WhatGeo.git WhatBorder
+  git clone https://github.com/Z4nR/WhatGeo.git WhatGeo
 ```
 
 Go to the project directory
