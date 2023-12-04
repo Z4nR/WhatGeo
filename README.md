@@ -28,4 +28,47 @@
 
 </br>
 
-<br/>
+## Information
+
+- [Information about OpenAPI Server](https://github.com/Z4nR/WhatGeo/tree/main/server)
+- [Information about Documentation Client](https://github.com/Z4nR/WhatGeo/tree/main/client)
+
+## Acknowledgements
+
+This project is OpenAPI for Indonesian GeoJSON Data include Province and City.
+
+## Clone Project To Local
+
+Clone the project
+
+```bash
+  git clone https://github.com/Z4nR/WhatGeo.git WhatBorder
+```
+
+Go to the project directory
+
+```bash
+  cd WhatGeo
+```
+
+## Run Locally
+
+Run locally server-side
+
+```bash
+  cd server
+  npm i
+  npm run server
+```
+
+Run locally client-side
+
+```bash
+  cd client
+  npm i
+  npm run dev
+```
+
+## Demo
+
+You can see the link for demo in About of Repository
