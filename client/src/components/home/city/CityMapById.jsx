@@ -1,15 +1,15 @@
-import { getProvById } from '@/utils/network';
+import { getCityById } from '@/utils/network';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 
-export default function ProvMapById() {
-  const [provId, setProvId] = useState(11);
+export default function CityMapById() {
+  const [cityId, setCityId] = useState(1101);
   const { data, isPending } = useQuery({
-    queryKey: ['prov', provId],
-    queryFn: async () => await getProvById(provId),
-    enabled: provId !== '',
+    queryKey: ['city', cityId],
+    queryFn: async () => await getCityById(cityId),
+    enabled: cityId !== '',
     staleTime: Infinity,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
@@ -27,13 +27,13 @@ export default function ProvMapById() {
   });
 
   const onSubmit = (data) => {
-    setProvId(data.id);
+    setCityId(data.id);
   };
 
   return (
-    <div className="pt-4">
+    <div className="py-4">
       <h2 className="text-xl text-center text-black font-bold pb-2">
-        Peta Provinsi berdasarkan Id Provinsi
+        Peta Kota berdasarkan Id Kota
       </h2>
       <div className="flex justify-center">
         <form
@@ -41,14 +41,14 @@ export default function ProvMapById() {
           className="form-control w-full max-w-sm my-4"
         >
           <label className="label">
-            <span className="label-text">Masukkan ID Provinsi</span>
+            <span className="label-text">Masukkan ID Kota</span>
           </label>
           <div className="flex flex-row gap-4">
             <input
               type="number"
               placeholder="Ketik ID disini"
               className="input input-bordered w-full max-w-xs"
-              {...register('id', { pattern: /[0-9]{2}/ })}
+              {...register('id', { pattern: /[0-9]{4}/ })}
             />
             <button type="submit" className="btn btn-primary w-fit max-w-xs">
               Cari
@@ -77,8 +77,8 @@ export default function ProvMapById() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <GeoJSON
-          key={isPending ? 'loading' : `prov-${provId}`}
-          data={data?.provFeature}
+          key={isPending ? 'loading' : `city-${cityId}`}
+          data={data?.cityFeature}
         />
       </MapContainer>
       <div className="divider" />

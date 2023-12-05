@@ -91,6 +91,13 @@ const getCityByProv = async (prov, page) => {
     });
 };
 
+const getCityById = async (id) => {
+  return axios.get(`${base_url}/city/${id}/map`).then((response) => {
+    const data = response.data;
+    return data;
+  });
+};
+
 export {
   provPage,
   getProvByPage,
@@ -103,4 +110,5 @@ export {
   getCityByIsle,
   cityPageByProv,
   getCityByProv,
+  getCityById,
 };

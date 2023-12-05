@@ -6,10 +6,11 @@ import { useForm } from 'react-hook-form';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 
 export default function CityMapByProv() {
-  const [provId, setProvId] = useState('');
+  const [provId, setProvId] = useState(11);
   const { data } = useQuery({
     queryKey: ['city-prov-page', provId],
     queryFn: async () => await cityPageByProv(provId),
+    enabled: provId !== '',
     staleTime: Infinity,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
@@ -56,7 +57,7 @@ export default function CityMapByProv() {
   };
 
   return (
-    <div className="py-4">
+    <div className="pt-4">
       <h2 className="text-xl text-center text-black font-bold pb-2">
         Peta Kota berdasarkan Id Provinsi
       </h2>

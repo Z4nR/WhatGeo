@@ -1,4 +1,5 @@
 import AllCityMap from '@/components/home/city/AllCityMap';
+import CityMapById from '@/components/home/city/CityMapById';
 import CityMapByIsle from '@/components/home/city/CityMapByIsle';
 import CityMapByProv from '@/components/home/city/CityMapByProv';
 import AllProvMap from '@/components/home/province/AllProvMap';
@@ -25,6 +26,7 @@ export default function HomePage() {
       <AllCityMap />
       <CityMapByIsle />
       <CityMapByProv />
+      <CityMapById />
     </div>
   );
 }
