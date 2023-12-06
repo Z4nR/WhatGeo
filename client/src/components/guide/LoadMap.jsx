@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
-import { loadMap } from '@/utils/code-example';
+import { loadMap } from '@/utils/code-guide';
 
 export default function LoadMap() {
   useEffect(() => {
