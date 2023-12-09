@@ -37,6 +37,10 @@ main,
   text-align: center;
 }
 
+.card-body {
+  padding: 1.5rem;
+}
+
 .footer {
   justify-items: center;
   align-items: center;

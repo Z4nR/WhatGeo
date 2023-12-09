@@ -3,13 +3,14 @@ import { exampleList } from '../utils/example-list';
 
 export default function ExamplePage() {
   return (
-    <div className="py-4 px-6">
+    <div className="p-4">
       {exampleList.map((data, index) => (
-        <div key={index} className="card w-96 bg-base-100 shadow-xl">
+        <div key={index} className="card max-w-xs bg-base-100 shadow-xl">
           <figure>
             <img
-              src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-              alt="Shoes"
+              className="w-full max-h-[200px] object-cover"
+              src={data.img}
+              alt={data.title}
             />
           </figure>
           <div className="card-body">
@@ -17,14 +18,15 @@ export default function ExamplePage() {
               <Link to={data.url} target="_blank" rel="noreferrer">
                 {data.title}
               </Link>
-              <div className="badge badge-secondary">{data.type}</div>
+              <div className="badge badge-md badge-secondary">{data.type}</div>
             </h2>
             <p>{data.desc}</p>
+            <div className="divider mt-0 mb-0" />
             <div className="card-actions justify-end">
               {data.language.map((badge, index) => (
-                <div key={index} className="badge badge-outline">
-                  {badge[index]}
-                </div>
+                <figure key={index}>
+                  <img src={badge} />
+                </figure>
               ))}
             </div>
           </div>
