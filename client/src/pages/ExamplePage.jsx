@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { exampleList } from '../utils/example-list';
 
 export default function ExamplePage() {
@@ -15,9 +14,7 @@ export default function ExamplePage() {
           </figure>
           <div className="card-body">
             <h2 className="card-title">
-              <Link to={data.url} target="_blank" rel="noreferrer">
-                {data.title}
-              </Link>
+              {data.title}
               <div className="badge badge-md badge-secondary">{data.type}</div>
             </h2>
             <p>{data.desc}</p>
@@ -29,6 +26,15 @@ export default function ExamplePage() {
                 </figure>
               ))}
             </div>
+            <a
+              role="button"
+              href={data.url}
+              target="_blank"
+              rel="noreferrer"
+              className="btn mt-4 min-h-0 h-auto py-3 bg-primary text-white"
+            >
+              Tautan Skrip
+            </a>
           </div>
         </div>
       ))}
