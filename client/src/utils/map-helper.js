@@ -1,4 +1,4 @@
-export const provCoordinate = (map) => {
+const provCoordinate = (map) => {
   let coordinate = [];
   if (map) {
     map.find((d) => {
@@ -19,3 +19,37 @@ export const cityCoordinate = (map) => {
   }
   return coordinate;
 };
+
+const originalStyle = {
+  weight: 2,
+  color: 'white',
+  dashArray: '3',
+  fillOpacity: 0.8,
+};
+
+const highlightFeature = (e) => {
+  const layer = e.target;
+  layer.setStyle({
+    weight: 5,
+    color: '#666',
+    fillOpacity: 0.6,
+  });
+  layer.bringToFront();
+};
+
+const resetHighlight = (e) => {
+  const layer = e.target;
+  layer.setStyle(originalStyle);
+};
+
+const onEachFeature = (feature, layer, zoomToFeature) => {
+  layer.on({
+    mouseover: highlightFeature,
+    mouseout: resetHighlight,
+    click: (e) => {
+      zoomToFeature(e, feature);
+    },
+  });
+};
+
+export { provCoordinate, originalStyle, onEachFeature };
