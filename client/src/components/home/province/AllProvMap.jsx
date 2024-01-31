@@ -1,4 +1,8 @@
-import { provCoordinate } from '@/utils/map-helper';
+import {
+  provCoordinate,
+  originalStyle,
+  onEachFeature,
+} from '@/utils/map-helper';
 import { getProvByPage, provPage } from '@/utils/network';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
@@ -39,6 +43,12 @@ export default function AllProvMap() {
     return provCoordinate(provData.data.flat());
   }, [provData]);
 
+  const zoomToFeature = (e, feature) => {
+    console.log(feature.properties);
+    const map = e.target._map;
+    map.fitBounds(e.target.getBounds());
+  };
+
   return (
     <div className="pt-4">
       <h2 className="text-xl text-center text-black font-bold pb-2">
@@ -50,7 +60,14 @@ export default function AllProvMap() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {prov?.map((item, index) => (
-          <GeoJSON key={index} data={item} />
+          <GeoJSON
+            key={index}
+            data={item}
+            style={{ fillColor: '#11648e', ...originalStyle }}
+            onEachFeature={(feature, layer) =>
+              onEachFeature(feature, layer, zoomToFeature)
+            }
+          />
         ))}
       </MapContainer>
       <div className="divider" />
