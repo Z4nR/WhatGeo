@@ -24,15 +24,14 @@ const originalStyle = {
   weight: 2,
   color: 'white',
   dashArray: '3',
-  fillOpacity: 0.8,
+  fillOpacity: 0.9,
 };
 
 const highlightFeature = (e) => {
   const layer = e.target;
   layer.setStyle({
-    weight: 5,
-    color: '#666',
-    fillOpacity: 0.6,
+    weight: 4,
+    color: '#f9844d',
   });
   layer.bringToFront();
 };
