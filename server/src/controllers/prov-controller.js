@@ -89,7 +89,7 @@ module.exports = {
           .send({ message: 'Denah Provinsi Tidak Ditemukan' });
 
       const stringifyJson = JSON.stringify(map);
-      client.set(`prov-${id}`, stringifyJson, { NX: true });
+      client.set(`prov-data-${id}`, stringifyJson, { NX: true });
 
       res.status(202).send(map);
     } catch (error) {
