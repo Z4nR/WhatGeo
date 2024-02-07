@@ -10,12 +10,6 @@ const ProvSchema = new Schema({
     },
   },
   island: String,
-  province: String,
-  date_created: String,
-  capital: String,
-  lat_capital: Number,
-  long_capital: Number,
-  description: String,
 });
 
 const provgeo = mongoose.model('provlatlong', ProvSchema, 'ProvLatLong');

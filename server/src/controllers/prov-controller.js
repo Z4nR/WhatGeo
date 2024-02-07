@@ -1,4 +1,5 @@
 const prov = require('../models/coordinate/Province');
+const provDetail = require('../models/detail/ProvDetail');
 const client = require('../utils/redis');
 
 let pageNumber = 1;
@@ -71,6 +72,33 @@ module.exports = {
 
       const stringifyJson = JSON.stringify(data);
       client.set(`prov-${island}${page}`, stringifyJson, { NX: true });
+
+      res.status(202).send(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
+    }
+  },
+
+  getProvDetail: async (req, res) => {
+    try {
+      const { id } = req.params;
+      if (!id) res.status(404).send({ message: 'Id Provinsi Tidak Ditemukan' });
+
+      const detail = await provDetail.findOne({ prov_id: id });
+      if (!detail)
+        return res
+          .status(404)
+          .send({ message: 'Informasi Provinsi Tidak Ditemukan' });
+
+      const data = {
+        date_created: detail.date_created,
+        province: detail.province,
+        capital: detail.capital,
+        long: detail.long_capital,
+        lat: detail.lat_capital,
+        desc: detail.description,
+      };
 
       res.status(202).send(data);
     } catch (error) {
