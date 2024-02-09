@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const CitySchema = new Schema({
@@ -12,13 +12,7 @@ const CitySchema = new Schema({
     },
   },
   island: String,
-  destinations: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "citydestiny",
-    },
-  ],
 });
 
-const citygeo = mongoose.model("citylatlong", CitySchema, "CityLatLong");
+const citygeo = mongoose.model('citylatlong', CitySchema, 'CityLatLong');
 module.exports = citygeo;

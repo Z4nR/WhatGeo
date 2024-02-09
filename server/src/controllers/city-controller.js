@@ -1,4 +1,5 @@
 const city = require('../models/coordinate/City');
+const cityDetail = require('../models/detail/CityDetail.js');
 require('../models/detail/CityDestiny');
 const client = require('../utils/redis.js');
 
@@ -137,21 +138,35 @@ module.exports = {
     }
   },
 
-  getCityDestiny: async (req, res) => {
+  getCityDetail: async (req, res) => {
     try {
       const { id } = req.params;
-      const destiny = await city.findById(id).populate({
+      const city = await cityDetail.findOne({ city_id: id }).populate({
         path: 'destinations',
         options: { sort: { place_name: 1 } },
       });
-      if (!destiny)
+      if (!city)
         return res
           .status(404)
           .send({ message: 'Data lokasi liburan tidak ditemukan' });
 
-      const data = destiny.destinations;
+      const destiny = city.destinations.map((d) => {
+        return {
+          place_name: d.place_name,
+          latitude: d.latitude,
+          longitude: d.longitude,
+          destiny_type: d.destiny_type,
+        };
+      });
 
-      res.status(202).send(data);
+      res.status(202).send({
+        city: city.city,
+        date_created: city.date_created,
+        lat_city: city.lat_city,
+        long_city: city.long_city,
+        description: city.description,
+        destinations: destiny,
+      });
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });

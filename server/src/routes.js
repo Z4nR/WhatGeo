@@ -30,6 +30,6 @@ router
   .route('/city/isle')
   .get(cachingController.cacheCityByIsland, cityController.getCityByIsland); //Get City Data using query Island name and page number
 router.route('/city/:id/map').get(cityController.getCityMap); //Get City Map using Id City params
-router.route('/city/:id/destiny').get(cityController.getCityDestiny); //Get City Destiny using Id City params
+router.route('/city/:id/detail').get(cityController.getCityDetail); //Get City Destiny using Id City params
 
 module.exports = router;
