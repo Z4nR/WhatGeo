@@ -14,6 +14,9 @@ export const swaggerJson = {
     {
       url: 'https://zulham.ahlitani.com/geo/v1',
     },
+    {
+      url: 'http://localhost:5000/v1/',
+    },
   ],
   components: {
     schemas: {
@@ -70,30 +73,6 @@ export const swaggerJson = {
           island: {
             type: 'string',
             example: 'Jawa',
-          },
-          capital: {
-            type: 'string',
-            example: 'Semarang',
-          },
-          date_created: {
-            type: 'string',
-            example: '15 Agustus 1950',
-          },
-          description: {
-            type: 'string',
-            example: 'Provinsi Jawa Tengah merupakan',
-          },
-          lat_capital: {
-            type: 'number',
-            example: -6.966667,
-          },
-          long_capital: {
-            type: 'number',
-            example: 110.416664,
-          },
-          province: {
-            type: 'string',
-            example: 'Jawa Tengah',
           },
         },
       },
@@ -155,34 +134,53 @@ export const swaggerJson = {
             type: 'string',
             example: 'Jawa',
           },
-          destinations: {
-            type: 'array',
-            example: ['1111', '2222', '3333'],
-          },
         },
       },
-      Destiny: {
+      Detail: {
         type: 'object',
         properties: {
-          _id: {
-            type: 'number',
-            example: 123654,
-          },
-          place_name: {
+          city: {
             type: 'string',
-            example: 'Taman Lorem',
+            example: 'Lorem City',
           },
-          latitude: {
+          date_created: {
+            type: 'string',
+            example: '4 Ipsum 2077',
+          },
+          lat_city: {
             type: 'number',
             example: -346.43278,
           },
-          longitude: {
+          long_city: {
             type: 'number',
             example: 46.43278,
           },
-          destiny_type: {
+          description: {
             type: 'string',
-            example: 'Reservoir',
+            example: 'Lorem Ipsum Dolor',
+          },
+          destinations: {
+            type: 'array',
+            example: [
+              {
+                place_name: 'Taman Lorem',
+                latitude: -346.43278,
+                longitude: 46.43278,
+                destiny_type: 'Reservoir',
+              },
+              {
+                place_name: 'Taman Lorem',
+                latitude: -346.43278,
+                longitude: 46.43278,
+                destiny_type: 'Reservoir',
+              },
+              {
+                place_name: 'Taman Lorem',
+                latitude: -346.43278,
+                longitude: 46.43278,
+                destiny_type: 'Reservoir',
+              },
+            ],
           },
         },
       },
@@ -195,7 +193,8 @@ export const swaggerJson = {
         summary: 'Get total page for all Indonesian Province',
         responses: {
           202: {
-            description: 'Success get total page',
+            description:
+              'Contoh respon ketika berhasil mendapatkan data jumlah halaman provinsi',
             content: {
               'application/json': {
                 schema: {
@@ -208,7 +207,7 @@ export const swaggerJson = {
             },
           },
           500: {
-            description: 'Something wrong in server',
+            description: 'Contoh respon ketika terjadi error pada server',
             content: {
               'application/json': {
                 schema: {
@@ -241,7 +240,8 @@ export const swaggerJson = {
         ],
         responses: {
           202: {
-            description: 'Success get province data by page number',
+            description:
+              'Contoh respon ketika berhasil mendapatkan data provinsi berdasarkan halaman',
             content: {
               'application/json': {
                 schema: {
@@ -254,7 +254,7 @@ export const swaggerJson = {
             },
           },
           404: {
-            description: "Throw message when in can't find any data",
+            description: 'Contoh respon ketika data tidak ditemukan',
             content: {
               'application/json': {
                 schema: {
@@ -267,7 +267,7 @@ export const swaggerJson = {
             },
           },
           500: {
-            description: 'Something wrong in server',
+            description: 'Contoh respon ketika terjadi error pada server',
             content: {
               'application/json': {
                 schema: {
@@ -300,7 +300,8 @@ export const swaggerJson = {
         ],
         responses: {
           202: {
-            description: 'Success get total page base on island name',
+            description:
+              'Contoh respon ketika berhasil mendapatkan data jumlah halaman berdasarkan id provinsi',
             content: {
               'application/json': {
                 schema: {
@@ -313,7 +314,7 @@ export const swaggerJson = {
             },
           },
           500: {
-            description: 'Something wrong in server',
+            description: 'Contoh respon ketika terjadi error pada server',
             content: {
               'application/json': {
                 schema: {
@@ -357,7 +358,8 @@ export const swaggerJson = {
         ],
         responses: {
           202: {
-            description: 'Success get province data base on island name',
+            description:
+              'Contoh respon ketika berhasil mendapatkan data provinsi berdasarkan nama pulau dan nomor halaman',
             content: {
               'application/json': {
                 schema: {
@@ -370,7 +372,7 @@ export const swaggerJson = {
             },
           },
           404: {
-            description: "Throw message when in can't find any data",
+            description: 'Contoh respon ketika data tidak ditemukan',
             content: {
               'application/json': {
                 schema: {
@@ -383,7 +385,7 @@ export const swaggerJson = {
             },
           },
           500: {
-            description: 'Something wrong in server',
+            description: 'Contoh respon ketika terjadi error pada server',
             content: {
               'application/json': {
                 schema: {
@@ -416,7 +418,8 @@ export const swaggerJson = {
         ],
         responses: {
           202: {
-            description: 'Success get province data by page number',
+            description:
+              'Contoh respon ketika berhasil mendapatkan data peta berdasarkan id provinsi',
             content: {
               'application/json': {
                 schema: {
@@ -426,7 +429,7 @@ export const swaggerJson = {
             },
           },
           404: {
-            description: "Throw message when in can't find any data",
+            description: 'Contoh respon ketika data tidak ditemukan',
             content: {
               'application/json': {
                 schema: {
@@ -439,7 +442,7 @@ export const swaggerJson = {
             },
           },
           500: {
-            description: 'Something wrong in server',
+            description: 'Contoh respon ketika terjadi error pada server',
             content: {
               'application/json': {
                 schema: {
@@ -460,7 +463,8 @@ export const swaggerJson = {
         summary: 'Get total page for all Indonesian City',
         responses: {
           202: {
-            description: 'Success get total page',
+            description:
+              'Contoh respon ketika berhasil mendapatkan data jumlah halaman kota',
             content: {
               'application/json': {
                 schema: {
@@ -473,7 +477,7 @@ export const swaggerJson = {
             },
           },
           500: {
-            description: 'Something wrong in server',
+            description: 'Contoh respon ketika terjadi error pada server',
             content: {
               'application/json': {
                 schema: {
@@ -506,7 +510,8 @@ export const swaggerJson = {
         ],
         responses: {
           202: {
-            description: 'Success get province data by page number',
+            description:
+              'Contoh respon ketika berhasil mendapatkan data berdasarkan nomor halaman',
             content: {
               'application/json': {
                 schema: {
@@ -519,7 +524,7 @@ export const swaggerJson = {
             },
           },
           404: {
-            description: "Throw message when in can't find any data",
+            description: 'Contoh respon ketika data tidak ditemukan',
             content: {
               'application/json': {
                 schema: {
@@ -532,7 +537,8 @@ export const swaggerJson = {
             },
           },
           500: {
-            description: 'Something wrong in server',
+            description:
+              'Contoh respon ketika data tidak ditemukanContoh respon ketika terjadi error pada server',
             content: {
               'application/json': {
                 schema: {
@@ -565,7 +571,8 @@ export const swaggerJson = {
         ],
         responses: {
           202: {
-            description: 'Success get total page base on island name',
+            description:
+              'Contoh respon ketika berhasil mendapatkan data jumlah halaman kota berdasarkan id provinsi',
             content: {
               'application/json': {
                 schema: {
@@ -578,7 +585,7 @@ export const swaggerJson = {
             },
           },
           500: {
-            description: 'Something wrong in server',
+            description: 'Contoh respon ketika terjadi error pada server',
             content: {
               'application/json': {
                 schema: {
@@ -621,7 +628,8 @@ export const swaggerJson = {
         ],
         responses: {
           202: {
-            description: 'Success get province data base on island name',
+            description:
+              'Contoh respon ketika berhasil mendapatkan data kota berdasarkan id provinsi dan nomor halaman',
             content: {
               'application/json': {
                 schema: {
@@ -634,7 +642,7 @@ export const swaggerJson = {
             },
           },
           404: {
-            description: "Throw message when in can't find any data",
+            description: 'Contoh respon ketika data tidak ditemukan',
             content: {
               'application/json': {
                 schema: {
@@ -647,7 +655,7 @@ export const swaggerJson = {
             },
           },
           500: {
-            description: 'Something wrong in server',
+            description: 'Contoh respon ketika terjadi error pada server',
             content: {
               'application/json': {
                 schema: {
@@ -679,7 +687,8 @@ export const swaggerJson = {
         ],
         responses: {
           202: {
-            description: 'Success get total page base on island name',
+            description:
+              'Contoh respon ketika berhasil mendapatkan data jumlah halaman kota berdasarkan nama pulau',
             content: {
               'application/json': {
                 schema: {
@@ -692,7 +701,7 @@ export const swaggerJson = {
             },
           },
           500: {
-            description: 'Something wrong in server',
+            description: 'Contoh respon ketika terjadi error pada server',
             content: {
               'application/json': {
                 schema: {
@@ -735,7 +744,8 @@ export const swaggerJson = {
         ],
         responses: {
           202: {
-            description: 'Success get province data base on island name',
+            description:
+              'Contoh respon ketika berhasil mendapatkan data kota berdasarkan nomor halaman dan nama pulau',
             content: {
               'application/json': {
                 schema: {
@@ -748,7 +758,7 @@ export const swaggerJson = {
             },
           },
           404: {
-            description: "Throw message when in can't find any data",
+            description: 'Contoh respon ketika data tidak ditemukan',
             content: {
               'application/json': {
                 schema: {
@@ -761,7 +771,7 @@ export const swaggerJson = {
             },
           },
           500: {
-            description: 'Something wrong in server',
+            description: 'Contoh respon ketika terjadi error pada server',
             content: {
               'application/json': {
                 schema: {
@@ -794,7 +804,8 @@ export const swaggerJson = {
         ],
         responses: {
           202: {
-            description: 'Success get city data by page number',
+            description:
+              'Contoh respon ketika berhasil mendapatkan data satu kota berdasarkan id kota',
             content: {
               'application/json': {
                 schema: {
@@ -804,7 +815,7 @@ export const swaggerJson = {
             },
           },
           404: {
-            description: "Throw message when in can't find any data",
+            description: 'Contoh respon ketika data tidak ditemukan',
             content: {
               'application/json': {
                 schema: {
@@ -817,7 +828,7 @@ export const swaggerJson = {
             },
           },
           500: {
-            description: 'Something wrong in server',
+            description: 'Contoh respon ketika terjadi error pada server',
             content: {
               'application/json': {
                 schema: {
@@ -832,10 +843,10 @@ export const swaggerJson = {
         },
       },
     },
-    '/city/{id}/destiny': {
+    '/city/{id}/detail': {
       get: {
         tags: ['City'],
-        summary: 'Get city geojson data base on city id',
+        summary: 'Get city detail base on city id',
         parameters: [
           {
             name: 'id',
@@ -850,33 +861,34 @@ export const swaggerJson = {
         ],
         responses: {
           202: {
-            description: 'Success get city data by page number',
+            description:
+              'Contoh respon ketika berhasil mendapatkan detail kota berdasarkan id kota',
             content: {
               'application/json': {
                 schema: {
                   type: 'array',
                   items: {
-                    $ref: '#/components/schemas/Destiny',
+                    $ref: '#/components/schemas/Detail',
                   },
                 },
               },
             },
           },
           404: {
-            description: "Throw message when in can't find any data",
+            description: 'Contoh respon ketika data tidak ditemukan',
             content: {
               'application/json': {
                 schema: {
                   type: 'object',
                   example: {
-                    message: 'Data lokasi liburan tidak ditemukana',
+                    message: 'Data detail tidak ditemukana',
                   },
                 },
               },
             },
           },
           500: {
-            description: 'Something wrong in server',
+            description: 'Contoh respon ketika terjadi error pada server',
             content: {
               'application/json': {
                 schema: {
