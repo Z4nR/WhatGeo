@@ -41,6 +41,13 @@ const getProvById = async (id) => {
   });
 };
 
+const getProvDetailById = async (id) => {
+  return axios.get(`${base_url}/prov/${id}/detail`).then((response) => {
+    const data = response.data;
+    return data;
+  });
+};
+
 const cityPage = async () => {
   return axios.get(`${base_url}/city/page`).then((response) => {
     const data = response.data;
@@ -104,6 +111,7 @@ export {
   provPageByIsle,
   getProvByIsle,
   getProvById,
+  getProvDetailById,
   cityPage,
   getCityByPage,
   cityPageByIsle,
