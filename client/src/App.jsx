@@ -1,11 +1,11 @@
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import HomePage from "./pages/HomePage";
-import GuidePage from "./pages/GuidePage";
-import DocsPage from "./pages/DocsPage";
-import ExamplePage from "./pages/ExamplePage";
-import { Route, Routes } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Header from './components/Header';
+import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import GuidePage from './pages/GuidePage';
+import DocsPage from './pages/DocsPage';
+import ExamplePage from './pages/ExamplePage';
+import { Route, Routes } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
@@ -21,7 +21,7 @@ export default function App() {
       <Header />
       <main
         id="main"
-        className="w-full px-4 md:px-0 my-4 max-w-7xl min-h-screen md:min-h-[75vh] 2xl:min-h-[80vh]"
+        className="w-full px-4 md:px-0 my-4 max-w-7xl min-h-screen md:min-h-[75vh] xl:min-h-[77vh] 2xl:min-h-[80vh]"
       >
         <QueryClientProvider client={queryClient}>
           <Routes>
