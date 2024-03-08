@@ -1,3 +1,4 @@
+import { DetailCardProv } from '@/components/detail/DetailCard';
 import {
   provCoordinate,
   originalStyle,
@@ -5,10 +6,13 @@ import {
 } from '@/utils/map-helper';
 import { getProvByPage, provPage } from '@/utils/network';
 import { useQueries, useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 
 export default function AllProvMap() {
+  const [provId, setProvId] = useState(0);
+  const [detail, setDetail] = useState(false);
+
   const { data } = useQuery({
     queryKey: ['prov-page'],
     queryFn: async () => await provPage(),
@@ -44,7 +48,9 @@ export default function AllProvMap() {
   }, [provData]);
 
   const zoomToFeature = (e, feature) => {
-    console.log(feature.properties);
+    console.log(feature.properties.Code);
+    setProvId(feature.properties.Code);
+    setDetail(true);
     const map = e.target._map;
     map.fitBounds(e.target.getBounds());
   };
@@ -70,6 +76,9 @@ export default function AllProvMap() {
           />
         ))}
       </MapContainer>
+      {detail === true && (
+        <DetailCardProv setDetail={setDetail} provId={provId} />
+      )}
       <div className="divider" />
     </div>
   );
