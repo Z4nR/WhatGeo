@@ -1,4 +1,15 @@
-export function DetailCardProv() {
+import { getProvDetailById } from '@/utils/network';
+import { useQuery } from '@tanstack/react-query';
+
+export function DetailCardProv({ setDetail, provId }) {
+  const { data } = useQuery({
+    queryKey: ['prov-detail', provId],
+    queryFn: async () => await getProvDetailById(provId),
+    gcTime: Infinity,
+  });
+
+  console.log(data);
+
   return (
     <div className="card w-full mt-4 bg-base-100 shadow-lg">
       <div className="card-body">
@@ -9,6 +20,10 @@ export function DetailCardProv() {
           strokeWidth="1.5"
           stroke="currentColor"
           className="w-6 h-6 absolute right-5 cursor-pointer"
+          onClick={(e) => {
+            e.preventDefault();
+            setDetail(false);
+          }}
         >
           <path
             strokeLinecap="round"
@@ -17,11 +32,11 @@ export function DetailCardProv() {
           />
         </svg>
         <div className="card-title justify-center">
-          <h2>Provinsi Bali</h2>
+          <h2>Provinsi {data?.province}</h2>
         </div>
         <div className="divider mt-0 mb-0" />
         <h2 className="font-medium text-center">Deskripsi</h2>
-        <h2 className="text-sm">Lorem Ipsum</h2>
+        <h2 className="text-sm">{data?.desc}</h2>
       </div>
     </div>
   );
