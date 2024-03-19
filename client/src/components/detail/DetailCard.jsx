@@ -8,8 +8,6 @@ export function DetailCardProv({ setDetail, provId }) {
     gcTime: Infinity,
   });
 
-  console.log(data);
-
   return (
     <div className="card w-full mt-4 bg-base-100 shadow-lg">
       <div className="card-body">
@@ -35,8 +33,26 @@ export function DetailCardProv({ setDetail, provId }) {
           <h2>Provinsi {data?.province}</h2>
         </div>
         <div className="divider mt-0 mb-0" />
-        <h2 className="font-medium text-center">Deskripsi</h2>
-        <h2 className="text-sm">{data?.desc}</h2>
+        <div className="flex w-full">
+          <div className="flex-grow-0 card">
+            <h3 className="font-medium text-center mb-2">Detil</h3>
+            <h4 className="text-sm">
+              Diresmikan : <b>{data?.date_created}</b>
+            </h4>
+            <h4 className="text-sm">
+              Ibu kota : <b>{data?.capital}</b>{' '}
+              <i className=" text-xs">
+                ({data?.lat}, {data?.long})
+              </i>
+            </h4>
+            <h4 className="text-sm">Slogan :</h4>
+          </div>
+          <div className="divider divider-horizontal"></div>
+          <div className="flex-grow card">
+            <h3 className="font-medium text-center mb-2">Ringkasan</h3>
+            <h4 className="text-sm">{data?.desc}</h4>
+          </div>
+        </div>
       </div>
     </div>
   );
