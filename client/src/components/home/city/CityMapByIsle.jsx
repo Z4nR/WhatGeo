@@ -1,3 +1,4 @@
+import { btnData } from '@/utils/docs-data';
 import { cityCoordinate } from '@/utils/map-helper';
 import { cityPageByIsle, getCityByIsle } from '@/utils/network';
 import { useQueries, useQuery } from '@tanstack/react-query';
@@ -6,6 +7,7 @@ import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 
 export default function CityMapByIsle() {
   const [island, setIsland] = useState('');
+
   const { data } = useQuery({
     queryKey: ['city-isle-page', island],
     queryFn: async () => await cityPageByIsle(island),
@@ -38,37 +40,6 @@ export default function CityMapByIsle() {
     if (cityData.pending) return null;
     return cityCoordinate(cityData.data.flat());
   }, [cityData]);
-
-  const btnData = [
-    {
-      btnTitle: 'Prov. di Wilayah Sulawesi',
-      island: 'Sulawesi',
-    },
-    {
-      btnTitle: 'Prov. di Wilayah Papua',
-      island: 'Papua',
-    },
-    {
-      btnTitle: 'Prov. di Wilayah Kep. BalNusRa',
-      island: 'BalNusra',
-    },
-    {
-      btnTitle: 'Prov. di Wilayah Kep. Maluku',
-      island: 'Maluku',
-    },
-    {
-      btnTitle: 'Prov. di Wilayah Jawa',
-      island: 'Jawa',
-    },
-    {
-      btnTitle: 'Prov. di Wilayah Sumatera',
-      island: 'Sumatera',
-    },
-    {
-      btnTitle: 'Prov. di Wilayah Kalimantan',
-      island: 'Kalimantan',
-    },
-  ];
 
   return (
     <div className="pt-4">

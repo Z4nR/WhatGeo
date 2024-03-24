@@ -1,3 +1,34 @@
+const btnData = [
+  {
+    btnTitle: 'Prov. di Wilayah Sulawesi',
+    island: 'Sulawesi',
+  },
+  {
+    btnTitle: 'Prov. di Wilayah Papua',
+    island: 'Papua',
+  },
+  {
+    btnTitle: 'Prov. di Wilayah Kep. BalNusRa',
+    island: 'BalNusra',
+  },
+  {
+    btnTitle: 'Prov. di Wilayah Kep. Maluku',
+    island: 'Maluku',
+  },
+  {
+    btnTitle: 'Prov. di Wilayah Jawa',
+    island: 'Jawa',
+  },
+  {
+    btnTitle: 'Prov. di Wilayah Sumatera',
+    island: 'Sumatera',
+  },
+  {
+    btnTitle: 'Prov. di Wilayah Kalimantan',
+    island: 'Kalimantan',
+  },
+];
+
 const codeData = [
   {
     prov_id: 11,
@@ -211,30 +242,30 @@ const codeData = [
   },
   {
     prov_id: 91,
-    regency_id: '9101 - 9112',
+    regency_id: '9403, 9408 & 9409, 9419 & 9420, 9426 - 9428',
+    city_id: '9471',
+    prov_name: 'Papua',
+    island: 'Papua',
+  },
+  {
+    prov_id: 92,
+    regency_id: '9101 - 9105, 9111 & 9112',
     city_id: '-',
     prov_name: 'Papua Barat',
     island: 'Papua',
   },
   {
-    prov_id: 92,
+    prov_id: 93,
     regency_id: '9401, 9413 - 9415',
     city_id: '-',
     prov_name: 'Papua Selatan',
     island: 'Papua',
   },
   {
-    prov_id: 93,
+    prov_id: 94,
     regency_id: '9404, 9410 - 9412, 9433 - 9436',
     city_id: '-',
     prov_name: 'Papua Tengah',
-    island: 'Papua',
-  },
-  {
-    prov_id: 94,
-    regency_id: '9403, 9408 & 9409, 9419 & 9420, 9426 - 9428',
-    city_id: '9471',
-    prov_name: 'Papua',
     island: 'Papua',
   },
   {
@@ -253,4 +284,4 @@ const codeData = [
   },
 ];
 
-export { codeData };
+export { btnData, codeData };

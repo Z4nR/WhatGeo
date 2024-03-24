@@ -1,11 +1,19 @@
 import { useMemo, useState } from 'react';
 import { useQueries, useQuery } from '@tanstack/react-query';
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON, Popup } from 'react-leaflet';
 import { getProvByIsle, provPageByIsle } from '@/utils/network';
-import { provCoordinate } from '@/utils/map-helper';
+import {
+  provCoordinate,
+  originalStyle,
+  onEachFeature,
+} from '@/utils/map-helper';
+import { btnData } from '@/utils/docs-data';
 
 export default function ProvMapByIsle() {
+  const [name, setName] = useState('');
+  const [marker, setMarker] = useState([]);
   const [island, setIsland] = useState('');
+
   const { data } = useQuery({
     queryKey: ['prov-isle-page', island],
     queryFn: async () => await provPageByIsle(island),
@@ -39,36 +47,13 @@ export default function ProvMapByIsle() {
     return provCoordinate(provData.data.flat());
   }, [provData]);
 
-  const btnData = [
-    {
-      btnTitle: 'Prov. di Wilayah Sulawesi',
-      island: 'Sulawesi',
-    },
-    {
-      btnTitle: 'Prov. di Wilayah Papua',
-      island: 'Papua',
-    },
-    {
-      btnTitle: 'Prov. di Wilayah Kep. BalNusRa',
-      island: 'BalNusra',
-    },
-    {
-      btnTitle: 'Prov. di Wilayah Kep. Maluku',
-      island: 'Maluku',
-    },
-    {
-      btnTitle: 'Prov. di Wilayah Jawa',
-      island: 'Jawa',
-    },
-    {
-      btnTitle: 'Prov. di Wilayah Sumatera',
-      island: 'Sumatera',
-    },
-    {
-      btnTitle: 'Prov. di Wilayah Kalimantan',
-      island: 'Kalimantan',
-    },
-  ];
+  const zoomToFeature = (e, feature) => {
+    const provinceName = feature.properties.Name;
+    setName(provinceName);
+    setMarker(e.latlng);
+    const map = e.target._map;
+    map.fitBounds(e.target.getBounds());
+  };
 
   return (
     <div className="pt-4">
@@ -80,8 +65,16 @@ export default function ProvMapByIsle() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        {marker && name && <Popup position={marker}>{name}</Popup>}
         {prov?.map((item, index) => (
-          <GeoJSON key={`${island}-${index}`} data={item} />
+          <GeoJSON
+            key={`${island}-${index}`}
+            data={item}
+            style={{ fillColor: '#11648e', ...originalStyle }}
+            onEachFeature={(feature, layer) =>
+              onEachFeature(feature, layer, zoomToFeature)
+            }
+          />
         ))}
       </MapContainer>
       <div className="pt-4 px-4 flex flex-wrap justify-center gap-2">
