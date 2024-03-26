@@ -3,9 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+import { originalStyle, onEachFeature } from '@/utils/map-helper';
 
 export default function ProvMapById() {
   const [provId, setProvId] = useState(11);
+
   const { data, isPending } = useQuery({
     queryKey: ['prov', provId],
     queryFn: async () => await getProvById(provId),
@@ -28,6 +30,11 @@ export default function ProvMapById() {
 
   const onSubmit = (data) => {
     setProvId(data.id);
+  };
+
+  const zoomToFeature = (e) => {
+    const map = e.target._map;
+    map.fitBounds(e.target.getBounds());
   };
 
   return (
@@ -62,6 +69,11 @@ export default function ProvMapById() {
               Reset
             </button>
           </div>
+          <label className="label">
+            <span className="label-text-alt text-gray-500">
+              ID Provinsi untuk inisiasi awal : 11 (Prov. Aceh)
+            </span>
+          </label>
           {errors.id && errors.id.type === 'pattern' && (
             <label className="label">
               <span className="label-text-alt text-error">
@@ -79,6 +91,10 @@ export default function ProvMapById() {
         <GeoJSON
           key={isPending ? 'loading' : `prov-${provId}`}
           data={data?.provFeature}
+          style={{ fillColor: '#11648e', ...originalStyle }}
+          onEachFeature={(feature, layer) =>
+            onEachFeature(feature, layer, zoomToFeature)
+          }
         />
       </MapContainer>
       <div className="divider" />
