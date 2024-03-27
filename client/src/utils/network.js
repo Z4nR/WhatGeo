@@ -105,6 +105,13 @@ const getCityById = async (id) => {
   });
 };
 
+const getCityDetailById = async (id) => {
+  return axios.get(`${base_url}/city/${id}/detail`).then((response) => {
+    const data = response.data;
+    return data;
+  });
+};
+
 export {
   provPage,
   getProvByPage,
@@ -119,4 +126,5 @@ export {
   cityPageByProv,
   getCityByProv,
   getCityById,
+  getCityDetailById,
 };
