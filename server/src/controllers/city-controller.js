@@ -160,10 +160,12 @@ module.exports = {
       });
 
       res.status(202).send({
+        type: city.type,
         city: city.city,
         date_created: city.date_created,
         lat_city: city.lat_city,
         long_city: city.long_city,
+        slogan: city.slogan,
         description: city.description,
         destinations: destiny,
       });
