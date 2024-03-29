@@ -1,4 +1,9 @@
-import { cityCoordinate } from '@/utils/map-helper';
+import { DetailCardCity } from '@/components/detail/DetailCard';
+import {
+  cityCoordinate,
+  originalStyle,
+  onEachFeature,
+} from '@/utils/map-helper';
 import { cityPageByProv, getCityByProv } from '@/utils/network';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
@@ -7,6 +12,9 @@ import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 
 export default function CityMapByProv() {
   const [provId, setProvId] = useState(11);
+  const [cityId, setCityId] = useState(0);
+  const [detail, setDetail] = useState(false);
+
   const { data } = useQuery({
     queryKey: ['city-prov-page', provId],
     queryFn: async () => await cityPageByProv(provId),
@@ -56,6 +64,14 @@ export default function CityMapByProv() {
     setProvId(data.id);
   };
 
+  const zoomToFeature = (e, feature) => {
+    const cityCode = feature.properties.Code;
+    setCityId(cityCode);
+    setDetail(true);
+    const map = e.target._map;
+    map.fitBounds(e.target.getBounds());
+  };
+
   return (
     <div className="pt-4">
       <h2 className="text-xl text-center text-black font-bold pb-2">
@@ -103,9 +119,17 @@ export default function CityMapByProv() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {city?.map((item, index) => (
-          <GeoJSON key={`${provId}-${index}`} data={item} />
+          <GeoJSON
+            key={`${provId}-${index}`}
+            data={item}
+            style={{ fillColor: '#11648e', ...originalStyle }}
+            onEachFeature={(feature, layer) =>
+              onEachFeature(feature, layer, zoomToFeature)
+            }
+          />
         ))}
       </MapContainer>
+      {detail && <DetailCardCity setDetail={detail} cityId={cityId} />}
       <div className="divider" />
     </div>
   );
