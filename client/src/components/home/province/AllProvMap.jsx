@@ -48,8 +48,8 @@ export default function AllProvMap() {
   }, [provData]);
 
   const zoomToFeature = (e, feature) => {
-    console.log(feature.properties.Code);
-    setProvId(feature.properties.Code);
+    const provinceCode = feature.properties.Code;
+    setProvId(provinceCode);
     setDetail(true);
     const map = e.target._map;
     map.fitBounds(e.target.getBounds());
@@ -60,7 +60,7 @@ export default function AllProvMap() {
       <h2 className="text-xl text-center text-black font-bold pb-2">
         Peta Provinsi Seluruh Indonesia
       </h2>
-      <MapContainer center={[-1.2480891, 118]} zoom={5} scrollWheelZoom={true}>
+      <MapContainer center={[-1.2480891, 118]} zoom={5} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -76,9 +76,7 @@ export default function AllProvMap() {
           />
         ))}
       </MapContainer>
-      {detail === true && (
-        <DetailCardProv setDetail={setDetail} provId={provId} />
-      )}
+      {detail && <DetailCardProv setDetail={setDetail} provId={provId} />}
       <div className="divider" />
     </div>
   );
