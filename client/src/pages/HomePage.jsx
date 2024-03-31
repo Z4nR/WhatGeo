@@ -15,10 +15,11 @@ export default function HomePage() {
       <h2 className="pt-4 text-3xl text-center text-black font-bold">
         API Data GeoJSON Indonesia
       </h2>
-      <p className="text-justify py-6">
+      <p className="sm:text-justify lg:text-center py-6">
         Kalian tidak perlu lagi memasukan file peta ke dalam projek kalian.
         Cukup panggil API ini, kalian sudah mendapatkan akses ke peta provinsi
-        dan kota/kabupaten di Indonesia.
+        dan kota/kabupaten di Indonesia. Data peta yang digunakan diambil dari
+        BPS dan Kemendagri (terakhir diperbarui : Mei 2023)
       </p>
       <AllProvMap />
       <ProvMapByIsle />
