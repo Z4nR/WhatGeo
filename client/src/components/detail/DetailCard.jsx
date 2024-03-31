@@ -34,12 +34,13 @@ export function DetailCardProv({ setDetail, provId }) {
         </div>
         <div className="divider mt-0 mb-0" />
         <div className="flex w-full">
-          <div className="flex-1 card">
+          <div className="flex-[3] card">
             <h3 className="font-medium text-center mb-2">Detil</h3>
             <div className="flex flex-row gap-1">
               <div className="flex-grow-[2]">
                 <h4 className="text-sm">Diresmikan </h4>
                 <h4 className="text-sm">Ibukota </h4>
+                <h4 className="text-sm">Koordinat Ibukota </h4>
                 <h4 className="text-sm">Slogan </h4>
               </div>
               <div className="flex-grow-[8]">
@@ -47,7 +48,10 @@ export function DetailCardProv({ setDetail, provId }) {
                   : <b>{data?.date_created}</b>
                 </h4>
                 <h4 className="text-sm">
-                  : <b>{data?.capital}</b>{' '}
+                  : <b>{data?.capital}</b>
+                </h4>
+                <h4 className="text-sm">
+                  :{' '}
                   <i className=" text-xs">
                     ({data?.lat}, {data?.long})
                   </i>
@@ -59,9 +63,9 @@ export function DetailCardProv({ setDetail, provId }) {
             </div>
           </div>
           <div className="divider divider-horizontal"></div>
-          <div className="flex-1 card">
+          <div className="flex-[7] card">
             <h3 className="font-medium text-center mb-2">Ringkasan</h3>
-            <h4 className="text-sm">{data?.desc}</h4>
+            <h4 className="text-sm text-justify">{data?.desc}</h4>
           </div>
         </div>
       </div>
