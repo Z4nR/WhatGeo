@@ -9,7 +9,8 @@ const CityDetailSchema = new Schema({
   lat_city: Number,
   long_city: Number,
   slogan: String,
-  description: String,
+  district_total: Number,
+  district_data: String,
   destinations: [
     {
       type: Schema.Types.ObjectId,
