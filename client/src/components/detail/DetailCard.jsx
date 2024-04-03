@@ -45,7 +45,7 @@ export function DetailCardProv({ setDetail, provId }) {
               </div>
               <div className="flex-grow-[8]">
                 <h4 className="text-sm">
-                  : <b>{data?.date_created}</b>
+                  : <b>{data?.created}</b>
                 </h4>
                 <h4 className="text-sm">
                   : <b>{data?.capital}</b>
@@ -63,9 +63,11 @@ export function DetailCardProv({ setDetail, provId }) {
             </div>
           </div>
           <div className="divider divider-horizontal"></div>
-          <div className="flex-[7] card">
+          <div className="flex-[7] card max-h-40">
             <h3 className="font-medium text-center mb-2">Ringkasan</h3>
-            <h4 className="text-sm text-justify">{data?.desc}</h4>
+            <div className="overflow-y-scroll">
+              <h4 className="text-sm text-justify">{data?.desc}</h4>
+            </div>
           </div>
         </div>
       </div>
@@ -109,37 +111,57 @@ export function DetailCardCity({ setDetail, cityId }) {
             {data?.type} {data?.city}
           </h2>
           <i className=" text-xs">
-            ({data?.lat_city}, {data?.long_city})
+            ({data?.lat}, {data?.long})
           </i>
         </div>
         <div className="divider mt-0 mb-0" />
         <div className="flex w-full">
-          <div className="flex-1 card">
+          <div className="flex-[4] card">
             <h3 className="font-medium text-center mb-2">Detil</h3>
             <div className="flex flex-row gap-1">
               <div className="flex-grow-[2]">
                 <h4 className="text-sm">Diresmikan </h4>
                 <h4 className="text-sm">Slogan </h4>
-                <h4 className="text-sm">Deskripsi </h4>
+                <h4 className="text-sm">Total Kecamatan </h4>
               </div>
               <div className="flex-grow-[8]">
                 <h4 className="text-sm">
-                  : <b>{data?.date_created}</b>
+                  : <b>{data?.created}</b>
                 </h4>
                 <h4 className="text-sm">
                   : <b>{data?.slogan}</b>
                 </h4>
                 <h4 className="text-sm">
-                  : <b>Lorem Ipsum</b>
+                  : <b>{data?.district} Kecamatan</b>
+                  <br />
+                  <p>Lorem Ipsum</p>
                 </h4>
               </div>
             </div>
           </div>
           <div className="divider divider-horizontal"></div>
-          <div className="flex-1 card">
+          <div className="flex-[6] card h-44">
             <h3 className="font-medium text-center mb-2">
               Destinasi Yang Bisa Dikunjungi
             </h3>
+            <div className="overflow-y-scroll grid grid-cols-2 gap-3">
+              {data?.destinations.map((destiny, index) => (
+                <div key={index} className="card border-2 border-black">
+                  <div className="card-body">
+                    <div className="badge">{destiny?.destiny_type}</div>
+                    <h4 className="text-lg font-medium text-ellipsis">
+                      {destiny?.place_name}
+                    </h4>
+                    <h4 className="text-xs">
+                      Koordinat Lokasi :{' '}
+                      <i className="text-xs">
+                        ({destiny?.latitude}, {destiny?.longitude})
+                      </i>
+                    </h4>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
