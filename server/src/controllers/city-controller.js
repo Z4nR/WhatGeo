@@ -162,11 +162,12 @@ module.exports = {
       res.status(202).send({
         type: city.type,
         city: city.city,
-        date_created: city.date_created,
-        lat_city: city.lat_city,
-        long_city: city.long_city,
+        created: city.date_created,
+        lat: city.lat_city,
+        long: city.long_city,
         slogan: city.slogan,
-        description: city.description,
+        district: city.district_total,
+        district_detail: city.district_data,
         destinations: destiny,
       });
     } catch (error) {
