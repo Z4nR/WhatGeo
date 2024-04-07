@@ -92,7 +92,7 @@ module.exports = {
           .send({ message: 'Informasi Provinsi Tidak Ditemukan' });
 
       const data = {
-        date_created: detail.date_created,
+        created: detail.date_created,
         province: detail.province,
         capital: detail.capital,
         long: detail.long_capital,
