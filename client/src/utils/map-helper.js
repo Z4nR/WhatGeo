@@ -51,4 +51,57 @@ const onEachFeature = (feature, layer, zoomToFeature) => {
   });
 };
 
-export { provCoordinate, originalStyle, onEachFeature };
+const getBackgroundColorClass = (destinyType) => {
+  switch (destinyType) {
+    case 'Reservoir':
+      return 'bg-blue-100 border-blue-200';
+    case 'Orchard':
+      return 'bg-lime-200 border-lime-300';
+    case 'Recreation':
+      return 'bg-yellow-100 border-yellow-200';
+    case 'Shore':
+      return 'bg-orange-100 border-orange-200';
+    case 'Sea':
+      return 'bg-blue-400  border-blue-500';
+    case 'History':
+      return 'bg-purple-100 border-purple-200';
+    case 'Religic':
+      return 'bg-white-100 border-white-200';
+    case 'Peak':
+      return 'bg-green-100 border-green-200';
+    default:
+      return 'bg-gray-200 border-gray-300';
+  }
+};
+
+const getDestinyTypeDefinition = (destinyType) => {
+  switch (destinyType) {
+    case 'Reservoir':
+      return 'Bendungan Air';
+    case 'Orchard':
+      return 'Agrowisata';
+    case 'Recreation':
+      return 'Tempat Rekreasi';
+    case 'Shore':
+      return 'Tepi Laut';
+    case 'Sea':
+      return 'Wisata Bahari';
+    case 'History':
+      return 'Tempat Bersejarah';
+    case 'Religic':
+      return 'Tempat Keagamaan';
+    case 'Peak':
+      return 'Dataran Tinggi';
+    default:
+      return 'Tidak Diketahui';
+  }
+};
+
+const getDestiny = (destinyType) => {
+  const style = getBackgroundColorClass(destinyType);
+  const type = getDestinyTypeDefinition(destinyType);
+
+  return { style: style, type: type };
+};
+
+export { provCoordinate, originalStyle, onEachFeature, getDestiny };
