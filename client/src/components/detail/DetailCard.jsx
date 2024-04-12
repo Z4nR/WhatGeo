@@ -1,5 +1,6 @@
 import { getCityDetailById, getProvDetailById } from '@/utils/network';
 import { useQuery } from '@tanstack/react-query';
+import ListDestiny from './ListDestiny';
 
 export function DetailCardProv({ setDetail, provId }) {
   const { data } = useQuery({
@@ -146,20 +147,7 @@ export function DetailCardCity({ setDetail, cityId }) {
             </h3>
             <div className="overflow-y-scroll grid grid-cols-2 gap-3">
               {data?.destinations.map((destiny, index) => (
-                <div key={index} className="card border-2 border-black">
-                  <div className="card-body">
-                    <div className="badge">{destiny?.destiny_type}</div>
-                    <h4 className="text-lg font-medium text-ellipsis">
-                      {destiny?.place_name}
-                    </h4>
-                    <h4 className="text-xs">
-                      Koordinat Lokasi :{' '}
-                      <i className="text-xs">
-                        ({destiny?.latitude}, {destiny?.longitude})
-                      </i>
-                    </h4>
-                  </div>
-                </div>
+                <ListDestiny key={index} destiny={destiny} />
               ))}
             </div>
           </div>

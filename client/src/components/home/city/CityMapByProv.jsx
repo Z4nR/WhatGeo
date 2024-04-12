@@ -129,7 +129,7 @@ export default function CityMapByProv() {
           />
         ))}
       </MapContainer>
-      {detail && <DetailCardCity setDetail={detail} cityId={cityId} />}
+      {detail && <DetailCardCity setDetail={setDetail} cityId={cityId} />}
       <div className="divider" />
     </div>
   );
