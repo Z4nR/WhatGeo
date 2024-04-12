@@ -1,4 +1,4 @@
-import { DetailCardCity } from '@/components/detail/DetailCard';
+import DetailCityCard from '@/components/detail/DetailCityCard';
 import {
   cityCoordinate,
   originalStyle,
@@ -129,7 +129,7 @@ export default function CityMapByProv() {
           />
         ))}
       </MapContainer>
-      {detail && <DetailCardCity setDetail={setDetail} cityId={cityId} />}
+      {detail && <DetailCityCard setDetail={setDetail} cityId={cityId} />}
       <div className="divider" />
     </div>
   );

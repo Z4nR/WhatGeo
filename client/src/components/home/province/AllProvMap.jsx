@@ -1,4 +1,4 @@
-import { DetailCardProv } from '@/components/detail/DetailCard';
+import DetailProvCard from '@/components/detail/DetailProvCard';
 import {
   provCoordinate,
   originalStyle,
@@ -76,7 +76,7 @@ export default function AllProvMap() {
           />
         ))}
       </MapContainer>
-      {detail && <DetailCardProv setDetail={setDetail} provId={provId} />}
+      {detail && <DetailProvCard setDetail={setDetail} provId={provId} />}
       <div className="divider" />
     </div>
   );
