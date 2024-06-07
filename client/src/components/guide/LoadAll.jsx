@@ -1,17 +1,12 @@
-import { useEffect } from 'react';
-import hljs from 'highlight.js';
-import 'highlight.js/styles/atom-one-dark.css';
 import { flattingData, loopingCode, saveData } from '@/utils/code-guide';
+import { javascript } from '@codemirror/lang-javascript';
+import ReactCodeMirror from '@uiw/react-codemirror';
 
 export default function LoadAll() {
-  useEffect(() => {
-    hljs.highlightAll();
-  }, []);
-
   return (
     <div className="pt-4">
       <h1 className="text-lg font-bold">
-        Menyatukan data map/page dalam 1 array
+        Menyatukan Data Map/Page Dalam 1 Array
       </h1>
       <p className="py-2 text-justify">
         Untuk dapat memuat seluruh data map berdasarkan page query. Kita perlu
@@ -23,20 +18,30 @@ export default function LoadAll() {
         router dengan query yang membutuhkan nilai dari nomor page. Berikut
         contoh penulisan kode looping:
       </p>
-      <div className="mockup-code md:w-fit xs:max-w-screen-sm pl-5">
-        <pre>
-          <code className="language-javascript">{loopingCode}</code>
-        </pre>
-      </div>
+      <ReactCodeMirror
+        className="flex justify-center"
+        value={loopingCode}
+        editable={false}
+        basicSetup
+        readOnly
+        theme={'dark'}
+        width="550px"
+        extensions={[javascript({ jsx: true })]}
+      />
       <p className="py-2 text-justify">
         Dari proses looping tersebut kemudian lakukan push data ke dalam
         variable dengan nilai <b>[array]</b> .
       </p>
-      <div className="mockup-code md:w-fit xs:max-w-screen-sm pl-5">
-        <pre>
-          <code className="language-javascript">{saveData}</code>
-        </pre>
-      </div>
+      <ReactCodeMirror
+        className="flex justify-center"
+        value={saveData}
+        editable={false}
+        basicSetup
+        readOnly
+        theme={'dark'}
+        width="550px"
+        extensions={[javascript({ jsx: true })]}
+      />
       <p className="py-2 text-justify">
         Maka tampilan data yang tersimpan dalam variable data akan menjadi
         seperti ini{' '}
@@ -46,11 +51,16 @@ export default function LoadAll() {
         Kemudian lakukan proses penyatuan beberapa sub array dalam variable data
         menggunakan method <b>flat()</b> .
       </p>
-      <div className="mockup-code md:w-fit xs:max-w-screen-sm pl-5">
-        <pre>
-          <code className="language-javascript">{flattingData}</code>
-        </pre>
-      </div>
+      <ReactCodeMirror
+        className="flex justify-center"
+        value={flattingData}
+        editable={false}
+        basicSetup
+        readOnly
+        theme={'dark'}
+        width="550px"
+        extensions={[javascript({ jsx: true })]}
+      />
       <div className="divider" />
     </div>
   );

@@ -1,13 +1,8 @@
-import { useEffect } from 'react';
-import hljs from 'highlight.js';
-import 'highlight.js/styles/atom-one-dark.css';
 import { loadMap } from '@/utils/code-guide';
+import { javascript } from '@codemirror/lang-javascript';
+import ReactCodeMirror from '@uiw/react-codemirror';
 
 export default function LoadMap() {
-  useEffect(() => {
-    hljs.highlightAll();
-  }, []);
-
   return (
     <div className="pt-4">
       <h1 className="text-lg font-bold">Memuat Data Peta</h1>
@@ -21,11 +16,16 @@ export default function LoadMap() {
         Data Kota/Kabupaten menggunakan array method <b>find()</b>. Lalu simpan
         data tersebut ke dalam variable dengan nilai <b>[array]</b>.
       </p>
-      <div className="mockup-code md:w-fit xs:max-w-screen-sm pl-5">
-        <pre>
-          <code className="language-javascript">{loadMap}</code>
-        </pre>
-      </div>
+      <ReactCodeMirror
+        className="flex justify-center"
+        value={loadMap}
+        editable={false}
+        basicSetup
+        readOnly
+        theme={'dark'}
+        width="550px"
+        extensions={[javascript({ jsx: true })]}
+      />
       <div className="divider" />
     </div>
   );
