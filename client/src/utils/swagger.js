@@ -1,4 +1,4 @@
-export const swaggerJson = {
+export const swaggerSpec = {
   openapi: '3.1.0',
   info: {
     title: 'WhatGeo API Documentation with Swagger',
