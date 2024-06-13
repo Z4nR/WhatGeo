@@ -1,10 +1,17 @@
-import { cityCoordinate } from '@/utils/map-helper';
+import {
+  cityCoordinate,
+  originalStyle,
+  onEachFeature,
+} from '@/utils/map-helper';
 import { cityPage, getCityByPage } from '@/utils/network';
 import { useQueries, useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+import { useMemo, useState } from 'react';
+import { MapContainer, TileLayer, GeoJSON, Popup } from 'react-leaflet';
 
 export default function AllCityMap() {
+  const [name, setName] = useState('');
+  const [marker, setMarker] = useState([]);
+
   const { data } = useQuery({
     queryKey: ['city-page'],
     queryFn: async () => await cityPage(),
@@ -39,18 +46,34 @@ export default function AllCityMap() {
     return cityCoordinate(cityData.data.flat());
   }, [cityData]);
 
+  const zoomToFeature = (e, feature) => {
+    const cityName = feature.properties.Name;
+    setName(cityName);
+    setMarker(e.latlng);
+    const map = e.target._map;
+    map.fitBounds(e.target.getBounds());
+  };
+
   return (
     <div className="pt-4">
       <h2 className="text-xl text-center text-black font-bold pb-2">
         Peta Kota Seluruh Indonesia
       </h2>
-      <MapContainer center={[-1.2480891, 118]} zoom={5} scrollWheelZoom={true}>
+      <MapContainer center={[-1.2480891, 118]} zoom={5} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        {marker && name && <Popup position={marker}>{name}</Popup>}
         {city?.map((item, index) => (
-          <GeoJSON key={index} data={item} />
+          <GeoJSON
+            key={index}
+            data={item}
+            style={{ fillColor: '#11648e', ...originalStyle }}
+            onEachFeature={(feature, layer) =>
+              onEachFeature(feature, layer, zoomToFeature)
+            }
+          />
         ))}
       </MapContainer>
       <div className="divider" />
