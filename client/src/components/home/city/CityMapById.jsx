@@ -1,3 +1,4 @@
+import { originalStyle, onEachFeature } from '@/utils/map-helper';
 import { getCityById } from '@/utils/network';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -28,6 +29,11 @@ export default function CityMapById() {
 
   const onSubmit = (data) => {
     setCityId(data.id);
+  };
+
+  const zoomToFeature = (e) => {
+    const map = e.target._map;
+    map.fitBounds(e.target.getBounds());
   };
 
   return (
@@ -62,6 +68,11 @@ export default function CityMapById() {
               Reset
             </button>
           </div>
+          <label className="label">
+            <span className="label-text-alt text-gray-500">
+              ID Provinsi untuk inisiasi awal : 1101 (Kab. Simeulue)
+            </span>
+          </label>
           {errors.id && errors.id.type === 'pattern' && (
             <label className="label">
               <span className="label-text-alt text-error">
@@ -79,6 +90,10 @@ export default function CityMapById() {
         <GeoJSON
           key={isPending ? 'loading' : `city-${cityId}`}
           data={data?.cityFeature}
+          style={{ fillColor: '#11648e', ...originalStyle }}
+          onEachFeature={(feature, layer) =>
+            onEachFeature(feature, layer, zoomToFeature)
+          }
         />
       </MapContainer>
       <div className="divider" />
