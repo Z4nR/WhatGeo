@@ -104,6 +104,11 @@ export default function CityMapByProv() {
               Reset
             </button>
           </div>
+          <label className="label">
+            <span className="label-text-alt text-gray-500">
+              ID Provinsi untuk inisiasi awal : 11 (Prov. Aceh)
+            </span>
+          </label>
           {errors.id && errors.id.type === 'pattern' && (
             <label className="label">
               <span className="label-text-alt text-error">
