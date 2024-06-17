@@ -23,20 +23,6 @@ main,
   z-index: 0;
 }
 
-.mockup-code {
-  min-width: auto;
-  background: #282c34;
-}
-
-.mockup-code::before {
-  content: none;
-}
-
-.mockup-code pre::before {
-  content: '';
-  margin-right: 0px;
-}
-
 .badge {
   border-radius: 5px;
   height: fit-content;
