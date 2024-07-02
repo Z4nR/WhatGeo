@@ -7,6 +7,7 @@ export default defineConfig({
   base: '/WhatGeo',
   resolve: {
     alias: {
+      // eslint-disable-next-line no-undef
       '@': path.resolve(__dirname, './src'),
     },
   },
