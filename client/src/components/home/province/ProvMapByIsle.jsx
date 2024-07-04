@@ -8,6 +8,7 @@ import {
   onEachFeature,
 } from '@/utils/map-helper';
 import { btnData } from '@/utils/docs-data';
+import MapSkeleton from '@/components/Skeleton';
 
 export default function ProvMapByIsle() {
   const [name, setName] = useState('');
@@ -37,13 +38,13 @@ export default function ProvMapByIsle() {
     combine: (results) => {
       return {
         data: results.map((result) => result.data),
-        pending: results.some((result) => result.isPending),
+        isLoading: results.some((result) => result.isLoading),
       };
     },
   });
 
   const prov = useMemo(() => {
-    if (provData.pending) return null;
+    if (provData.isLoading) return null;
     return provCoordinate(provData.data.flat());
   }, [provData]);
 
@@ -60,23 +61,32 @@ export default function ProvMapByIsle() {
       <h2 className="text-xl text-center text-black font-bold pb-2">
         Peta Provinsi berdasarkan Pulau dan Kepulauannya
       </h2>
-      <MapContainer center={[-1.2480891, 118]} zoom={5} scrollWheelZoom={true}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {marker && name && <Popup position={marker}>{name}</Popup>}
-        {prov?.map((item, index) => (
-          <GeoJSON
-            key={`${island}-${index}`}
-            data={item}
-            style={{ fillColor: '#11648e', ...originalStyle }}
-            onEachFeature={(feature, layer) =>
-              onEachFeature(feature, layer, zoomToFeature)
-            }
+      {!provData.isLoading ? (
+        <MapContainer
+          center={[-1.2480891, 118]}
+          zoom={5}
+          scrollWheelZoom={false}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-        ))}
-      </MapContainer>
+          {marker && name && <Popup position={marker}>{name}</Popup>}
+          {prov?.map((item, index) => (
+            <GeoJSON
+              key={`${island}-${index}`}
+              data={item}
+              style={{ fillColor: '#11648e', ...originalStyle }}
+              onEachFeature={(feature, layer) =>
+                onEachFeature(feature, layer, zoomToFeature)
+              }
+            />
+          ))}
+        </MapContainer>
+      ) : (
+        <MapSkeleton />
+      )}
+
       <div className="pt-4 px-4 flex flex-wrap justify-center gap-2">
         {btnData.map((item, index) => (
           <button
