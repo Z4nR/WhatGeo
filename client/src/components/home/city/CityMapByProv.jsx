@@ -1,3 +1,4 @@
+import MapSkeleton from '@/components/Skeleton';
 import DetailCityCard from '@/components/detail/DetailCityCard';
 import {
   cityCoordinate,
@@ -39,7 +40,7 @@ export default function CityMapByProv() {
     combine: (results) => {
       return {
         data: results.map((result) => result.data),
-        pending: results.some((result) => result.isPending),
+        isLoading: results.some((result) => result.isLoading),
       };
     },
   });
@@ -118,22 +119,31 @@ export default function CityMapByProv() {
           )}
         </form>
       </div>
-      <MapContainer center={[-1.2480891, 118]} zoom={5} scrollWheelZoom={true}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {city?.map((item, index) => (
-          <GeoJSON
-            key={`${provId}-${index}`}
-            data={item}
-            style={{ fillColor: '#11648e', ...originalStyle }}
-            onEachFeature={(feature, layer) =>
-              onEachFeature(feature, layer, zoomToFeature)
-            }
+      {!cityData.isLoading ? (
+        <MapContainer
+          center={[-1.2480891, 118]}
+          zoom={5}
+          scrollWheelZoom={true}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-        ))}
-      </MapContainer>
+          {city?.map((item, index) => (
+            <GeoJSON
+              key={`${provId}-${index}`}
+              data={item}
+              style={{ fillColor: '#11648e', ...originalStyle }}
+              onEachFeature={(feature, layer) =>
+                onEachFeature(feature, layer, zoomToFeature)
+              }
+            />
+          ))}
+        </MapContainer>
+      ) : (
+        <MapSkeleton />
+      )}
+
       {detail && <DetailCityCard setDetail={setDetail} cityId={cityId} />}
       <div className="divider" />
     </div>
