@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import WebsiteLogo from '@/assets/logo/desktop-logo.svg';
 
 export default function Header() {
   const urlLocation = useLocation();
@@ -8,18 +9,25 @@ export default function Header() {
     <header className="w-full flex justify-center top-0 right-0 sticky z-20 shadow-sm bg-white">
       <div className="navbar px-6 py-2 max-w-7xl">
         <div className="flex-1">
-          <Link
-            className="text-primary hover:text-accent aria-[current=page]:text-secondary"
-            aria-label="Home Button"
-            aria-current={urlPath === '/' ? 'page' : undefined}
-            to={'/'}
-          >
-            <h3 className="text-lg font-medium">WhatGeo: Indonesian Map</h3>
-          </Link>
+          <img
+            src={WebsiteLogo}
+            alt="Website Image"
+            className="w-[200px] h-full"
+          ></img>
         </div>
         <div className="hidden font-medium items-center sm:flex">
           <nav>
             <ul className="hidden items-center gap-x-8 sm:flex">
+              <li>
+                <Link
+                  className="text-primary hover:text-accent aria-[current=page]:text-secondary"
+                  aria-label="Home Button"
+                  aria-current={urlPath === '/' ? 'page' : undefined}
+                  to={'/'}
+                >
+                  Beranda
+                </Link>
+              </li>
               <li>
                 <Link
                   className="text-primary hover:text-accent aria-[current=page]:text-secondary"

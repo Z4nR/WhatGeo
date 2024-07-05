@@ -33,7 +33,7 @@ export default function ExamplePage() {
               rel="noreferrer"
               className="btn mt-4 min-h-0 h-auto py-3 bg-primary text-white hover:bg-secondary"
             >
-              Tautan Skrip
+              Tautan Kode
             </a>
           </div>
         </div>
