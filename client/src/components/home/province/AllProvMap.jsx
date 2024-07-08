@@ -1,3 +1,4 @@
+import MapSkeleton from '@/components/Skeleton';
 import DetailProvCard from '@/components/detail/DetailProvCard';
 import {
   provCoordinate,
@@ -37,13 +38,13 @@ export default function AllProvMap() {
     combine: (results) => {
       return {
         data: results.map((result) => result.data),
-        pending: results.some((result) => result.isPending),
+        isLoading: results.some((result) => result.isLoading),
       };
     },
   });
 
   const prov = useMemo(() => {
-    if (provData.pending) return null;
+    if (provData.isLoading) return null;
     return provCoordinate(provData.data.flat());
   }, [provData]);
 
@@ -60,22 +61,30 @@ export default function AllProvMap() {
       <h2 className="text-xl text-center text-black font-bold pb-2">
         Peta Provinsi Seluruh Indonesia
       </h2>
-      <MapContainer center={[-1.2480891, 118]} zoom={5} scrollWheelZoom={false}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {prov?.map((item, index) => (
-          <GeoJSON
-            key={index}
-            data={item}
-            style={{ fillColor: '#11648e', ...originalStyle }}
-            onEachFeature={(feature, layer) =>
-              onEachFeature(feature, layer, zoomToFeature)
-            }
+      {!provData.isLoading ? (
+        <MapContainer
+          center={[-1.2480891, 118]}
+          zoom={5}
+          scrollWheelZoom={false}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-        ))}
-      </MapContainer>
+          {prov?.map((item, index) => (
+            <GeoJSON
+              key={index}
+              data={item}
+              style={{ fillColor: '#11648e', ...originalStyle }}
+              onEachFeature={(feature, layer) =>
+                onEachFeature(feature, layer, zoomToFeature)
+              }
+            />
+          ))}
+        </MapContainer>
+      ) : (
+        <MapSkeleton />
+      )}
       {detail && <DetailProvCard setDetail={setDetail} provId={provId} />}
       <div className="divider" />
     </div>
