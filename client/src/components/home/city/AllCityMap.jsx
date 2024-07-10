@@ -1,3 +1,4 @@
+import MapSkeleton from '@/components/Skeleton';
 import {
   cityCoordinate,
   originalStyle,
@@ -36,13 +37,13 @@ export default function AllCityMap() {
     combine: (results) => {
       return {
         data: results.map((result) => result.data),
-        pending: results.some((result) => result.isPending),
+        isLoading: results.some((result) => result.isLoading),
       };
     },
   });
 
   const city = useMemo(() => {
-    if (cityData.pending) return null;
+    if (cityData.isLoading) return null;
     return cityCoordinate(cityData.data.flat());
   }, [cityData]);
 
@@ -59,23 +60,31 @@ export default function AllCityMap() {
       <h2 className="text-xl text-center text-black font-bold pb-2">
         Peta Kota Seluruh Indonesia
       </h2>
-      <MapContainer center={[-1.2480891, 118]} zoom={5} scrollWheelZoom={false}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {marker && name && <Popup position={marker}>{name}</Popup>}
-        {city?.map((item, index) => (
-          <GeoJSON
-            key={index}
-            data={item}
-            style={{ fillColor: '#11648e', ...originalStyle }}
-            onEachFeature={(feature, layer) =>
-              onEachFeature(feature, layer, zoomToFeature)
-            }
+      {!cityData.isLoading ? (
+        <MapContainer
+          center={[-1.2480891, 118]}
+          zoom={5}
+          scrollWheelZoom={false}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-        ))}
-      </MapContainer>
+          {marker && name && <Popup position={marker}>{name}</Popup>}
+          {city?.map((item, index) => (
+            <GeoJSON
+              key={index}
+              data={item}
+              style={{ fillColor: '#11648e', ...originalStyle }}
+              onEachFeature={(feature, layer) =>
+                onEachFeature(feature, layer, zoomToFeature)
+              }
+            />
+          ))}
+        </MapContainer>
+      ) : (
+        <MapSkeleton />
+      )}
       <div className="divider" />
     </div>
   );
