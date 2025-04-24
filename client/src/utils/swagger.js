@@ -12,7 +12,7 @@ export const swaggerSpec = {
   },
   servers: [
     {
-      url: 'https://zulham.ahlitani.com/geo/v1',
+      url: 'https://whatsproject.my.id/geo/v1',
     },
     {
       url: 'http://localhost:5000/v1/',
