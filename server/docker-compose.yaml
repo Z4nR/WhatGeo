@@ -6,7 +6,7 @@ services:
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PW: ${REDIS_PW}
     ports:
-      - 5000:5000
+      - 5500:5000
     restart: always
   redis:
     image: 'redis:alpine'
