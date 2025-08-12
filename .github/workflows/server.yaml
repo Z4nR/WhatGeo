@@ -2,7 +2,7 @@ name: GeoJSON Indonesia
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
 
 jobs:
   deploy:
@@ -24,4 +24,4 @@ jobs:
             git pull origin main
             cd server
             docker compose down --remove-orphans
-            docker compose --project-name geojson up --build -d
+            docker compose --project-name geojson up --build
