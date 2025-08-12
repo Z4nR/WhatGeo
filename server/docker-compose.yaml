@@ -2,6 +2,7 @@ services:
   api:
     build: .
     environment:
+      DB_CONNECTION: ${DB_CONNECTION}
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PW: ${REDIS_PW}
     ports:
