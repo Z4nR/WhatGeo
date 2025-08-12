@@ -9,7 +9,7 @@ const app = express(),
   route = require('./routes'),
   client = require('./utils/redis');
 
-const port = Number(process.env.PORT) || 5000;
+const port = 5000;
 
 //Middleware
 app.use(bodyParser.json());
