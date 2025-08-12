@@ -13,7 +13,13 @@ const port = 5000;
 
 //Middleware
 app.use(bodyParser.json());
-app.use(cors({ origin: '*', methods: ['GET'] }));
+app.use(
+  cors({
+    origin: '*',
+    methods: ['GET', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 
 //Route
 app.use('/v1', route);
