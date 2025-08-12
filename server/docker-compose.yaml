@@ -2,7 +2,6 @@ services:
   api:
     build: .
     environment:
-      PORT: ${PORT}
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PW: ${REDIS_PW}
     ports:
