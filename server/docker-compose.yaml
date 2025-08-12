@@ -1,8 +1,12 @@
 services:
   api:
     build: .
+    environment:
+      PORT: ${PORT}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PW: ${REDIS_PW}
     ports:
-      - 5500:5000
+      - ${PORT}:${PORT}
     restart: always
   redis:
     image: 'redis:alpine'
