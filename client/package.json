@@ -2,7 +2,7 @@
   "name": "client",
   "private": true,
   "homepage": "https://z4nr.github.io/WhatGeo/",
-  "version": "1.5.10",
+  "version": "1.5.11",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
