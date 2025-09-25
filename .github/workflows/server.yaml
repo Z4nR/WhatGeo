@@ -9,25 +9,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup SSH
         run: |
-          mkdir -p $HOME/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/.ssh/id_ed25519
-          chmod 600 $HOME/.ssh/id_ed25519
-          ssh-keyscan -p 22 -H ${{ secrets.SSH_HOST }} >> $HOME/.ssh/known_hosts
-          cat $HOME/.ssh/known_hosts
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p 22 -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+          cat ~/.ssh/known_hosts
         shell: bash
 
       - name: Test SSH connection
         run: |
-          ssh -i $HOME/.ssh/id_ed25519 -p 22 ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "echo 'SSH connection successful!'"
+          ssh -i ~/.ssh/id_ed25519 -p 22 ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "echo 'SSH connection successful!'"
         shell: bash
 
       - name: Deploy to server
         run: |
-          ssh -i $HOME/.ssh/id_ed25519 ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
           git clone https://github.com/Z4nR/GeoAPI-Doc
           cd ~/GeoAPI-Doc
           git pull origin main
