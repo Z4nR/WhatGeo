@@ -20,11 +20,6 @@ jobs:
           cat ~/.ssh/known_hosts
         shell: bash
 
-      - name: Test SSH connection
-        run: |
-          ssh -i ~/.ssh/id_ed25519 -p 22 ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "echo 'SSH connection successful!'"
-        shell: bash
-
       - name: Deploy to server
         run: |
           ssh -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
