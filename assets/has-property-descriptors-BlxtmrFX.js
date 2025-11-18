@@ -1,0 +1,1 @@
+import{r as a}from"./es-define-property-D_7cP-M3.js";var e,n;function u(){if(n)return e;n=1;var r=a(),t=function(){return!!r};return t.hasArrayLengthDefineBug=function(){if(!r)return null;try{return r([],"length",{value:1}).length!==1}catch{return!0}},e=t,e}export{u as r};

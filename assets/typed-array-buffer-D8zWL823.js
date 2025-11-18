@@ -1,0 +1,1 @@
+import{r as t}from"./es-errors-CxTyLFAO.js";import{r as o}from"./call-bound-CfAOWhyF.js";import{r as i}from"./is-typed-array-D8lteSM8.js";var r,a;function s(){if(a)return r;a=1;var f=t(),y=o(),u=y("TypedArray.prototype.buffer",!0),p=i();return r=u||function(e){if(!p(e))throw new f("Not a Typed Array");return e.buffer},r}export{s as r};
