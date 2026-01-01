@@ -18,27 +18,45 @@ app.use(
     origin: '*',
     methods: ['GET', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-  })
+  }),
 );
 
 //Route
 app.use('/v1', route);
 
-//DB Connection
-db();
+const connectRedisWithRetry = async () => {
+  let retries = 10;
 
-//Redis logging
-client.on('error', (err) => {
-  console.log(err);
-});
+  while (retries) {
+    try {
+      await client.connect();
+      console.log('Redis connected');
+      return;
+    } catch (err) {
+      console.log(`Retry Redis... (${retries})`);
+      retries--;
+      await new Promise((res) => setTimeout(res, 2000));
+    }
+  }
 
-const redisConnect = async () => {
-  return await client.connect();
+  throw new Error('Redis connection failed');
 };
 
-redisConnect();
+const startServer = async () => {
+  try {
+    console.log('Connecting to Redis...');
+    await connectRedisWithRetry();
 
-//Listen Port
-app.listen(port, () => {
-  console.log(`Litening on port ${port}...`);
-});
+    console.log('Connecting to DB...');
+    await db();
+
+    app.listen(port, () => {
+      console.log(`Listening on port ${port}...`);
+    });
+  } catch (err) {
+    console.error('Startup failed:', err);
+    process.exit(1); // biar docker restart
+  }
+};
+
+startServer();
