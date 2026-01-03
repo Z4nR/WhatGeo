@@ -1,7 +1,7 @@
 const { createClient } = require('redis');
 
 const client = createClient({
-  url: `redis://:${process.env.REDIS_PW}@$geojson-redis-1:6379`,
+  url: `redis://:${process.env.REDIS_PW}@geojson-redis-1:6379`,
   socket: {
     reconnectStrategy: (retries) => {
       console.log('Redis retry:', retries);
