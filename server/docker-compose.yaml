@@ -7,7 +7,7 @@ services:
       PORT: 5000
       NODE_ENV: production
       DB_CONNECTION: ${DB_CONNECTION}
-      REDIS_HOST: ${REDIS_DOCKER}
+      REDIS_HOST: geojson-redis-1
       REDIS_PW: ${REDIS_PW}
     ports:
       - ${PORT}:5000
