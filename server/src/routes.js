@@ -1,35 +1,55 @@
+const express = require('express');
+
 const cachingController = require('./controllers/caching-controller');
 const cityController = require('./controllers/city-controller');
 const provController = require('./controllers/prov-controller');
 
-const router = require('express-promise-router')();
+const router = express.Router();
 
-//Prov Route
-router.route('/prov/page').get(provController.provPage); //Get Total Page of Province
+// ====================
+// Province Route
+// ====================
+
+router.route('/prov/page').get(provController.provPage);
+
 router
   .route('/prov')
-  .get(cachingController.cacheProvByPage, provController.getProvByPage); //Get Province Data using query page number
-router.route('/prov/isle/page').get(provController.getProvOnIsland); //Get Total Page of Province on Island using query island name
+  .get(cachingController.cacheProvByPage, provController.getProvByPage);
+
+router.route('/prov/isle/page').get(provController.getProvOnIsland);
+
 router
   .route('/prov/isle')
-  .get(cachingController.cacheProvByIsland, provController.getProvByIsland); //Get Province Data using query Island name and page number
-router.route('/prov/:id/detail').get(provController.getProvDetail); //Get Province Detail using prov_id parameter
-router.route('/prov/:id/map').get(provController.getProvMap); //Get Province Map using Id Province params
+  .get(cachingController.cacheProvByIsland, provController.getProvByIsland);
 
-//City Route
-router.route('/city/page').get(cityController.cityPage); //Get Total Page of City
+router.route('/prov/:id/detail').get(provController.getProvDetail);
+
+router.route('/prov/:id/map').get(provController.getProvMap);
+
+// ====================
+// City Route
+// ====================
+
+router.route('/city/page').get(cityController.cityPage);
+
 router
   .route('/city')
-  .get(cachingController.cacheCityByPage, cityController.getCityByPage); //Get City Data using query page number
-router.route('/city/prov/page').get(cityController.getCityOnProv); //Get Total Page of City on Province using query Province Id
+  .get(cachingController.cacheCityByPage, cityController.getCityByPage);
+
+router.route('/city/prov/page').get(cityController.getCityOnProv);
+
 router
   .route('/city/prov')
-  .get(cachingController.cacheCityByProv, cityController.getCityByProv); //Get City Data using query Province Id and page number
-router.route('/city/isle/page').get(cityController.getCityOnIsland); //Get Total Page of City on Island using query island name
+  .get(cachingController.cacheCityByProv, cityController.getCityByProv);
+
+router.route('/city/isle/page').get(cityController.getCityOnIsland);
+
 router
   .route('/city/isle')
-  .get(cachingController.cacheCityByIsland, cityController.getCityByIsland); //Get City Data using query Island name and page number
-router.route('/city/:id/map').get(cityController.getCityMap); //Get City Map using Id City params
-router.route('/city/:id/detail').get(cityController.getCityDetail); //Get City Destiny using Id City params
+  .get(cachingController.cacheCityByIsland, cityController.getCityByIsland);
+
+router.route('/city/:id/map').get(cityController.getCityMap);
+
+router.route('/city/:id/detail').get(cityController.getCityDetail);
 
 module.exports = router;
