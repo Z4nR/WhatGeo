@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose, { model } from 'mongoose';
 const { Schema } = mongoose;
 
 const CityDestinySchema = new Schema({
@@ -8,5 +8,5 @@ const CityDestinySchema = new Schema({
   destiny_type: String,
 });
 
-const destiny = mongoose.model("citydestiny", CityDestinySchema, "CityDestiny");
-module.exports = destiny;
+const destiny = model('citydestiny', CityDestinySchema, 'CityDestiny');
+export default destiny;

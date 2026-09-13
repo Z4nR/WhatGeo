@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose, { model } from 'mongoose';
 const { Schema } = mongoose;
 
 const ProvDetailSchema = new Schema({
@@ -11,5 +11,5 @@ const ProvDetailSchema = new Schema({
   description: String,
 });
 
-const provdtl = mongoose.model('provdetail', ProvDetailSchema, 'ProvDetail');
-module.exports = provdtl;
+const provdtl = model('provdetail', ProvDetailSchema, 'ProvDetail');
+export default provdtl;

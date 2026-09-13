@@ -1,55 +1,67 @@
-const express = require('express');
+import { Router } from 'express';
 
-const cachingController = require('./controllers/caching-controller');
-const cityController = require('./controllers/city-controller');
-const provController = require('./controllers/prov-controller');
+import {
+  cacheProvByPage,
+  cacheProvByIsland,
+  cacheCityByPage,
+  cacheCityByProv,
+  cacheCityByIsland,
+} from './controllers/caching-controller.js';
+import {
+  cityPage,
+  getCityByPage,
+  getCityOnProv,
+  getCityByProv,
+  getCityOnIsland,
+  getCityByIsland,
+  getCityMap,
+  getCityDetail,
+} from './controllers/city-controller.js';
+import {
+  provPage,
+  getProvByPage,
+  getProvOnIsland,
+  getProvByIsland,
+  getProvDetail,
+  getProvMap,
+} from './controllers/prov-controller.js';
 
-const router = express.Router();
+const router = Router();
 
 // ====================
 // Province Route
 // ====================
 
-router.route('/prov/page').get(provController.provPage);
+router.route('/prov/page').get(provPage);
 
-router
-  .route('/prov')
-  .get(cachingController.cacheProvByPage, provController.getProvByPage);
+router.route('/prov').get(cacheProvByPage, getProvByPage);
 
-router.route('/prov/isle/page').get(provController.getProvOnIsland);
+router.route('/prov/isle/page').get(getProvOnIsland);
 
-router
-  .route('/prov/isle')
-  .get(cachingController.cacheProvByIsland, provController.getProvByIsland);
+router.route('/prov/isle').get(cacheProvByIsland, getProvByIsland);
 
-router.route('/prov/:id/detail').get(provController.getProvDetail);
+router.route('/prov/:id/detail').get(getProvDetail);
 
-router.route('/prov/:id/map').get(provController.getProvMap);
+router.route('/prov/:id/map').get(getProvMap);
 
 // ====================
 // City Route
 // ====================
 
-router.route('/city/page').get(cityController.cityPage);
+router.route('/city/page').get(cityPage);
 
-router
-  .route('/city')
-  .get(cachingController.cacheCityByPage, cityController.getCityByPage);
+router.route('/city').get(cacheCityByPage, getCityByPage);
 
-router.route('/city/prov/page').get(cityController.getCityOnProv);
+router.route('/city/prov/page').get(getCityOnProv);
 
-router
-  .route('/city/prov')
-  .get(cachingController.cacheCityByProv, cityController.getCityByProv);
+router.route('/city/prov').get(cacheCityByProv, getCityByProv);
 
-router.route('/city/isle/page').get(cityController.getCityOnIsland);
+router.route('/city/isle/page').get(getCityOnIsland);
 
-router
-  .route('/city/isle')
-  .get(cachingController.cacheCityByIsland, cityController.getCityByIsland);
+router.route('/city/isle').get(cacheCityByIsland, getCityByIsland);
 
-router.route('/city/:id/map').get(cityController.getCityMap);
+router.route('/city/:id/map').get(getCityMap);
 
-router.route('/city/:id/detail').get(cityController.getCityDetail);
+router.route('/city/:id/detail').get(getCityDetail);
 
-module.exports = router;
+export default router;

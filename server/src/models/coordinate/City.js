@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose, { model } from 'mongoose';
 const { Schema } = mongoose;
 
 const CitySchema = new Schema({
@@ -14,5 +14,5 @@ const CitySchema = new Schema({
   island: String,
 });
 
-const citygeo = mongoose.model('citylatlong', CitySchema, 'CityLatLong');
-module.exports = citygeo;
+const citygeo = model('citylatlong', CitySchema, 'CityLatLong');
+export default citygeo;

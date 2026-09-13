@@ -1,30 +1,12 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-module.exports = async () => {
+export default async () => {
   try {
-    mongoose.Promise = global.Promise;
+    await mongoose.connect(process.env.DB_CONNECTION);
 
-    await mongoose.connect(process.env.DB_CONNECTION, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000,
-    });
-
-    console.log('✅ MongoDB connected');
+    console.log('Connected to database successfully');
   } catch (error) {
-    console.error('❌ MongoDB connection failed:', error.message);
-    throw error;
+    console.error(error);
+    console.log("Couldn't connect to database");
   }
-
-  mongoose.connection.on('connected', () => {
-    console.log('MongoDB event: connected');
-  });
-
-  mongoose.connection.on('error', (err) => {
-    console.error('MongoDB event error:', err);
-  });
-
-  mongoose.connection.on('disconnected', () => {
-    console.warn('MongoDB event: disconnected');
-  });
 };

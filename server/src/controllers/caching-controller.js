@@ -1,155 +1,153 @@
-const client = require('../utils/redis');
+import client from '../utils/redis.js';
 
 let pageNumber = 1;
 
-module.exports = {
-  cacheProvByPage: async (req, res, next) => {
-    const { page } = req.query;
-    if (!Number.isNaN(page) && page > 0) pageNumber = page;
+export async function cacheProvByPage(req, res, next) {
+  const { page } = req.query;
+  if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
-    try {
-      const data = await client.get(`prov-${page}`);
+  try {
+    const data = await client.get(`prov-${page}`);
 
-      const parseData = JSON.parse(data);
+    const parseData = JSON.parse(data);
 
-      if (!parseData || parseData.length === 0) {
-        console.log(`Data prov-${page} tidak ditemukan`);
-        return next();
-      }
-
-      res.status(202).send(parseData);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
+    if (!parseData || parseData.length === 0) {
+      console.log(`Data prov-${page} tidak ditemukan`);
+      return next();
     }
-  },
 
-  cacheProvByIsland: async (req, res, next) => {
-    const { island } = req.query;
-    const { page } = req.query;
-    if (!Number.isNaN(page) && page > 0) pageNumber = page;
+    res.status(202).send(parseData);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
+  }
+}
 
-    try {
-      const data = await client.get(`prov-${island}${page}`);
+export async function cacheProvByIsland(req, res, next) {
+  const { island } = req.query;
+  const { page } = req.query;
+  if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
-      const parseData = JSON.parse(data);
+  try {
+    const data = await client.get(`prov-${island}${page}`);
 
-      if (!parseData || parseData.length === 0) {
-        console.log(`Data prov-${island}${page} tidak ditemukan`);
-        return next();
-      }
+    const parseData = JSON.parse(data);
 
-      res.status(202).send(parseData);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
+    if (!parseData || parseData.length === 0) {
+      console.log(`Data prov-${island}${page} tidak ditemukan`);
+      return next();
     }
-  },
 
-  cacheProvMap: async (req, res, next) => {
-    const { id } = req.params;
-    if (!Number.isNaN(page) && page > 0) pageNumber = page;
+    res.status(202).send(parseData);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
+  }
+}
 
-    try {
-      const data = await client.get(`prov-${id}`);
+export async function cacheProvMap(req, res, next) {
+  const { id } = req.params;
+  if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
-      const parseData = JSON.parse(data);
+  try {
+    const data = await client.get(`prov-${id}`);
 
-      if (!parseData || parseData.length === 0) {
-        console.log(`Data prov-${id} tidak ditemukan`);
-        return next();
-      }
+    const parseData = JSON.parse(data);
 
-      res.status(202).send(parseData);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
+    if (!parseData || parseData.length === 0) {
+      console.log(`Data prov-${id} tidak ditemukan`);
+      return next();
     }
-  },
 
-  cacheCityByPage: async (req, res, next) => {
-    const { page } = req.query;
-    if (!Number.isNaN(page) && page > 0) pageNumber = page;
+    res.status(202).send(parseData);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
+  }
+}
 
-    try {
-      const data = await client.get(`city-${page}`);
+export async function cacheCityByPage(req, res, next) {
+  const { page } = req.query;
+  if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
-      const parseData = JSON.parse(data);
+  try {
+    const data = await client.get(`city-${page}`);
 
-      if (!parseData || parseData.length === 0) {
-        console.log(`Data city-${page} tidak ditemukan`);
-        return next();
-      }
+    const parseData = JSON.parse(data);
 
-      res.status(202).send(parseData);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
+    if (!parseData || parseData.length === 0) {
+      console.log(`Data city-${page} tidak ditemukan`);
+      return next();
     }
-  },
 
-  cacheCityByProv: async (req, res, next) => {
-    const { prov_id } = req.query;
-    const { page } = req.query;
-    if (!Number.isNaN(page) && page > 0) pageNumber = page;
+    res.status(202).send(parseData);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
+  }
+}
 
-    try {
-      const data = await client.get(`city-${prov_id}${page}`);
+export async function cacheCityByProv(req, res, next) {
+  const { prov_id } = req.query;
+  const { page } = req.query;
+  if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
-      const parseData = JSON.parse(data);
+  try {
+    const data = await client.get(`city-${prov_id}${page}`);
 
-      if (!parseData || parseData.length === 0) {
-        console.log(`Data city-${prov_id}${page} tidak ditemukan`);
-        return next();
-      }
+    const parseData = JSON.parse(data);
 
-      res.status(202).send(parseData);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
+    if (!parseData || parseData.length === 0) {
+      console.log(`Data city-${prov_id}${page} tidak ditemukan`);
+      return next();
     }
-  },
 
-  cacheCityByIsland: async (req, res, next) => {
-    const { island } = req.query;
-    const { page } = req.query;
-    if (!Number.isNaN(page) && page > 0) pageNumber = page;
+    res.status(202).send(parseData);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
+  }
+}
 
-    try {
-      const data = await client.get(`city-${island}${page}`);
+export async function cacheCityByIsland(req, res, next) {
+  const { island } = req.query;
+  const { page } = req.query;
+  if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
-      const parseData = JSON.parse(data);
+  try {
+    const data = await client.get(`city-${island}${page}`);
 
-      if (!parseData || parseData.length === 0) {
-        console.log(`Data city-${island}${page} tidak ditemukan`);
-        return next();
-      }
+    const parseData = JSON.parse(data);
 
-      res.status(202).send(parseData);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
+    if (!parseData || parseData.length === 0) {
+      console.log(`Data city-${island}${page} tidak ditemukan`);
+      return next();
     }
-  },
 
-  cacheCityMap: async (req, res, next) => {
-    const { id } = req.params;
-    if (!Number.isNaN(page) && page > 0) pageNumber = page;
+    res.status(202).send(parseData);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
+  }
+}
 
-    try {
-      const data = await client.get(`city-${id}`);
+export async function cacheCityMap(req, res, next) {
+  const { id } = req.params;
+  if (!Number.isNaN(page) && page > 0) pageNumber = page;
 
-      const parseData = JSON.parse(data);
+  try {
+    const data = await client.get(`city-${id}`);
 
-      if (!parseData || parseData.length === 0) {
-        console.log(`Data city-${id} tidak ditemukan`);
-        return next();
-      }
+    const parseData = JSON.parse(data);
 
-      res.status(202).send(parseData);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
+    if (!parseData || parseData.length === 0) {
+      console.log(`Data city-${id} tidak ditemukan`);
+      return next();
     }
-  },
-};
+
+    res.status(202).send(parseData);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: 'Terjadi Kesalahan Pada Server' });
+  }
+}

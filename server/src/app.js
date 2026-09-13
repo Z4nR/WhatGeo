@@ -1,18 +1,21 @@
-require('dotenv').config();
+import 'dotenv/config';
 
-const express = require('express'),
-  cors = require('cors'),
-  bodyParser = require('body-parser');
+import express from 'express';
+import cors from 'cors';
 
-const app = express(),
-  db = require('./db'),
-  route = require('./routes'),
-  client = require('./utils/redis');
+import bodyParser from 'body-parser';
+const { json } = bodyParser;
+
+import db from './db.js';
+import route from './routes.js';
+import redis from './utils/redis.js';
+
+const app = express();
 
 const port = 5000;
 
 //Middleware
-app.use(bodyParser.json());
+app.use(json());
 app.use(
   cors({
     origin: '*',
@@ -29,7 +32,7 @@ const connectRedisWithRetry = async () => {
 
   while (retries) {
     try {
-      await client.connect();
+      await redis.connect();
       console.log('Redis connected');
       return;
     } catch (err) {

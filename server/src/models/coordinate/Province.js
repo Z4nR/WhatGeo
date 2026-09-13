@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose, { model } from 'mongoose';
 const { Schema } = mongoose;
 
 const ProvSchema = new Schema({
@@ -12,5 +12,5 @@ const ProvSchema = new Schema({
   island: String,
 });
 
-const provgeo = mongoose.model('provlatlong', ProvSchema, 'ProvLatLong');
-module.exports = provgeo;
+const provgeo = model('provlatlong', ProvSchema, 'ProvLatLong');
+export default provgeo;
