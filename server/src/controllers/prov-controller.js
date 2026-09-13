@@ -7,7 +7,7 @@ const limit = 3;
 
 export async function provPage(req, res) {
   try {
-    const count = await Province.countDocument();
+    const count = await Province.countDocuments();
     const total = Math.ceil(count / limit);
 
     return res.status(202).send({
