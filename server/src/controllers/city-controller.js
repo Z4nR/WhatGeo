@@ -25,7 +25,7 @@ export async function cityPage(req, res) {
 
 export async function getCityByPage(req, res) {
   try {
-    const { page } = req.query;
+    const { page = '1' } = req.query;
     const pageNumber = Number(page);
 
     if (!Number.isInteger(pageNumber) || pageNumber <= 0) {
@@ -58,7 +58,7 @@ export async function getCityOnProv(req, res) {
 
   try {
     const count = await City.countDocuments({
-      prov_id,
+      prov_id: prov_id,
     });
 
     const total = Math.ceil(count / limit);
@@ -76,7 +76,7 @@ export async function getCityOnProv(req, res) {
 }
 
 export async function getCityByProv(req, res) {
-  const { prov_id, page } = req.query;
+  const { prov_id, page = '1' } = req.query;
   const pageNumber = Number(page);
 
   if (!Number.isInteger(pageNumber) || pageNumber <= 0) {

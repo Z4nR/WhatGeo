@@ -24,7 +24,7 @@ export async function provPage(req, res) {
 
 export async function getProvByPage(req, res) {
   try {
-    const { page } = req.query;
+    const { page = '1' } = req.query;
     const pageNumber = Number(page);
 
     if (!Number.isInteger(pageNumber) || pageNumber <= 0) {
@@ -56,8 +56,8 @@ export async function getProvOnIsland(req, res) {
   const { island } = req.query;
 
   try {
-    const count = await Province.countDocument({
-      island,
+    const count = await Province.countDocuments({
+      island: island,
     });
 
     const total = Math.ceil(count / limit);
@@ -75,7 +75,7 @@ export async function getProvOnIsland(req, res) {
 }
 
 export async function getProvByIsland(req, res) {
-  const { island, page } = req.query;
+  const { island, page = '1' } = req.query;
   const pageNumber = Number(page);
 
   if (!Number.isInteger(pageNumber) || pageNumber <= 0) {
